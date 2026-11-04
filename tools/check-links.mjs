@@ -44,7 +44,7 @@ for (const f of files) {
   });
 }
 // 徽章、檢索頁自身、Release 下載連結不查：它們不是來源，掛了也會有別的地方先發現。
-const SKIP = /img\.shields\.io|eternity4719\.github\.io|\/releases\/download\/|localhost/;
+const SKIP = /img\.shields\.io|doggy8088\.github\.io|\/releases\/download\/|localhost/;
 // 不少地方政府站還用著老的加密套件或證書鏈不全，Node 握手直接報錯，瀏覽器卻能正常打開。
 // 這類單獨一檔，不和真正連不上的混在一起。
 const TLS = /^(ERR_SSL_|UNABLE_TO_VERIFY|CERT_|SELF_SIGNED|DEPTH_ZERO)/;

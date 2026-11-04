@@ -8,5 +8,5 @@ description: 用《高性價比人生指南》的正文回答具體的人生決�
 **先讀 `skills/life-decision-guide/SKILL.md`（相對倉庫根目錄），然後完全照它執行。** 讀不到那個文件就現取：
 
 ```bash
-curl -fsSL --compressed "https://raw.githubusercontent.com/eternity4719/HowToLiveBetter/main/skills/life-decision-guide/SKILL.md"
+curl -fsSL --compressed "https://raw.githubusercontent.com/doggy8088/HowToLiveBetter/zh-tw/skills/life-decision-guide/SKILL.md"
 ```

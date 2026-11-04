@@ -84,6 +84,10 @@ export const PROTECT = [
   // types) keeps 錄像; generic 錄像 becomes 錄影 in GLOBAL_VOCAB.
   ['影视、录音、录像、演出', '\u0001TITLE4\u0001'],
   ['影視、錄音、錄像、演出', '\u0001TITLE4\u0001'],
+  // A verification note cites the upstream issue that prompted an
+  // entry; that citation is provenance and keeps the upstream URL
+  // even though every functional slug now points at the fork.
+  ['https://github.com/eternity4719/HowToLiveBetter/issues/16', '\u0001CITE1\u0001'],
   // CLAUDE.md's ratio-terminology rule quotes 幾率 as the banned word;
   // those three quotations keep it. Every other 幾率 becomes 機率.
   ['几率是 X 倍', '\u0001RATIO1\u0001'],
@@ -113,6 +117,7 @@ export const restore = (t) => {
   t = t.split('\u0001TITLE2\u0001').join('丙型病毒性肝炎篩查及管理');
   t = t.split('\u0001TITLE3\u0001').join('中國女性乳腺癌篩查與早診早治指南');
   t = t.split('\u0001TITLE4\u0001').join('影視、錄音、錄像、演出');
+  t = t.split('\u0001CITE1\u0001').join('https://github.com/eternity4719/HowToLiveBetter/issues/16');
   t = t.split('\u0001RATIO1\u0001').join('幾率是 X 倍');
   t = t.split('\u0001RATIO2\u0001').join('幾率、機會、可能性、概率是 X 倍');
   t = t.split('\u0001RATIO3\u0001').join('「幾率」「可能性」');
@@ -439,6 +444,19 @@ export const GLOBAL_VOCAB = [
   ['硅膠', '矽膠'],
   ['號販子', '黃牛'],
   ['遮罩', '屏蔽'], // statutory 屏蔽； radiation shielding; ad blocking
+
+  // --- Fork slug (Will, 2026-11-05, following the answer-me rule). ---
+  // Every functional pointer (site, releases, clone, raw fetches, the
+  // REPO/SITE constants) names the fork, not upstream. The one
+  // provenance citation above is protected. Branch paths follow the
+  // slug: the site's blob/tree links and the skill's raw fetches name
+  // files that only exist, under their converted names, on zh-tw.
+  ['eternity4719/HowToLiveBetter', 'doggy8088/HowToLiveBetter'],
+  ['eternity4719.github.io', 'doggy8088.github.io'],
+  ['eternity4719\\.github\\.io', 'doggy8088\\.github\\.io'], // check-links SKIP regex
+  ['HowToLiveBetter/blob/main/', 'HowToLiveBetter/blob/zh-tw/'],
+  ['HowToLiveBetter/tree/main/', 'HowToLiveBetter/tree/zh-tw/'],
+  ['HowToLiveBetter/main/', 'HowToLiveBetter/zh-tw/'],
 
   // --- Proper names of PRC laws / regulations: wording kept, script only.
   // Generic prose keeps the Taiwan forms (資訊、網路、資料). ---

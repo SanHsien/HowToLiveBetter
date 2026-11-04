@@ -9,25 +9,25 @@
 
 不用全做：這是一份備選單，不是任務清單——挑走一兩條就算數，作者自己也沒做到其中大部分。
 
-書裡的內容可能過時，也可能有錯。不少政策各地執行不一樣。真去辦事、看病、打官司時，以當地部門、醫生和律師的說法為準。發現寫錯了，歡迎[提 issue](https://github.com/eternity4719/HowToLiveBetter/issues)。
+書裡的內容可能過時，也可能有錯。不少政策各地執行不一樣。真去辦事、看病、打官司時，以當地部門、醫生和律師的說法為準。發現寫錯了，歡迎[提 issue](https://github.com/doggy8088/HowToLiveBetter/issues)。
 
 **電子書平台上的官方版本由果麥文化獨家出品**，2026 年 10 月上架，其他版本都不是官方的。本頁的網頁版、EPUB、PDF 照舊免費，更新也最快。
 
-[![線上檢索](https://img.shields.io/badge/%E7%B7%9A%E4%B8%8A%E6%AA%A2%E7%B4%A2-%E9%BB%9E%E9%80%99%E8%A3%A1%E6%89%93%E9%96%8B-3451b2?style=flat-square)](https://eternity4719.github.io/HowToLiveBetter/)
+[![線上檢索](https://img.shields.io/badge/%E7%B7%9A%E4%B8%8A%E6%AA%A2%E7%B4%A2-%E9%BB%9E%E9%80%99%E8%A3%A1%E6%89%93%E9%96%8B-3451b2?style=flat-square)](https://doggy8088.github.io/HowToLiveBetter/)
 [![條目](https://img.shields.io/badge/%E6%A2%9D%E7%9B%AE-772 %E6%A2%9D-18794e?style=flat-square)](#目錄)
 [![證據分級](https://img.shields.io/badge/%E8%AD%89%E6%93%9A%E5%88%86%E7%B4%9A-A%20497%20%C2%B7%20B%20223%20%C2%B7%20C%2052-915930?style=flat-square)](#證據分級)
 [![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2590 %E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
 [![許可](https://img.shields.io/badge/%E8%A8%B1%E5%8F%AF-CC%20BY%204.0-565a5f?style=flat-square)](#許可)
 [![Claude Code 協助編寫](https://img.shields.io/badge/Claude%20Code-%E5%8D%94%E5%8A%A9%E7%B7%A8%E5%AF%AB-D97757?style=flat-square&logo=claude&logoColor=white)](https://claude.com/claude-code)
 
-### [打開線上檢索頁](https://eternity4719.github.io/HowToLiveBetter/) · [讓 AI 照書回答（skill）](skills/life-decision-guide/README.md)
+### [打開線上檢索頁](https://doggy8088.github.io/HowToLiveBetter/) · [讓 AI 照書回答（skill）](skills/life-decision-guide/README.md)
 
 AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔保籤不籤」，它先查書裡的條目再回答，並註明出自第幾節第幾條。
 
 <table>
 <tr><td align="right"><b>下載</b></td><td align="left">
 
-[PDF](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf) · [EPUB](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub) · [離線單文件（HTML）](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html) · [Anki 牌組](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)
+[PDF](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf) · [EPUB](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub) · [離線單文件（HTML）](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html) · [Anki 牌組](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)
 
 </td></tr>
 <tr><td align="right"><b>查閱</b></td><td align="left">
@@ -37,7 +37,7 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 </td></tr>
 <tr><td align="right"><b>自查</b></td><td align="left">
 
-[生活自查](https://eternity4719.github.io/HowToLiveBetter/selfcheck.html)：回答幾十道是否題，看看書裡哪些事你還沒做到、先做哪幾件
+[生活自查](https://doggy8088.github.io/HowToLiveBetter/selfcheck.html)：回答幾十道是否題，看看書裡哪些事你還沒做到、先做哪幾件
 
 </td></tr>
 <tr><td align="right"><b>長文</b></td><td align="left">
@@ -113,13 +113,13 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 
 - **不用全做**：這是一份備選單，不是任務清單。挑走一兩條就算數，剩下的放著，需要時再回來查。「說著容易做著難」這個評價是對的——作者自己也沒做到其中大部分，寫下來是為了要用的時候找得到。想挑省力的，看下面「只想看最值得做的」那條。
 - **想讓 AI 幫你查**：倉庫裡帶了一個中文 skill（[skills/life-decision-guide](skills/life-decision-guide/)），Claude Code 和 Codex 都能裝。裝上以後直接問「替朋友擔保籤不籤」「每天通勤兩小時值不值」。它會先把相關條目從正文裡查出來，再照書裡的算帳方式排序回答，並註明出自第幾節第幾條。查不到就說查不到，不自己編數字。裝法見 [那個目錄的說明](skills/life-decision-guide/README.md)。
-- **想按條件挑**：打開[線上檢索頁](https://eternity4719.github.io/HowToLiveBetter/)，可以按關鍵詞、章節、證據等級來篩，也可以按「花不花錢、花多少時間、要不要毅力」這三樣篩，幾個條件能疊著用。頁面上的內容直接取自 book/ 目錄裡的正文，正文一改，頁面跟著改。
+- **想按條件挑**：打開[線上檢索頁](https://doggy8088.github.io/HowToLiveBetter/)，可以按關鍵詞、章節、證據等級來篩，也可以按「花不花錢、花多少時間、要不要毅力」這三樣篩，幾個條件能疊著用。頁面上的內容直接取自 book/ 目錄裡的正文，正文一改，頁面跟著改。
 - **條目之間會互相指路**（「見第 8 節第 17 條」這種）：在檢索頁裡，這種指路帶一條虛線。點一下，就地顯示被指的那條的標題和「說人話」。想真的翻過去，再按「跳過去」。那一條正好被篩選條件藏起來了，頁面會自動把篩選清掉。在 GitHub 上直接讀正文點不動，但每處指路後面都寫著指向什麼（「見第 18 條（借錢寫清借條）」）。不翻過去也知道說的是哪條。
 - **想按順序讀**：每節內的先後順序不代表性價比高低。條目多的節開頭有一段分組導覽，按主題挑著看就行。
-- **想離線看、想發給別人**：下載 [離線單文件 HTML](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，整本書連同檢索和篩選都在這一個文件裡，雙擊就開，不用伺服器也不用聯網，微信裡也能直接傳。
-- **想列印或在手機上翻**：下載 [PDF](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf)，A4 排版、兩百多頁，帶目錄頁碼和書籤，每節另起一頁。
-- **想在 Kindle 或其他閱讀器上讀**：下載 [EPUB 電子書](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub)，Kindle 用 Send to Kindle 發過去即可。
-- **想記住、隔幾天複習一遍**：下載 [Anki 牌組](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)，用 Anki 打開就匯入。一條一張卡，按節分成子牌組。正面是建議，背面是說人話、成本和證據等級。可以只學其中幾節，也可以按「性價比極高」這類標籤篩。以後重新下載再匯入一次，卡片內容會更新，複習記錄不丟。
+- **想離線看、想發給別人**：下載 [離線單文件 HTML](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，整本書連同檢索和篩選都在這一個文件裡，雙擊就開，不用伺服器也不用聯網，微信裡也能直接傳。
+- **想列印或在手機上翻**：下載 [PDF](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf)，A4 排版、兩百多頁，帶目錄頁碼和書籤，每節另起一頁。
+- **想在 Kindle 或其他閱讀器上讀**：下載 [EPUB 電子書](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub)，Kindle 用 Send to Kindle 發過去即可。
+- **想記住、隔幾天複習一遍**：下載 [Anki 牌組](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)，用 Anki 打開就匯入。一條一張卡，按節分成子牌組。正面是建議，背面是說人話、成本和證據等級。可以只學其中幾節，也可以按「性價比極高」這類標籤篩。以後重新下載再匯入一次，卡片內容會更新，複習記錄不丟。
 - **這四樣都是正文每次更新後自動重新生成的**，下載連結固定不變；轉發出去的那一份不會跟著更新，以線上版為準。
 - **看不懂那串數字**：每條都有一行「說人話」。它把「收益」欄裡那些研究裡的寫法，翻成「同期死亡的概率低約兩成」「拘留幾日、罰多少錢」這樣的日常說法。它只用「收益」欄已經寫到的內容，不添新數字。只看這一行就夠拿主意。「收益」欄裡原樣留著全部數字，想自己核對就看那一欄。
 - **只想看結論最硬的**：在檢索頁裡勾選證據等級 A，只留下有具體數字、來自薈萃分析或大型試驗的 497 條。
@@ -140,12 +140,12 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 
 ## 自己跑一份
 
-多數人用不著部署：[線上檢索頁](https://eternity4719.github.io/HowToLiveBetter/)是現成的，要離線就下[離線單文件 HTML](https://github.com/eternity4719/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，雙擊就開。
+多數人用不著部署：[線上檢索頁](https://doggy8088.github.io/HowToLiveBetter/)是現成的，要離線就下[離線單文件 HTML](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，雙擊就開。
 
 真要在自己電腦或伺服器上跑：
 
 ```bash
-git clone https://github.com/eternity4719/HowToLiveBetter.git
+git clone https://github.com/doggy8088/HowToLiveBetter.git
 cd HowToLiveBetter
 python -m http.server 8000
 ```
@@ -312,13 +312,13 @@ A 級只說明「有具體數字、出處可核」，不說明這個數字一定
 
 ## 正文
 
-正文按節拆成 34 個文件放在 [book/](book/)，點上面目錄裡的節名進入。拆開是因為單文件已經超過 GitHub 渲染 Markdown 的 512 KB 上限，後面的節顯示不出來；[線上檢索頁](https://eternity4719.github.io/HowToLiveBetter/)會把這些文件合起來讀，用法不變。
+正文按節拆成 34 個文件放在 [book/](book/)，點上面目錄裡的節名進入。拆開是因為單文件已經超過 GitHub 渲染 Markdown 的 512 KB 上限，後面的節顯示不出來；[線上檢索頁](https://doggy8088.github.io/HowToLiveBetter/)會把這些文件合起來讀，用法不變。
 
 ## 許可
 
 正文用 [CC BY 4.0](LICENSE) 發布，範圍是 book/、docs/ 和本 README 的文字。你可以轉載、改編、商用，不用來問作者，但要做到三件事：
 
-- 寫明出處：「高性價比人生指南」，附上倉庫連結 https://github.com/eternity4719/HowToLiveBetter 。
+- 寫明出處：「高性價比人生指南」，附上倉庫連結 https://github.com/doggy8088/HowToLiveBetter 。
 - 附上許可證連結 https://creativecommons.org/licenses/by/4.0/ 。
 - 改過內容的要寫明改過。書裡的法條、補貼標準和截止日期經常更新，建議同時寫上你同步的是哪一天的版本。
 
@@ -326,7 +326,7 @@ A 級只說明「有具體數字、出處可核」，不說明這個數字一定
 
 ## Star 走勢
 
-[![Star History Chart](https://api.star-history.com/svg?repos=eternity4719/HowToLiveBetter&type=Date)](https://star-history.com/#eternity4719/HowToLiveBetter&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=doggy8088/HowToLiveBetter&type=Date)](https://star-history.com/#doggy8088/HowToLiveBetter&Date)
 
 ## 讚賞
 

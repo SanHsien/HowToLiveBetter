@@ -105,6 +105,14 @@ sub('skills/life-decision-guide/SKILL.md', [
 ]);
 // The book workflow builds the edition branch, not the upstream mirror.
 sub('.github/workflows/book.yml', [['branches: [main]', 'branches: [zh-tw]']]);
+// The stats job's updates.mjs --check diffs entry text against git
+// history; on this branch that history is the simplified upstream, so
+// it can never pass and would push us to restamp every entry's date.
+// updates.json stays upstream's (converted) — see check.mjs header.
+sub('.github/workflows/book.yml', [[
+  '      - run: node tools/sync-stats.mjs --check\n      - run: node tools/updates.mjs --check',
+  '      - run: node tools/sync-stats.mjs --check\n      # zh-tw：不跑 updates.mjs --check（比對簡體 git 歷史必然全數不符；updates.json 保留上游逐條日期，僅做轉換）',
+]]);
 
 // --- Renames ---
 // Snapshot every path (files and directories) and convert each segment

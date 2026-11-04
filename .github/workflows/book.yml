@@ -95,7 +95,7 @@ jobs:
         with:
           node-version: 22
       - run: node tools/sync-stats.mjs --check
-      - run: node tools/updates.mjs --check
+      # zh-tw：不跑 updates.mjs --check（比對簡體 git 歷史必然全數不符；updates.json 保留上游逐條日期，僅做轉換）
 
   selfcheck:
     name: 自查條件檢查

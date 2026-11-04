@@ -105,6 +105,9 @@ sub('skills/life-decision-guide/SKILL.md', [
 ]);
 // The book workflow builds the edition branch, not the upstream mirror.
 sub('.github/workflows/book.yml', [['branches: [main]', 'branches: [zh-tw]']]);
+// GitHub Pages custom domain for the edition's site. The file is not
+// part of upstream, so it is (re)written on every conversion run.
+fs.writeFileSync(path.join(root, 'CNAME'), 'howtolivebetter.gh.miniasp.com\n');
 // The stats job's updates.mjs --check diffs entry text against git
 // history; on this branch that history is the simplified upstream, so
 // it can never pass and would push us to restamp every entry's date.

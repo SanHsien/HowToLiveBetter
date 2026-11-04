@@ -7,7 +7,7 @@ import { execSync } from 'node:child_process';
 
 export const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 export const REPO = 'https://github.com/doggy8088/HowToLiveBetter';
-export const SITE = 'https://doggy8088.github.io/HowToLiveBetter/';
+export const SITE = 'https://howtolivebetter.gh.miniasp.com/';
 export const TITLE = '高性價比人生指南';
 export const RELEASE = `${REPO}/releases/download/epub-latest`;
 

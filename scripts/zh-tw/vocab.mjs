@@ -457,6 +457,10 @@ export const GLOBAL_VOCAB = [
   ['HowToLiveBetter/blob/main/', 'HowToLiveBetter/blob/zh-tw/'],
   ['HowToLiveBetter/tree/main/', 'HowToLiveBetter/tree/zh-tw/'],
   ['HowToLiveBetter/main/', 'HowToLiveBetter/zh-tw/'],
+  // The edition's site lives on the custom domain (Will, 2026-11-05);
+  // canonical / og / sitemap / SITE all root there. The CNAME file
+  // itself is written by convert.mjs on every run.
+  ['doggy8088.github.io/HowToLiveBetter/', 'howtolivebetter.gh.miniasp.com/'],
 
   // --- Proper names of PRC laws / regulations: wording kept, script only.
   // Generic prose keeps the Taiwan forms (資訊、網路、資料). ---

@@ -80,6 +80,21 @@ const sub = (f, pairs) => {
 for (const f of FILES) sub(f, [['zh-CN', 'zh-TW'], ['zh_CN', 'zh_TW'], ['Noto Sans SC', 'Noto Sans TC']]);
 // The book's own writing rules name the edition's script.
 sub('CLAUDE.md', [['簡體中文，不用繁體', '繁體中文（台灣用詞），不用簡體']]);
+// Three 說人話 run 1–3 characters over the book's own 120-character
+// limit only because the Taiwan terms are longer （使用者， 程式碼）.
+// Trimmed by the smallest possible wording change so the edition's CI
+// 說人話檢查 job passes like every other job; meaning is unchanged.
+sub('book/11-程式設計師和技術人容易踩的紅線.md', [
+  ['公司還可以另外找你索賠', '公司還能另外找你索賠'],
+]);
+sub('book/14-帳號與資訊安全.md', [
+  ['你發出去的內容和收回來的回答', '你發出的內容和收回的回答'],
+]);
+sub('book/26-做一個網站或平台.md', [
+  ['丟失或者可能發生', '丟失或可能發生'],
+  ['從輕或者不追究', '從輕或不追究'],
+  ['可以視情從輕', '可視情從輕'],
+]);
 sub('skills/life-decision-guide/SKILL.md', [['簡體中文', '繁體中文']]);
 // The skill's own instruction prose (not book content): Taiwan terms for
 // a generic "personalised" and for stroke / heart attack. The statutory

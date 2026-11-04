@@ -59,11 +59,10 @@ const ALLOW_COMPOUNDS = [
   '幾率是 X 倍', '幾率、機會、可能性、概率是 X 倍', '「幾率」「可能性」',
 ];
 
-const KNOWN_PLAIN_FAILURES = [
-  '11-程式設計師和技術人容易踩的紅線.md  第 11 節第 7 條',
-  '14-帳號與資訊安全.md  第 14 節第 10 條',
-  '26-做一個網站或平台.md  第 26 節第 12 條',
-];
+// The three entries that once overflowed (11-7, 14-10, 26-12) are now
+// trimmed inside the limit by convert.mjs edition edits, so this list
+// is empty; any future check-plain failure is a hard gate failure.
+const KNOWN_PLAIN_FAILURES = [];
 
 const failures = [];
 const note = (gate, msg) => failures.push(`[${gate}] ${msg}`);

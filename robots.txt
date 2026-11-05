@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://howtolivebetter.gh.miniasp.com/sitemap.xml
+Sitemap: https://how-to-live-better.gh.miniasp.com/sitemap.xml

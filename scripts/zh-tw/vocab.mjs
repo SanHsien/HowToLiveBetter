@@ -461,6 +461,8 @@ export const GLOBAL_VOCAB = [
   // canonical / og / sitemap / SITE all root there. The CNAME file
   // itself is written by convert.mjs on every run.
   ['doggy8088.github.io/HowToLiveBetter/', 'howtolivebetter.gh.miniasp.com/'],
+  // Will 於 2026-11-05 上午將網域改為 how-to-live-better；舊網域字串一律跟進。
+  ['howtolivebetter.gh.miniasp.com/', 'how-to-live-better.gh.miniasp.com/'],
 
   // --- Proper names of PRC laws / regulations: wording kept, script only.
   // Generic prose keeps the Taiwan forms (資訊、網路、資料). ---

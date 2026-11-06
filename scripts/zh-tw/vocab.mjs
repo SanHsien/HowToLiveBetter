@@ -102,6 +102,17 @@ export const PROTECT = [
   ['幾率、機會、可能性、概率是 X 倍', '\u0001RATIO2\u0001'],
   ['「几率」「可能性」', '\u0001RATIO3\u0001'],
   ['「幾率」「可能性」', '\u0001RATIO3\u0001'],
+  // 互聯網 institutional compounds (zhtw-mcp round, 2026-11-07): PRC
+  // service categories and license names keep 互聯網; generic narrative
+  // 互聯網 becomes 網際網路 in GLOBAL_VOCAB.
+  ['互聯網新聞資訊服務許可證', '\u0001NETLIC\u0001'],
+  ['互聯網診療', '\u0001NETMED\u0001'],
+  ['互聯網醫院', '\u0001NETHOSP\u0001'],
+  ['互聯網+', '\u0001NETPLUS\u0001'],
+  ['互聯網上網服務', '\u0001NETCAFE\u0001'],
+  // 電動自行車 is a PRC vehicle class with legal speed/weight limits;
+  // only generic 自行車 becomes 腳踏車.
+  ['電動自行車', '\u0001EBIKE\u0001'],
 ];
 
 export const restore = (t) => {
@@ -128,6 +139,12 @@ export const restore = (t) => {
   t = t.split('\u0001RATIO1\u0001').join('幾率是 X 倍');
   t = t.split('\u0001RATIO2\u0001').join('幾率、機會、可能性、概率是 X 倍');
   t = t.split('\u0001RATIO3\u0001').join('「幾率」「可能性」');
+  t = t.split('\u0001NETLIC\u0001').join('互聯網新聞資訊服務許可證');
+  t = t.split('\u0001NETMED\u0001').join('互聯網診療');
+  t = t.split('\u0001NETHOSP\u0001').join('互聯網醫院');
+  t = t.split('\u0001NETPLUS\u0001').join('互聯網+');
+  t = t.split('\u0001NETCAFE\u0001').join('互聯網上網服務');
+  t = t.split('\u0001EBIKE\u0001').join('電動自行車');
   return t;
 };
 
@@ -343,6 +360,44 @@ export const GLOBAL_VOCAB = [
   ['迴報', '回報'], // 迴 is for 迴避 / 迴旋 / 迴圈 only
   ['渠道', '管道'],
   ['幾率', '機率'], // the rule quotations in CLAUDE.md are protected above
+  // --- zhtw-mcp review round (2026-11-07, sysprog21/zhtw-mcp base
+  // profile, cross_strait family). Clear mainland-leaning vocabulary in
+  // narrative prose; PRC statutory names and quoted law text stay as-is
+  // (社保/合同 family, 產品質量法, 信息網絡 license names — see the
+  // edition principles at the top). Institutional 互聯網 compounds and
+  // 電動自行車 are protected above.
+  ['概率', '機率'],
+  ['報道', '報導'],
+  ['互聯網', '網際網路'],
+  ['綜合徵', '症候群'],
+  ['置信區間', '信賴區間'],
+  ['胰腺', '胰臟'],
+  ['意大利', '義大利'],
+  ['新西蘭', '紐西蘭'],
+  ['實時', '即時'],
+  ['私信', '私訊'],
+  ['帖子', '貼文'],
+  ['比特', '位元'],
+  ['密鑰', '金鑰'],
+  ['重定向', '重新導向'],
+  ['圖標', '圖示'],
+  ['人臉識別', '人臉辨識'],
+  ['呼吸機', '呼吸器'],
+  ['老年痴呆', '失智症'],
+  ['頁腳', '頁尾'],
+  ['空氣淨化器', '空氣清淨機'],
+  ['安卓', 'Android'],
+  ['社交媒體', '社群媒體'],
+  ['社交平台', '社群平台'],
+  ['摩托車', '機車'],
+  ['自行車', '腳踏車'],
+  ['山地車', '登山車'],
+  ['抑鬱', '憂鬱'],
+  ['阿司匹林', '阿斯匹靈'],
+  ['中國內地', '中國大陸'],
+  ['內地居民', '大陸居民'],
+  ['群聊', '群組'],
+  ['刷手機', '滑手機'],
   ['溼', '濕'], // 濕 is the standard Taiwan glyph
   ['相冊', '相簿'],
   // Statutory categories in the Company Law and Labour Contract Law;

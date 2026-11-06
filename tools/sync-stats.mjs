@@ -98,7 +98,7 @@ const EDITS = [
   ['index.html', '五處描述', /(\d+) 條建議/g, `${entries} 條建議`],
   ['index.html', 'numberOfPages', /numberOfPages":(\d+)/g, `numberOfPages":${entries}`],
   ['index.html', '頁首條目數', /\d+ 節 (\d+) 條/g, `${sections} 節 ${entries} 條`],
-  ['index.html', '頁腳文件數', /下的 (\d+) 個文件/g, `下的 ${sections} 個文件`],
+  ['index.html', '頁尾文件數', /下的 (\d+) 個文件/g, `下的 ${sections} 個文件`],
   ['tools/og.html', 'og 條目數', /<b>(\d+)<\/b> 條建議/g, `<b>${entries}</b> 條建議`],
   ['tools/og.html', 'og A 級數', /A 級證據 <b>(\d+)<\/b> 條/g, `A 級證據 <b>${grade.A}</b> 條`],
   ['tools/og.html', 'og 連結數', /<b>(\d+)<\/b> 條原始文獻連結/g, `<b>${links}</b> 條原始文獻連結`],

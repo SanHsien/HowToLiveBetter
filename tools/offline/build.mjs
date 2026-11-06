@@ -58,9 +58,9 @@ for (const [img, mime] of [['ads/mcyyy-side.webp', 'image/webp'], ['ads/wechat-r
   html = html.replace(`src="${img}"`, `src="data:${mime};base64,${data}"`);
 }
 
-// 頁腳註明這是哪一版的離線副本
+// 頁尾註明這是哪一版的離線副本
 const foot = '<div class="foot">';
-must(foot, '頁腳');
+must(foot, '頁尾');
 const commitNote = COMMIT ? `，正文提交 ${COMMIT.slice(0, 7)}` : '';
 html = html.replace(foot, `${foot}離線副本，生成於 ${STAMP}（北京時間）${commitNote}；正文會繼續更新，以 <a href="${SITE}">線上版</a> 為準。<br>`);
 

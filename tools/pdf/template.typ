@@ -1,6 +1,6 @@
 $--
 $-- pandoc 的 typst 樣板（只認 $body$ 和幾個 -V 變數），不用 pandoc 自帶的 conf()：
-$-- 自帶樣板把頁面設定鎖在 conf() 裡，改不了頁眉頁腳，所以這裡自己排。
+$-- 自帶樣板把頁面設定鎖在 conf() 裡，改不了頁眉頁尾，所以這裡自己排。
 $-- 開頭到 divider 那段是 pandoc 生成的正文要用的輔助定義，照抄自 `pandoc -D typst`，別刪。
 $--
 #set terms(hanging-indent: 1.5em)

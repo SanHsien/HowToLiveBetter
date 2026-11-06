@@ -72,6 +72,12 @@ export const PROTECT = [
   // are restored by POST_VOCAB after restore().
   ['对象', '\u0001TARGET\u0001'],
   ['對象', '\u0001TARGET\u0001'],
+  // 欧洲食品安全局 (EFSA, European Food Safety Authority): tw2 renders
+  // 局 as 域 in this compound, producing the non-existent 食品安全域.
+  // Found 2026-11-06 in the coffee entry (第 2 節第 26 條); the error
+  // predates this round (present since the 2026-11-05 first conversion).
+  ['欧洲食品安全局', '\u0001EFSA\u0001'],
+  ['歐洲食品安全局', '\u0001EFSA\u0001'],
   // Formal document titles that contain 篩查 keep their official names;
   // generic 篩查 becomes 篩檢 in GLOBAL_VOCAB.
   ['新生儿疾病筛查管理办法', '\u0001TITLE1\u0001'],
@@ -113,6 +119,7 @@ export const restore = (t) => {
   t = t.split('\u0001BIRTHPERMIT\u0001').join('准生證');
   t = t.split('\u0001ABNORMAL\u0001').join('異常');
   t = t.split('\u0001TARGET\u0001').join('對象');
+  t = t.split('\u0001EFSA\u0001').join('歐洲食品安全局');
   t = t.split('\u0001TITLE1\u0001').join('新生兒疾病篩查管理辦法');
   t = t.split('\u0001TITLE2\u0001').join('丙型病毒性肝炎篩查及管理');
   t = t.split('\u0001TITLE3\u0001').join('中國女性乳腺癌篩查與早診早治指南');

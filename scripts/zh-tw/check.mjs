@@ -155,7 +155,11 @@ for (const [name, args] of [
 {
   const r = runTool(['tools/check-plain.mjs']);
   if (r.status !== 0) {
-    const badLines = (r.stdout || '').split('\n').filter((l) => /超過 120|不合格/.test(l) === false && /第 \d+ 節第 \d+ 條/.test(l));
+    // Failure lines name the entry (第 N 節第 M 條); the summary line does
+    // not. The old filter also excluded lines containing 超過 120, which
+    // is exactly what length-failure lines say, so the gate could never
+    // see them — the three over-long lines passed the gate for months.
+    const badLines = (r.stdout || '').split('\n').filter((l) => /第 \d+ 節第 \d+ 條/.test(l));
     const unknown = badLines.filter((l) => !KNOWN_PLAIN_FAILURES.some((k) => l.includes(k)));
     if (unknown.length) note('repo-tools', `check-plain has failures beyond the known three:\n${unknown.join('\n')}`);
   }

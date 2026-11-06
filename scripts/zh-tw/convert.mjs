@@ -8,13 +8,18 @@
 //  1. Every text file: protect() -> OpenCC (cn -> tw2) -> applyVocab() ->
 //     restore(), plus a percent-encoded-segment pass so Chinese inside
 //     URL-encoded links and shields.io badges converts too.
-//  2. Edition edits: zh-CN language tags become zh-TW, the book's own
-//     "write in Simplified" rules flip to Traditional, Noto Sans SC font
-//     names become Noto Sans TC, and the book workflow builds zh-tw.
-//  3. Files and directories whose names contain Simplified Chinese are
+//  2. Files and directories whose names contain Simplified Chinese are
 //     renamed to their converted form (same pipeline), so no Simplified
 //     file name survives; links inside converted content convert with the
 //     same pipeline and keep resolving.
+//  3. Edition edits: zh-CN language tags become zh-TW, the book's own
+//     "write in Simplified" rules flip to Traditional, Noto Sans SC font
+//     names become Noto Sans TC, the book workflow builds zh-tw, and the
+//     three over-long 說人話 lines are trimmed to fit the 120-char limit.
+//     Edition edits run after the renames because they address the book
+//     files by their converted (Traditional) names; before the renames
+//     those paths do not exist yet, so the three trims used to silently
+//     do nothing (the files were still named in Simplified Chinese).
 //
 // Excluded: .git, scripts/zh-tw itself (authored in zh-TW), dist,
 // node_modules, binary files, the English licences (no Chinese content),
@@ -48,13 +53,14 @@ const walk = (dir, out = []) => {
 };
 // scripts/ contains only scripts/zh-tw in this repo; skip the whole tree.
 // (If upstream ever adds other scripts/, revisit this line.)
-const FILES = walk('.').filter((f) => {
+const listTextFiles = () => walk('.').filter((f) => {
   if (EXCLUDE_FILES.has(f)) return false;
   if (!TEXT_EXT.has(path.extname(f)) && !f.startsWith('.')) return false;
   try {
     return !fs.readFileSync(path.join(root, f)).includes(0);
   } catch { return false; }
 });
+let FILES = listTextFiles();
 
 const read = (f) => fs.readFileSync(path.join(root, f), 'utf8');
 const write = (f, t) => fs.writeFileSync(path.join(root, f), t);
@@ -68,9 +74,43 @@ for (const f of FILES) {
 }
 console.log(`converted ${changed}/${FILES.length} text files`);
 
+// --- Renames ---
+// Snapshot every path (files and directories) and convert each segment
+// with the same pipeline. Rename deepest paths first.
+const entries = [];
+const walkPaths = (dir) => {
+  for (const e of fs.readdirSync(path.join(root, dir), { withFileTypes: true })) {
+    const p = dir === '.' ? e.name : path.join(dir, e.name);
+    if (dir === '.' && (e.name === '.git' || e.name === 'scripts')) continue;
+    entries.push(p);
+    if (e.isDirectory()) walkPaths(p);
+  }
+};
+walkPaths('.');
+let renamed = 0;
+// Deepest paths first, and rename only the basename inside its current
+// parent: ancestors keep their old names until their own turn, so the
+// parent directory always exists at the moment of the rename.
+const byDepth = entries.sort((a, b) => b.split(path.sep).length - a.split(path.sep).length);
+for (const p of byDepth) {
+  const base = path.basename(p);
+  const newBase = convertText(base);
+  if (newBase !== base) {
+    fs.renameSync(path.join(root, p), path.join(root, path.dirname(p), newBase));
+    renamed++;
+  }
+}
+console.log(`renamed ${renamed} paths`);
+
+// Edition edits address files by their converted names, so re-list the
+// tree after the renames; the pre-rename paths no longer exist.
+FILES = listTextFiles();
+
 // --- Edition edits (file-scoped, applied after conversion) ---
 const sub = (f, pairs) => {
-  if (!fs.existsSync(path.join(root, f))) return;
+  // Fail loudly on a missing target: a silent skip here once let the
+  // three 說人話 trims below do nothing for months.
+  if (!fs.existsSync(path.join(root, f))) throw new Error(`convert.mjs: edition-edit target missing: ${f}`);
   let t = read(f);
   const orig = t;
   for (const [a, b] of pairs) t = t.split(a).join(b);
@@ -116,31 +156,3 @@ sub('.github/workflows/book.yml', [[
   '      - run: node tools/sync-stats.mjs --check\n      - run: node tools/updates.mjs --check',
   '      - run: node tools/sync-stats.mjs --check\n      # zh-tw：不跑 updates.mjs --check（比對簡體 git 歷史必然全數不符；updates.json 保留上游逐條日期，僅做轉換）',
 ]]);
-
-// --- Renames ---
-// Snapshot every path (files and directories) and convert each segment
-// with the same pipeline. Rename deepest paths first.
-const entries = [];
-const walkPaths = (dir) => {
-  for (const e of fs.readdirSync(path.join(root, dir), { withFileTypes: true })) {
-    const p = dir === '.' ? e.name : path.join(dir, e.name);
-    if (dir === '.' && (e.name === '.git' || e.name === 'scripts')) continue;
-    entries.push(p);
-    if (e.isDirectory()) walkPaths(p);
-  }
-};
-walkPaths('.');
-let renamed = 0;
-// Deepest paths first, and rename only the basename inside its current
-// parent: ancestors keep their old names until their own turn, so the
-// parent directory always exists at the moment of the rename.
-const byDepth = entries.sort((a, b) => b.split(path.sep).length - a.split(path.sep).length);
-for (const p of byDepth) {
-  const base = path.basename(p);
-  const newBase = convertText(base);
-  if (newBase !== base) {
-    fs.renameSync(path.join(root, p), path.join(root, path.dirname(p), newBase));
-    renamed++;
-  }
-}
-console.log(`renamed ${renamed} paths`);

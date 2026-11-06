@@ -113,6 +113,10 @@ export const PROTECT = [
   // 電動自行車 is a PRC vehicle class with legal speed/weight limits;
   // only generic 自行車 becomes 腳踏車.
   ['電動自行車', '\u0001EBIKE\u0001'],
+  // 事務所: tw2 renders it 交易所 (!). Taiwan agency names introduced
+  // by the localization overrides (戶政事務所、律師事務所) must survive;
+  // genuine 交易所 (證券交易所) does not contain 事務所 and is untouched.
+  ['事務所', '\u0001OFFICE\u0001'],
 ];
 
 export const restore = (t) => {
@@ -145,6 +149,7 @@ export const restore = (t) => {
   t = t.split('\u0001NETPLUS\u0001').join('互聯網+');
   t = t.split('\u0001NETCAFE\u0001').join('互聯網上網服務');
   t = t.split('\u0001EBIKE\u0001').join('電動自行車');
+  t = t.split('\u0001OFFICE\u0001').join('事務所');
   return t;
 };
 

@@ -156,3 +156,40 @@ sub('.github/workflows/book.yml', [[
   '      - run: node tools/sync-stats.mjs --check\n      - run: node tools/updates.mjs --check',
   '      - run: node tools/sync-stats.mjs --check\n      # zh-tw：不跑 updates.mjs --check（比對簡體 git 歷史必然全數不符；updates.json 保留上游逐條日期，僅做轉換）',
 ]]);
+
+// --- Taiwan localization overrides (Will, 2026-11-07) ---
+// Entries whose substance is PRC law / PRC institutions are rewritten
+// as advice for Taiwan readers (not word-swapped: procedures, agencies,
+// fees and statutes are Taiwan's). The rewritten blocks live in
+// scripts/zh-tw/localize/ and are listed in its index.json with the
+// converted entry title each one replaces. Matching is by position
+// (the Nth ### block) plus an exact title check, so if upstream edits
+// or renumbers an entry the conversion fails loudly instead of
+// silently localizing the wrong entry or dropping the rewrite on the
+// next daily sync.
+{
+  const locDir = path.join(root, 'scripts/zh-tw/localize');
+  const indexPath = path.join(locDir, 'index.json');
+  if (fs.existsSync(indexPath)) {
+    const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+    let applied = 0;
+    for (const item of index) {
+      const target = path.join(root, item.file);
+      if (!fs.existsSync(target)) throw new Error(`convert.mjs: localize target file missing: ${item.file}`);
+      const override = fs.readFileSync(path.join(locDir, item.override), 'utf8').replace(/\s+$/, '');
+      const text = fs.readFileSync(target, 'utf8');
+      const heads = [...text.matchAll(/^### .*$/gm)];
+      const h = heads[item.no - 1];
+      if (!h) throw new Error(`convert.mjs: localize entry ${item.no} not found in ${item.file}`);
+      const actualTitle = h[0].replace(/^### /, '');
+      if (actualTitle !== item.title) throw new Error(`convert.mjs: localize title mismatch in ${item.file} #${item.no}: expected "${item.title}", found "${actualTitle}" — upstream changed this entry; re-verify the Taiwan rewrite before updating the index`);
+      const start = h.index;
+      const hasNext = item.no < heads.length;
+      const end = hasNext ? heads[item.no].index : text.length;
+      const next = text.slice(0, start) + override + (hasNext ? '\n\n' + text.slice(end) : '\n');
+      fs.writeFileSync(target, next);
+      applied++;
+    }
+    console.log(`localized ${applied} entries`);
+  }
+}

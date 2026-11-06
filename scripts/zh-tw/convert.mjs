@@ -178,6 +178,22 @@ sub('.github/workflows/book.yml', [[
   '      - run: node tools/sync-stats.mjs --check\n      # zh-tw：不跑 updates.mjs --check（比對簡體 git 歷史必然全數不符；updates.json 保留上游逐條日期，僅做轉換）',
 ]]);
 
+// Cross-references and the self-check quiz name chapter 8 entries by
+// their pre-localization titles; the localized titles differ, so the
+// anchors and quiz keys are repointed here (check-refs and
+// check-selfcheck verify them against the finished text).
+sub('book/09-普通人容易踩的法律紅線.md', [
+  ['（別當掛名法人、不把銀行卡借給人）', '（別當人頭公司負責人、不把銀行帳戶借給任何人）'],
+]);
+sub('book/14-帳號與資訊安全.md', [
+  ['第 8 節第 9 條（徵信報告）', '第 8 節第 9 條（聯徵信用報告）'],
+  ['第 8 節第 8 條（不把銀行卡、手機卡）', '第 8 節第 8 條（不把銀行帳戶、提款卡）'],
+]);
+sub('selfcheck.html', [
+  ["key:'不把銀行卡', text:'從不把銀行卡、手機卡、支付帳號借給別人'", "key:'不把銀行帳戶', text:'從不把銀行帳戶、提款卡、網銀和支付帳號借給別人'"],
+  ["key:'徵信報告', text:'查過自己的徵信報告'", "key:'聯徵信用報告', text:'查過自己的聯徵信用報告'"],
+]);
+
 // --- Taiwan localization overrides (Will, 2026-11-07) ---
 // Entries whose substance is PRC law / PRC institutions are rewritten
 // as advice for Taiwan readers (not word-swapped: procedures, agencies,

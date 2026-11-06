@@ -117,6 +117,10 @@ export const PROTECT = [
   // by the localization overrides (戶政事務所、律師事務所) must survive;
   // genuine 交易所 (證券交易所) does not contain 事務所 and is untouched.
   ['事務所', '\u0001OFFICE\u0001'],
+  // 占有人 is the Civil Code §190 statutory term (動物占有人); tw2 would
+  // render it 佔有人. Only the compound is protected, generic 佔有 verbs
+  // elsewhere still convert normally.
+  ['占有人', '\u0001POSSESSOR\u0001'],
 ];
 
 export const restore = (t) => {
@@ -150,6 +154,7 @@ export const restore = (t) => {
   t = t.split('\u0001NETCAFE\u0001').join('互聯網上網服務');
   t = t.split('\u0001EBIKE\u0001').join('電動自行車');
   t = t.split('\u0001OFFICE\u0001').join('事務所');
+  t = t.split('\u0001POSSESSOR\u0001').join('占有人');
   return t;
 };
 

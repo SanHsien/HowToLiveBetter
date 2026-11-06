@@ -232,6 +232,16 @@ sub('book/05-不要浪費錢.md', [
 sub('book/31-十八歲之後有哪幾條路.md', [
   ['第 19 節第 19 條（養老和醫保關係轉到新參保地）', '第 19 節第 19 條（換工作、換縣市都不用辦保險轉移）'],
 ]);
+// Same repointing for chapter 5's localized titles.
+sub('docs/剛確診慢性病之後.md', [
+  ['第 5 節第 12 條（一致性評價的仿製藥和集採中選藥）', '第 5 節第 12 條（優先選學名藥）'],
+]);
+sub('docs/換工作、換城市之前.md', [
+  ['第 5 節第 2 條（個稅彙算）', '第 5 節第 2 條（綜合所得稅結算申報）'],
+]);
+sub('book/18-養孩子劃不划算.md', [
+  ['第 5 節第 2 條（個稅彙算）', '第 5 節第 2 條（綜合所得稅結算申報）'],
+]);
 
 // --- Taiwan localization overrides (Will, 2026-11-07) ---
 // Entries whose substance is PRC law / PRC institutions are rewritten

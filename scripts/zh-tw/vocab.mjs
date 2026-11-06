@@ -187,7 +187,9 @@ export const GLOBAL_VOCAB = [
   ['羣', '群'], // never emit 羣 in zh-TW output
 
   // --- Settled Taiwan word choices tw2 misses or renders mainland-style ---
-  ['登錄', '登入'], // account sign-in; 登記 (registration) is a different word
+  // 登錄 is NOT pair-mapped: as account sign-in it is 登入 in Taiwan, but
+  // as statutory registration （食品業者登錄） 登錄 is the correct Taiwan
+  // term. Scoped regexes in REGEX_VOCAB convert only the sign-in senses.
   ['寬帶', '寬頻'], // broadband
   ['打印', '列印'],
   ['列印遺囑', '打印遺囑'], // PRC Civil Code category name, proper noun
@@ -582,6 +584,12 @@ export const REGEX_VOCAB = [
   // 瞭解, except where 了 is a verb particle before 解釋 / 解決
   // (刪了原解釋的面積條款 must not become 刪瞭解釋).
   [/了解(?!釋|決)/g, '瞭解'],
+  // 登錄 → 登入 only in account sign-in senses: followed by a sign-in
+  // object/aspect （帳號、設備、後、的…), or preceded by a sign-in verb
+  // （驗證碼、退出、帳號…). Statutory registration senses （業者登錄、
+  // 申請登錄、登錄類別、登錄字號） keep 登錄， the correct Taiwan term.
+  [/登錄(?=帳號|密碼|設備|頁面|系統|方式|狀態|紀錄|記錄|後|時|的|了|介面|畫面|IP|老|新|驗證)/g, '登入'],
+  [/(?<=驗證碼|退出|自動|無需|免|重新|進行|掃碼|帳號)登錄/g, '登入'],
   // Adverbial 只 (only): tw2 systematically writes 隻 （隻記錄、不分組
   // is the book's stock evidence phrase). Measure-word 隻 survives
   // after numerals and in 船隻 / 犬隻 / 那隻股票 / 那隻眼， which the
@@ -602,9 +610,11 @@ export const applyVocab = (t) => {
 // (個人信息保護法, 網絡安全法, 產品質量, 數位化, 視頻號, ...). 標記 is
 // deliberately absent: it is the project's own term (引文標記) and a
 // legitimate verb; the 標籤 cost tags are protected by PROTECT instead.
+// 登錄 is likewise absent: statutory registration （食品業者登錄） is
+// correct Taiwan usage; only its sign-in senses convert (REGEX_VOCAB).
 export const WRONG_FORMS = [
   '視頻', '信息', '數據', '用戶', '軟件', '網絡', '屏幕', '默認', '質量',
-  '打印', '緩存', '登錄', '賬', '羣', '分鍾', '寬帶', '數位',
+  '打印', '緩存', '賬', '羣', '分鍾', '寬帶', '數位',
   '平行處理症', '週歲', '摺合', '篩查', '攝像頭', '塑料', '絕經', '提現',
   '溼', '幾率', 'callback',
 ];

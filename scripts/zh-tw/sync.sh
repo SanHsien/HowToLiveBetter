@@ -53,11 +53,15 @@ fi
 # tree is reset to upstream.
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-cp -a scripts/zh-tw "$TMP/zh-tw"
+# NOTE: /tmp is a tmpfs mounted with uid/gid mapping, so `cp -a` fails with
+# "failed to preserve ownership: Operation not permitted" when copying back
+# into the workspace. Ownership is irrelevant here (git tracks no ownership),
+# so skip it; modes/timestamps are still preserved.
+cp -a --no-preserve=ownership scripts/zh-tw "$TMP/zh-tw"
 git read-tree --reset -u "$UP"
 rm -rf scripts/zh-tw
 mkdir -p scripts
-cp -a "$TMP/zh-tw" scripts/zh-tw
+cp -a --no-preserve=ownership "$TMP/zh-tw" scripts/zh-tw
 
 node scripts/zh-tw/convert.mjs
 node scripts/zh-tw/regen-images.mjs

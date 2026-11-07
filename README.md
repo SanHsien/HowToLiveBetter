@@ -16,7 +16,7 @@
 [![線上檢索](https://img.shields.io/badge/%E7%B7%9A%E4%B8%8A%E6%AA%A2%E7%B4%A2-%E9%BB%9E%E9%80%99%E8%A3%A1%E6%89%93%E9%96%8B-3451b2?style=flat-square)](https://how-to-live-better.gh.miniasp.com/)
 [![條目](https://img.shields.io/badge/%E6%A2%9D%E7%9B%AE-772 %E6%A2%9D-18794e?style=flat-square)](#目錄)
 [![證據分級](https://img.shields.io/badge/%E8%AD%89%E6%93%9A%E5%88%86%E7%B4%9A-A%20491%20%C2%B7%20B%20229%20%C2%B7%20C%2052-915930?style=flat-square)](#證據分級)
-[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2404 %E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
+[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2397 %E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
 [![許可](https://img.shields.io/badge/%E8%A8%B1%E5%8F%AF-CC%20BY%204.0-565a5f?style=flat-square)](#許可)
 [![Claude Code 協助編寫](https://img.shields.io/badge/Claude%20Code-%E5%8D%94%E5%8A%A9%E7%B7%A8%E5%AF%AB-D97757?style=flat-square&logo=claude&logoColor=white)](https://claude.com/claude-code)
 

@@ -231,6 +231,25 @@ sub('index.html', [
   ["/* ---------- 讚賞碼彈窗 ---------- */\nconst TIP = document.getElementById('tip-mask');\nfunction tipClose(){\n  if (TIP.hidden) return;\n  TIP.hidden = true;\n  document.getElementById('tip-open').focus();\n}\ndocument.getElementById('tip-open').addEventListener('click', () => {\n  TIP.hidden = false;\n  document.getElementById('tip-x').focus();\n  if (window.gtag) gtag('event', 'tip_open');\n});\ndocument.getElementById('tip-x').addEventListener('click', tipClose);\nTIP.addEventListener('click', ev => { if (ev.target === TIP) tipClose(); });\ndocument.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !TIP.hidden){ ev.stopPropagation(); tipClose(); } }, true);\n", ''],
 ]);
 
+// Reader-reported fixes (issue #7, verified 2026-11-08): butter is
+// 奶油 in Taiwan usage, not 黃油 (ch.2 §41 + its intro short name,
+// ch.13 burns note quoting NHS advice); ch.3 §25 gains the ibuprofen
+// allergy contraindication from TFDA's revised label, which the entry
+// previously only implied via the US label. （預包裝→包裝食品 for
+// §2-40 / §5-36 lives in their localize overrides.)
+sub('book/02-不要慢慢死.md', [
+  ['### 41. 做飯用植物油代替豬油和黃油，不必為了健康換著買油，也別指望亞麻籽油護心', '### 41. 做飯用植物油代替豬油和奶油，不必為了健康換著買油，也別指望亞麻籽油護心'],
+  ['少吃豬油黃油這類飽和脂肪', '少吃豬油、奶油這類飽和脂肪'],
+  ['用植物油代替豬油黃油（第 41 條）', '用植物油代替豬油、奶油（第 41 條）'],
+]);
+sub('book/13-緊急情況.md', [
+  ['也不要往燙傷上抹任何藥膏、油或黃油', '也不要往燙傷上抹任何藥膏、油或奶油'],
+]);
+sub('book/03-不要浪費精力.md', [
+  ['- 備註：60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。', '- 備註：對布洛芬、阿斯匹靈或其他消炎止痛藥過敏的人不要吃這類藥，食藥署修訂的仿單把這列為禁忌。60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。'],
+  ['Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>', 'Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>；衛生福利部食品藥物管理署. 含 ibuprofen 成分藥品仿單禁忌修訂（對 ibuprofen 過敏、服用 aspirin 或其他非類固醇消炎藥後曾發生過敏反應者禁用）. <https://www.fda.gov.tw/tc/includes/GetFile.ashx?mID=19&id=57734>'],
+]);
+
 // The book's own writing rules name the edition's script.
 sub('CLAUDE.md', [['簡體中文，不用繁體', '繁體中文（台灣用詞），不用簡體']]);
 // Three 說人話 run 1–3 characters over the book's own 120-character

@@ -167,6 +167,8 @@ sub('book/13-緊急情況.md', [
   ['呼叫120', '呼叫119'],
   ['撥打120', '撥打119'],
   ['「120', '「119'],
+  // §24 在地化改題（batch-5d）後，節首引言的短名同步新標題。
+  ['火災時貼地爬（第 24 條）', '小火快逃，濃煙關門（第 24 條）'],
 ]);
 sub('skills/life-decision-guide/SKILL.md', [['簡體中文', '繁體中文']]);
 // The skill's own instruction prose (not book content): Taiwan terms for

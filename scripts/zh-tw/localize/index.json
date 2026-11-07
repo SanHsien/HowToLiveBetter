@@ -3256,5 +3256,18 @@
   "no": 10,
   "title": "10. 坐車時給 4 歲以下兒童用安全座椅，不要抱在懷裡",
   "override": "1__10.md"
- }
+ },
+ {"file": "book/01-不要早死.md", "no": 16, "title": "16. 女性接種 HPV 疫苗，越早越好", "override": "1__16.md"},
+ {"file": "book/01-不要早死.md", "no": 18, "title": "18. 30 歲以上女性做宮頸癌篩檢，優先 HPV 檢測", "override": "1__18.md"},
+ {"file": "book/01-不要早死.md", "no": 19, "title": "19. 45 到 50 歲起做結直腸癌篩檢，做查大便隱血的糞便免疫化學檢測或者腸鏡", "override": "1__19.md"},
+ {"file": "book/01-不要早死.md", "no": 21, "title": "21. 50 歲以後打帶狀皰疹疫苗", "override": "1__21.md"},
+ {"file": "book/01-不要早死.md", "no": 22, "title": "22. 65 歲以上打肺炎球菌疫苗", "override": "1__22.md"},
+ {"file": "book/01-不要早死.md", "no": 23, "title": "23. 查幽門螺桿菌，陽性就根除", "override": "1__23.md"},
+ {"file": "book/01-不要早死.md", "no": 24, "title": "24. 重度吸菸者每年做一次低劑量胸部 CT", "override": "1__24.md"},
+ {"file": "book/06-反面清單.md", "no": 1, "title": "1. 不要為了長壽或防心血管病吃複合維生素", "override": "06__1.md"},
+ {"file": "book/06-反面清單.md", "no": 2, "title": "2. 不要為了預防心血管病吃普通魚油", "override": "06__2.md"},
+ {"file": "book/06-反面清單.md", "no": 5, "title": "5. 不要指望氨糖（葡萄糖胺）/軟骨素治膝關節炎", "override": "06__5.md"},
+ {"file": "book/06-反面清單.md", "no": 6, "title": "6. 不要靠維生素 C 預防感冒", "override": "06__6.md"},
+ {"file": "book/06-反面清單.md", "no": 11, "title": "11. 不要在沒有腸道問題時長期吃益生菌", "override": "06__11.md"},
+ {"file": "book/02-不要慢慢死.md", "no": 40, "title": "40. 買預包裝、有 SC 編號的食用油，不買小作坊散裝自榨花生油", "override": "2__40.md"}
 ]

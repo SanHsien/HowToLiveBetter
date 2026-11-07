@@ -162,6 +162,12 @@ export const restore = (t) => {
 // physical object after all. 物件導向 (object-oriented) does not occur
 // in this corpus; if upstream adds it, add a restore here.
 export const POST_VOCAB = [
+  // 划算 (cost-effective): OpenCC tw2 re-writes 划 back to 劃 even on
+  // already-Traditional input, so the 定版 must run after the OpenCC pass
+  // (here, in applyPostVocab), not in GLOBAL_VOCAB. Only this idiom takes
+  // 划; 計劃/規劃/劃重點/劃線價 keep their 劃.
+  ['划不划算', '划不划算'],
+  ['划算', '划算'],
   ['對象儲存', '物件儲存'], // object storage, the S3 sense
   ['招財對象', '招財物件'], // lucky-charm objects
   ['這類對象', '這類物件'], // "this kind of object" (crystals, charms)
@@ -182,10 +188,6 @@ export const protect = (t) => {
 // would otherwise rewrite them.
 export const GLOBAL_VOCAB = [
   // --- OpenCC tw2 slips and variant characters ---
-  ['划不划算', '划不划算'], // 划算 (cost-effective) is the standard Taiwan form; the 劃 variant
-  // covers only the idiom, so 計劃/規劃/劃重點/劃線價 keep their 劃. Also rewrites chapter
-  // titles and file names via convertText, and keeps localize overrides idempotent.
-  ['划算', '划算'],
   ['分鍾', '分鐘'], // Taiwan standard is 分鐘 (鍾 is a surname / old measure)
   ['賬', '帳'], // never emit 賬 in zh-TW output
   ['羣', '群'], // never emit 羣 in zh-TW output

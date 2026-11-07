@@ -51,12 +51,7 @@ html = html
   .replaceAll('href="book/"', `href="${REPO}/tree/main/book"`)
   .replaceAll('<a class="title" href="./"', `<a class="title" href="${SITE}"`);
 
-// 側欄廣告圖和讚賞碼轉 data URI，否則離線打開是個裂圖
-for (const [img, mime] of [['ads/mcyyy-side.webp', 'image/webp'], ['ads/wechat-reward.png', 'image/png']]) {
-  must(`src="${img}"`, `圖片 ${img}`);
-  const data = readFileSync(resolve(ROOT, img)).toString('base64');
-  html = html.replace(`src="${img}"`, `src="data:${mime};base64,${data}"`);
-}
+// 繁體中文版已移除側欄廣告與讚賞碼，index.html 不再引用 ads/ 圖片，離線版無圖可內嵌。
 
 // 頁尾註明這是哪一版的離線副本
 const foot = '<div class="foot">';

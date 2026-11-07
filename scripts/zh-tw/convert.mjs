@@ -447,6 +447,26 @@ sub('docs/換工作、換城市之前.md', [
   }
 }
 
+// Standalone docs (docs/*.md) whose entire content is China-specific get a
+// full-document Taiwan replacement, kept in scripts/zh-tw/localize-docs/
+// under the same file name. Applied after the entry overrides so edition
+// edits targeting those files are superseded by the replacement. Each
+// replacement must be a convertText fixed point (gate 4 verifies the tree).
+{
+  const docsDir = path.join(root, 'scripts/zh-tw/localize-docs');
+  if (fs.existsSync(docsDir)) {
+    let applied = 0;
+    for (const name of fs.readdirSync(docsDir).sort()) {
+      if (!name.endsWith('.md')) continue;
+      const target = path.join(root, 'docs', name);
+      if (!fs.existsSync(target)) throw new Error(`convert.mjs: localize-docs target missing: docs/${name}`);
+      fs.writeFileSync(target, fs.readFileSync(path.join(docsDir, name), 'utf8'));
+      applied++;
+    }
+    console.log(`localized ${applied} docs`);
+  }
+}
+
 // Refresh the derived statistics (README badges, index.html, og.html)
 // and the cross-reference table from the finished edition text:
 // localized entries change the link count and the titles the table

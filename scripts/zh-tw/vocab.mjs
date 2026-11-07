@@ -557,7 +557,9 @@ export const GLOBAL_VOCAB = [
   // provenance citation above is protected. Branch paths follow the
   // slug: the site's blob/tree links and the skill's raw fetches name
   // files that only exist, under their converted names, on zh-tw.
-  ['eternity4719/HowToLiveBetter', 'doggy8088/HowToLiveBetter'],
+  // The repo slug rewrite lives in REGEX_VOCAB: the license section's
+  // attribution line is a provenance citation and keeps the upstream
+  // slug (Will, 2026-11-08), like the protected citation above.
   ['eternity4719.github.io', 'doggy8088.github.io'],
   ['eternity4719\\.github\\.io', 'doggy8088\\.github\\.io'], // check-links SKIP regex
   ['HowToLiveBetter/blob/main/', 'HowToLiveBetter/blob/zh-tw/'],
@@ -603,6 +605,10 @@ export const GLOBAL_VOCAB = [
  * not followed by 碼 is restored to 編碼.
  */
 export const REGEX_VOCAB = [
+  // Repo slug: functional pointers name the fork, but the attribution
+  // line in the license section ("附上倉庫連結 <url>") is a provenance
+  // citation and keeps the upstream slug (Will, 2026-11-08).
+  [/(?<!附上倉庫連結 https:\/\/github\.com\/)eternity4719\/HowToLiveBetter/g, 'doggy8088/HowToLiveBetter'],
   // Cervix (Will, 2026-11-08: domain term check, batch A). Negative
   // lookbehind keeps the already-correct 子宮頸 a fixed point.
   [/(?<!子)宮頸/g, '子宮頸'],

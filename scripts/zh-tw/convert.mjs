@@ -203,6 +203,24 @@ sub('book/14-帳號與資訊安全.md', [
 ]);
 sub('docs/生物鐘和夜班.md', [['褪黑素', '褪黑激素']]);
 
+
+// README 說明與授權（Will, 2026-11-08）：開頭的制度口徑改為台灣版現行
+// 規定；「許可」節改名「授權聲明」（徽章同步）；授權聲明的出處連結指回
+// 原作倉庫 eternity4719；讚賞、廣告位、商務合作三節全數移除。網站
+// index.html 的側欄廣告與讚賞彈窗（同為原作者的贊助/廣告內容）一併移除。
+sub('README.md', [
+  ['法律、醫保、社保這些制度上的內容，按中國大陸的現行規定寫。', '法律、健保、勞保這些制度上的內容，本版已按台灣的現行規定改寫。'],
+  ['[![許可](https://img.shields.io/badge/%E8%A8%B1%E5%8F%AF-CC%20BY%204.0-565a5f?style=flat-square)](#許可)', '[![授權聲明](https://img.shields.io/badge/%E6%8E%88%E6%AC%8A%E8%81%B2%E6%98%8E-CC%20BY%204.0-565a5f?style=flat-square)](#授權聲明)'],
+  ['## 許可', '## 授權聲明'],
+  ["\n## 讚賞\n\n覺得有用，可以用微信掃碼請作者喝杯咖啡。給不給都行，不影響任何內容。\n\n<img src=\"ads/wechat-reward.png\" alt=\"微信讚賞碼\" width=\"240\">\n\n## 廣告位\n\n<a href=\"https://4.mcyyy.com\"><img src=\"ads/mcyyy.webp\" alt=\"永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com\" width=\"820\"></a>\n\n## 商務合作\n\n信箱 [admin@mcyyy.com](mailto:admin@mcyyy.com)\n", ''],
+]);
+sub('index.html', [
+  ["/* 側欄底部廣告位：圖片換成新廣告主的即可，尺寸按 2:1 出圖，源文件在 tools/ad-*.html */\n.ad{margin-top:26px}\n.ad img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--divider)}\n/* 讚賞：側欄底部一行字，點開才出二維碼，圖用 loading=lazy，不點不下載 */\n.tip-open{margin-top:10px;padding:0;border:0;background:none;font:inherit;font-size:12px;color:var(--t3);cursor:pointer}\n.tip-open:hover{color:var(--brand-1)}\n#tip-mask{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}\n#tip-mask[hidden]{display:none}\n#tip-box{background:var(--bg);border:1px solid var(--divider);border-radius:12px;box-shadow:var(--shadow);width:min(360px,100%);padding:16px;text-align:center}\n#tip-box img{display:block;width:100%;height:auto;border-radius:8px}\n#tip-box p{margin:12px 0;font-size:13px;line-height:1.6;color:var(--t2)}\n#tip-box button{border:1px solid var(--divider);background:var(--bg-soft);color:var(--t2);border-radius:6px;padding:3px 14px;font-size:13px;cursor:pointer;font-family:inherit}\n#tip-box button:hover{color:var(--t1);background:var(--bg-mute)}\n", ''],
+  ["  <div class=\"group ad\">\n    <div class=\"gt\">廣告</div>\n    <a href=\"https://4.mcyyy.com\" target=\"_blank\" rel=\"noopener\"><img src=\"ads/mcyyy-side.webp\" alt=\"永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com\" width=\"624\" height=\"312\" loading=\"lazy\"></a>\n    <button type=\"button\" class=\"tip-open\" id=\"tip-open\">覺得有用？請作者喝杯咖啡</button>\n  </div>\n", ''],
+  ["\n<div id=\"tip-mask\" hidden>\n  <div id=\"tip-box\" role=\"dialog\" aria-modal=\"true\" aria-label=\"微信讚賞碼\">\n    <img src=\"ads/wechat-reward.png\" alt=\"微信讚賞碼\" width=\"1037\" height=\"1037\" loading=\"lazy\">\n    <p>用微信掃一掃，給不給都行，不影響任何內容。<br>在手機上看的話，先截圖，再用微信掃一掃從相簿選圖。</p>\n    <button type=\"button\" id=\"tip-x\">關閉</button>\n  </div>\n</div>", '\n'],
+  ["/* ---------- 讚賞碼彈窗 ---------- */\nconst TIP = document.getElementById('tip-mask');\nfunction tipClose(){\n  if (TIP.hidden) return;\n  TIP.hidden = true;\n  document.getElementById('tip-open').focus();\n}\ndocument.getElementById('tip-open').addEventListener('click', () => {\n  TIP.hidden = false;\n  document.getElementById('tip-x').focus();\n  if (window.gtag) gtag('event', 'tip_open');\n});\ndocument.getElementById('tip-x').addEventListener('click', tipClose);\nTIP.addEventListener('click', ev => { if (ev.target === TIP) tipClose(); });\ndocument.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !TIP.hidden){ ev.stopPropagation(); tipClose(); } }, true);\n", ''],
+]);
+
 // The book's own writing rules name the edition's script.
 sub('CLAUDE.md', [['簡體中文，不用繁體', '繁體中文（台灣用詞），不用簡體']]);
 // Three 說人話 run 1–3 characters over the book's own 120-character

@@ -4,7 +4,7 @@
 
 # 高性價比人生指南
 
-講怎麼活得久、怎麼少生病，出了意外怎麼救。講怎麼少花冤枉錢，哪些事會讓人被騙、攤上官司。講沒工作沒錢時能去領什麼，開店、開公司、做網站要辦什麼手續。也講戀愛結婚生孩子、出國和學手藝。法律、醫保、社保這些制度上的內容，按中國大陸的現行規定寫。<br>
+講怎麼活得久、怎麼少生病，出了意外怎麼救。講怎麼少花冤枉錢，哪些事會讓人被騙、攤上官司。講沒工作沒錢時能去領什麼，開店、開公司、做網站要辦什麼手續。也講戀愛結婚生孩子、出國和學手藝。法律、健保、勞保這些制度上的內容，本版已按台灣的現行規定改寫。<br>
 772 條建議，每條寫明花掉什麼、換回什麼、證據有多硬，來源只引期刊論文和官方文件，少數官方不公開的案件引署名的原創新聞報導並附網頁存檔。
 
 不用全做：這是一份備選單，不是任務清單——挑走一兩條就算數，作者自己也沒做到其中大部分。
@@ -17,7 +17,7 @@
 [![條目](https://img.shields.io/badge/%E6%A2%9D%E7%9B%AE-772%20%E6%A2%9D-18794e?style=flat-square)](#目錄)
 [![證據分級](https://img.shields.io/badge/%E8%AD%89%E6%93%9A%E5%88%86%E7%B4%9A-A%20478%20%C2%B7%20B%20240%20%C2%B7%20C%2054-915930?style=flat-square)](#證據分級)
 [![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2286%20%E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
-[![許可](https://img.shields.io/badge/%E8%A8%B1%E5%8F%AF-CC%20BY%204.0-565a5f?style=flat-square)](#許可)
+[![授權聲明](https://img.shields.io/badge/%E6%8E%88%E6%AC%8A%E8%81%B2%E6%98%8E-CC%20BY%204.0-565a5f?style=flat-square)](#授權聲明)
 [![Claude Code 協助編寫](https://img.shields.io/badge/Claude%20Code-%E5%8D%94%E5%8A%A9%E7%B7%A8%E5%AF%AB-D97757?style=flat-square&logo=claude&logoColor=white)](https://claude.com/claude-code)
 
 ### [打開線上檢索頁](https://how-to-live-better.gh.miniasp.com/) · [讓 AI 照書回答（skill）](skills/life-decision-guide/README.md)
@@ -314,11 +314,11 @@ A 級只說明「有具體數字、出處可核」，不說明這個數字一定
 
 正文按節拆成 34 個文件放在 [book/](book/)，點上面目錄裡的節名進入。拆開是因為單文件已經超過 GitHub 渲染 Markdown 的 512 KB 上限，後面的節顯示不出來；[線上檢索頁](https://how-to-live-better.gh.miniasp.com/)會把這些文件合起來讀，用法不變。
 
-## 許可
+## 授權聲明
 
 正文用 [CC BY 4.0](LICENSE) 發布，範圍是 book/、docs/ 和本 README 的文字。你可以轉載、改編、商用，不用來問作者，但要做到三件事：
 
-- 寫明出處：「高性價比人生指南」，附上倉庫連結 https://github.com/doggy8088/HowToLiveBetter 。
+- 寫明出處：「高性價比人生指南」，附上倉庫連結 https://github.com/eternity4719/HowToLiveBetter 。
 - 附上許可證連結 https://creativecommons.org/licenses/by/4.0/ 。
 - 改過內容的要寫明改過。書裡的法條、補貼標準和截止日期經常更新，建議同時寫上你同步的是哪一天的版本。
 
@@ -327,17 +327,3 @@ A 級只說明「有具體數字、出處可核」，不說明這個數字一定
 ## Star 走勢
 
 [![Star History Chart](https://api.star-history.com/svg?repos=doggy8088/HowToLiveBetter&type=Date)](https://star-history.com/#doggy8088/HowToLiveBetter&Date)
-
-## 讚賞
-
-覺得有用，可以用微信掃碼請作者喝杯咖啡。給不給都行，不影響任何內容。
-
-<img src="ads/wechat-reward.png" alt="微信讚賞碼" width="240">
-
-## 廣告位
-
-<a href="https://4.mcyyy.com"><img src="ads/mcyyy.webp" alt="永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com" width="820"></a>
-
-## 商務合作
-
-信箱 [admin@mcyyy.com](mailto:admin@mcyyy.com)

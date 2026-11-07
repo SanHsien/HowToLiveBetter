@@ -166,19 +166,6 @@ html.dark .switch .sun{display:none} html.dark .switch .moon{display:block}
 .doc-links{margin-top:8px;font-size:14px;color:var(--t3)}
 .doc-links a{margin-right:4px}
 .hint{font-size:12px;color:var(--t3);line-height:1.6;margin-top:16px}
-/* 側欄底部廣告位：圖片換成新廣告主的即可，尺寸按 2:1 出圖，源文件在 tools/ad-*.html */
-.ad{margin-top:26px}
-.ad img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--divider)}
-/* 讚賞：側欄底部一行字，點開才出二維碼，圖用 loading=lazy，不點不下載 */
-.tip-open{margin-top:10px;padding:0;border:0;background:none;font:inherit;font-size:12px;color:var(--t3);cursor:pointer}
-.tip-open:hover{color:var(--brand-1)}
-#tip-mask{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}
-#tip-mask[hidden]{display:none}
-#tip-box{background:var(--bg);border:1px solid var(--divider);border-radius:12px;box-shadow:var(--shadow);width:min(360px,100%);padding:16px;text-align:center}
-#tip-box img{display:block;width:100%;height:auto;border-radius:8px}
-#tip-box p{margin:12px 0;font-size:13px;line-height:1.6;color:var(--t2)}
-#tip-box button{border:1px solid var(--divider);background:var(--bg-soft);color:var(--t2);border-radius:6px;padding:3px 14px;font-size:13px;cursor:pointer;font-family:inherit}
-#tip-box button:hover{color:var(--t1);background:var(--bg-mute)}
 .hint p{margin:4px 0}
 .backdrop{display:none}
 
@@ -493,11 +480,6 @@ abbr.term:hover{border-bottom-color:var(--brand-1);color:var(--brand-1)}
     <p>每節內的先後順序不代表性價比高低，想挑划算的就用上面的性價比篩選。</p>
     <p>正文與標籤來自倉庫 <a href="book/">book/</a> 下的 34 個文件，改正文即改這裡。</p>
   </div>
-  <div class="group ad">
-    <div class="gt">廣告</div>
-    <a href="https://4.mcyyy.com" target="_blank" rel="noopener"><img src="ads/mcyyy-side.webp" alt="永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com" width="624" height="312" loading="lazy"></a>
-    <button type="button" class="tip-open" id="tip-open">覺得有用？請作者喝杯咖啡</button>
-  </div>
 </aside>
 
 <main class="content">
@@ -533,13 +515,7 @@ abbr.term:hover{border-bottom-color:var(--brand-1);color:var(--brand-1)}
   </div>
 </div>
 
-<div id="tip-mask" hidden>
-  <div id="tip-box" role="dialog" aria-modal="true" aria-label="微信讚賞碼">
-    <img src="ads/wechat-reward.png" alt="微信讚賞碼" width="1037" height="1037" loading="lazy">
-    <p>用微信掃一掃，給不給都行，不影響任何內容。<br>在手機上看的話，先截圖，再用微信掃一掃從相簿選圖。</p>
-    <button type="button" id="tip-x">關閉</button>
-  </div>
-</div>
+
 
 <div id="xref-pop" hidden>
   <div class="xp-h"><b></b><button class="xp-go" type="button">跳過去</button><button class="xp-x" type="button" aria-label="關閉">✕</button></div>
@@ -1579,21 +1555,6 @@ document.addEventListener('keydown', ev => {
   dmClose();
 }, true);
 
-/* ---------- 讚賞碼彈窗 ---------- */
-const TIP = document.getElementById('tip-mask');
-function tipClose(){
-  if (TIP.hidden) return;
-  TIP.hidden = true;
-  document.getElementById('tip-open').focus();
-}
-document.getElementById('tip-open').addEventListener('click', () => {
-  TIP.hidden = false;
-  document.getElementById('tip-x').focus();
-  if (window.gtag) gtag('event', 'tip_open');
-});
-document.getElementById('tip-x').addEventListener('click', tipClose);
-TIP.addEventListener('click', ev => { if (ev.target === TIP) tipClose(); });
-document.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !TIP.hidden){ ev.stopPropagation(); tipClose(); } }, true);
 
 (async function init(){
   const status = document.getElementById('status');

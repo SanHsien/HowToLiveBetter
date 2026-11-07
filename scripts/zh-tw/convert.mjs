@@ -242,6 +242,9 @@ sub('docs/換工作、換城市之前.md', [
 sub('book/18-養孩子劃不划算.md', [
   ['第 5 節第 2 條（個稅彙算）', '第 5 節第 2 條（綜合所得稅結算申報）'],
 ]);
+sub('docs/結婚劃不划算.md', [
+  ['第 10 節第 18 條（授權委託、意定監護和遺囑）', '第 10 節第 18 條（同性伴侶可以直接辦結婚登記）'],
+]);
 
 // --- Taiwan localization overrides (Will, 2026-11-07) ---
 // Entries whose substance is PRC law / PRC institutions are rewritten

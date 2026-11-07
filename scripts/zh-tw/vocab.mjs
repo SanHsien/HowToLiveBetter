@@ -166,8 +166,8 @@ export const POST_VOCAB = [
   // already-Traditional input, so the 定版 must run after the OpenCC pass
   // (here, in applyPostVocab), not in GLOBAL_VOCAB. Only this idiom takes
   // 划; 計劃/規劃/劃重點/劃線價 keep their 劃.
-  ['划不划算', '划不划算'],
-  ['划算', '划算'],
+  ['劃不划算', '划不划算'],
+  ['劃算', '划算'],
   ['對象儲存', '物件儲存'], // object storage, the S3 sense
   ['招財對象', '招財物件'], // lucky-charm objects
   ['這類對象', '這類物件'], // "this kind of object" (crystals, charms)

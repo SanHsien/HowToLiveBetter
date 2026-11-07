@@ -16,7 +16,7 @@
 [![線上檢索](https://img.shields.io/badge/%E7%B7%9A%E4%B8%8A%E6%AA%A2%E7%B4%A2-%E9%BB%9E%E9%80%99%E8%A3%A1%E6%89%93%E9%96%8B-3451b2?style=flat-square)](https://how-to-live-better.gh.miniasp.com/)
 [![條目](https://img.shields.io/badge/%E6%A2%9D%E7%9B%AE-772%20%E6%A2%9D-18794e?style=flat-square)](#目錄)
 [![證據分級](https://img.shields.io/badge/%E8%AD%89%E6%93%9A%E5%88%86%E7%B4%9A-A%20478%20%C2%B7%20B%20240%20%C2%B7%20C%2054-915930?style=flat-square)](#證據分級)
-[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2285%20%E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
+[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2286%20%E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
 [![許可](https://img.shields.io/badge/%E8%A8%B1%E5%8F%AF-CC%20BY%204.0-565a5f?style=flat-square)](#許可)
 [![Claude Code 協助編寫](https://img.shields.io/badge/Claude%20Code-%E5%8D%94%E5%8A%A9%E7%B7%A8%E5%AF%AB-D97757?style=flat-square&logo=claude&logoColor=white)](https://claude.com/claude-code)
 
@@ -209,7 +209,7 @@ A 級只說明「有具體數字、出處可核」，不說明這個數字一定
 
 三項成本的最低檔是「不花錢、用時少、不需要毅力」。「用時少」指一次花幾分鐘以內，或順手就能做。
 
-全書 772 條中性價比極高 119 條（16%）、高 337 條（44%）、一般 304 條（40%）。中間那檔條數多是有意的：底下的收益量級本來就只分大、中、小三級，再往細裡切就是裝出來的精確。
+全書 772 條中性價比極高 119 條（16%）、高 336 條（44%）、一般 305 條（40%）。中間那檔條數多是有意的：底下的收益量級本來就只分大、中、小三級，再往細裡切就是裝出來的精確。
 
 **這一檔是作者自己的判斷，不是證據**，按本書的標準它本身只算 C 級；它和證據等級是兩回事，誰也不影響誰。一條可以證據是 A 級、性價比卻只算一般（帶狀皰疹疫苗有 97.2% 效力的三期 RCT，但兩針三四千元、帶狀皰疹很少致命），也可以證據只有 C 級、性價比卻極高（手機設鎖屏密碼、SIM 卡設 PIN 碼）。「一般」不等於不該做——全書的條目都是建議做的，只是這一檔得你自己掂量那筆花銷值不值。
 

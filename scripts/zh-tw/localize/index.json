@@ -2162,7 +2162,7 @@
  {
   "file": "book/26-做一個網站或平台.md",
   "intro": true,
-  "expect": "",
+  "expect": "你想做一個網站或者 App。",
   "override": "26__intro.md"
  },
  {
@@ -2348,7 +2348,7 @@
  {
   "file": "book/32-出國留學.md",
   "intro": true,
-  "expect": "涵蓋美國、加拿大、英國、澳大利亞四個國家，數字一國一國列。",
+  "expect": "覆蓋美國、加拿大、英國、澳大利亞四個國家，數字一國一國列。",
   "override": "32__intro.md"
  }
 ]

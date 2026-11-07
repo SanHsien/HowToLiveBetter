@@ -214,6 +214,16 @@ sub('README.md', [
   ['## 許可', '## 授權聲明'],
   ["\n## 讚賞\n\n覺得有用，可以用微信掃碼請作者喝杯咖啡。給不給都行，不影響任何內容。\n\n<img src=\"ads/wechat-reward.png\" alt=\"微信讚賞碼\" width=\"240\">\n\n## 廣告位\n\n<a href=\"https://4.mcyyy.com\"><img src=\"ads/mcyyy.webp\" alt=\"永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com\" width=\"820\"></a>\n\n## 商務合作\n\n信箱 [admin@mcyyy.com](mailto:admin@mcyyy.com)\n", ''],
 ]);
+// 離線版產生器原本會把廣告圖與讚賞碼內嵌成 data URI 並斷言其存在；
+// 本版既已移除，該段改為說明註解，否則電子書 workflow 的離線步驟會失敗。
+sub('tools/offline/build.mjs', [
+  [`// 側欄廣告圖和讚賞碼轉 data URI，否則離線打開是個裂圖
+for (const [img, mime] of [['ads/mcyyy-side.webp', 'image/webp'], ['ads/wechat-reward.png', 'image/png']]) {
+  must(\`src="\${img}"\`, \`圖片 \${img}\`);
+  const data = readFileSync(resolve(ROOT, img)).toString('base64');
+  html = html.replace(\`src="\${img}"\`, \`src="data:\${mime};base64,\${data}"\`);
+}`, '// 繁體中文版已移除側欄廣告與讚賞碼，index.html 不再引用 ads/ 圖片，離線版無圖可內嵌。'],
+]);
 sub('index.html', [
   ["/* 側欄底部廣告位：圖片換成新廣告主的即可，尺寸按 2:1 出圖，源文件在 tools/ad-*.html */\n.ad{margin-top:26px}\n.ad img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--divider)}\n/* 讚賞：側欄底部一行字，點開才出二維碼，圖用 loading=lazy，不點不下載 */\n.tip-open{margin-top:10px;padding:0;border:0;background:none;font:inherit;font-size:12px;color:var(--t3);cursor:pointer}\n.tip-open:hover{color:var(--brand-1)}\n#tip-mask{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}\n#tip-mask[hidden]{display:none}\n#tip-box{background:var(--bg);border:1px solid var(--divider);border-radius:12px;box-shadow:var(--shadow);width:min(360px,100%);padding:16px;text-align:center}\n#tip-box img{display:block;width:100%;height:auto;border-radius:8px}\n#tip-box p{margin:12px 0;font-size:13px;line-height:1.6;color:var(--t2)}\n#tip-box button{border:1px solid var(--divider);background:var(--bg-soft);color:var(--t2);border-radius:6px;padding:3px 14px;font-size:13px;cursor:pointer;font-family:inherit}\n#tip-box button:hover{color:var(--t1);background:var(--bg-mute)}\n", ''],
   ["  <div class=\"group ad\">\n    <div class=\"gt\">廣告</div>\n    <a href=\"https://4.mcyyy.com\" target=\"_blank\" rel=\"noopener\"><img src=\"ads/mcyyy-side.webp\" alt=\"永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com\" width=\"624\" height=\"312\" loading=\"lazy\"></a>\n    <button type=\"button\" class=\"tip-open\" id=\"tip-open\">覺得有用？請作者喝杯咖啡</button>\n  </div>\n", ''],

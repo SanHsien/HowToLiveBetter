@@ -246,8 +246,10 @@ sub('book/13-緊急情況.md', [
   ['也不要往燙傷上抹任何藥膏、油或黃油', '也不要往燙傷上抹任何藥膏、油或奶油'],
 ]);
 sub('book/03-不要浪費精力.md', [
+  // The source append anchors on the following 備註 line so the edited
+  // text no longer matches the pattern (a re-run cannot double-append).
+  ['Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>\n- 備註：60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。', 'Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>；衛生福利部食品藥物管理署. 含 ibuprofen 成分藥品仿單禁忌修訂（對 ibuprofen 過敏、服用 aspirin 或其他非類固醇消炎藥後曾發生過敏反應者禁用）. <https://www.fda.gov.tw/tc/includes/GetFile.ashx?mID=19&id=57734>\n- 備註：60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。'],
   ['- 備註：60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。', '- 備註：對布洛芬、阿斯匹靈或其他消炎止痛藥過敏的人不要吃這類藥，食藥署修訂的仿單把這列為禁忌。60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。'],
-  ['Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>', 'Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>；衛生福利部食品藥物管理署. 含 ibuprofen 成分藥品仿單禁忌修訂（對 ibuprofen 過敏、服用 aspirin 或其他非類固醇消炎藥後曾發生過敏反應者禁用）. <https://www.fda.gov.tw/tc/includes/GetFile.ashx?mID=19&id=57734>'],
 ]);
 
 // The book's own writing rules name the edition's script.

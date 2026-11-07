@@ -182,6 +182,10 @@ export const protect = (t) => {
 // would otherwise rewrite them.
 export const GLOBAL_VOCAB = [
   // --- OpenCC tw2 slips and variant characters ---
+  ['划不划算', '划不划算'], // 划算 (cost-effective) is the standard Taiwan form; the 劃 variant
+  // covers only the idiom, so 計劃/規劃/劃重點/劃線價 keep their 劃. Also rewrites chapter
+  // titles and file names via convertText, and keeps localize overrides idempotent.
+  ['划算', '划算'],
   ['分鍾', '分鐘'], // Taiwan standard is 分鐘 (鍾 is a surname / old measure)
   ['賬', '帳'], // never emit 賬 in zh-TW output
   ['羣', '群'], // never emit 羣 in zh-TW output

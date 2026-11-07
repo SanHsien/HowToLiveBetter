@@ -213,6 +213,7 @@ export const GLOBAL_VOCAB = [
   ['比如', '譬如'], // for example (also closes the 邊界詞 question)
   ['註冊機', '序號產生器'], // keygen
   ['破解補丁', '破解修補程式'], // crack patch; bare 補丁 stays (metaphor use in ch.10)
+  ['頭盔', '安全帽'], // helmet (Will, 2026-11-07: Taiwan usage for riding/sports helmets)
   ['打印', '列印'],
   ['列印遺囑', '打印遺囑'], // PRC Civil Code category name, proper noun
   ['身份', '身分'], // 身分證 / 身分驗證 are the Taiwan standard forms

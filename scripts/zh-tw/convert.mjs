@@ -113,32 +113,43 @@ console.log(`renamed ${renamed} paths`);
 FILES = listTextFiles();
 
 // --- Edition edits (file-scoped, applied after conversion) ---
+const UNMATCHED_EDITS = [];
+let RECORD_UNMATCHED = true;
 const sub = (f, pairs) => {
   // Fail loudly on a missing target: a silent skip here once let the
   // three 說人話 trims below do nothing for months.
   if (!fs.existsSync(path.join(root, f))) throw new Error(`convert.mjs: edition-edit target missing: ${f}`);
   let t = read(f);
   const orig = t;
-  for (const [a, b] of pairs) t = t.split(a).join(b);
+  for (const [a, b] of pairs) {
+    if (RECORD_UNMATCHED && !t.includes(a)) UNMATCHED_EDITS.push(`${f} :: ${a.slice(0, 60)}`);
+    t = t.split(a).join(b);
+  }
   if (t !== orig) write(f, t);
 };
+// All-files sweeps legitimately miss in most files; don't record those.
+const subAllFiles = (pairs, skip) => {
+  RECORD_UNMATCHED = false;
+  for (const f of FILES) {
+    if (skip && f === skip) continue;
+    sub(f, pairs);
+  }
+  RECORD_UNMATCHED = true;
+};
 // Language tags everywhere.
-for (const f of FILES) sub(f, [['zh-CN', 'zh-TW'], ['zh_CN', 'zh_TW'], ['Noto Sans SC', 'Noto Sans TC']]);
+subAllFiles([['zh-CN', 'zh-TW'], ['zh_CN', 'zh_TW'], ['Noto Sans SC', 'Noto Sans TC']]);
 // Cross-reference anchors that name localized chapter-7 entries: the
 // anchor word in parentheses must stay a substring of the entry's
 // current (Taiwan) title or check-refs fails. The generated reference
 // table is excluded; check-refs regenerates it.
-for (const f of FILES) {
-  if (f === 'docs/引用對照.md') continue;
-  sub(f, [
+subAllFiles([
     ['第 7 節第 9 條（居民醫保）', '第 7 節第 9 條（健保不能斷）'],
     ['第 7 節第 18 條（社保斷繳不要慌）', '第 7 節第 18 條（換工作先接續健保）'],
     ['第 7 節第 18 條（社保斷繳）', '第 7 節第 18 條（換工作先接續健保）'],
     ['第 7 節第 8 條（兩項補貼）', '第 7 節第 8 條（先領生活補助）'],
     ['第 7 節第 13 條（職業培訓補貼）', '第 7 節第 13 條（職訓前先問補助）'],
     ['第 7 節第 16 條（住房困難先排公租房）', '第 7 節第 16 條（租金補貼）'],
-  ]);
-}
+  ], 'docs/引用對照.md');
 // The book's own writing rules name the edition's script.
 sub('CLAUDE.md', [['簡體中文，不用繁體', '繁體中文（台灣用詞），不用簡體']]);
 // Three 說人話 run 1–3 characters over the book's own 120-character
@@ -213,8 +224,8 @@ sub('docs/孩子出生前後要辦的事.md', [
 sub("book/01-不要早死.md", [
   ["- 成本：一針 50 到 150 元。每年秋天打一次。", "- 成本：公費對象免費，不符合公費資格的自費一劑約 1,000 到 2,000 元。每年秋天打一次。"],
   ["- 成本：鉬靶每次兩三百元。很多地區有免費篩檢項目。每兩年花半天。", "- 成本：40 到 74 歲女性每 2 年一次公費免費，做的是乳房 X 光攝影。每兩年花半天。"],
-  ["- 成本：去醫院做一次雙能 X 線骨密度檢查（簡稱 DXA），查腰椎和髖部，躺著幾分鐘就做完。自費一般一兩百元，各地價格不同。體檢裡踩一腳的跟骨超聲只能初篩，不能確診。", "- 成本：去醫院做一次雙能 X 線骨密度檢查（簡稱 DXA），查腰椎和髖部，躺著幾分鐘就做完。自費約 1,000 到 2,000 元，查腰椎加髖部兩個部位約 1,600 元。符合健保適應症的，由健保給付。體檢裡踩一腳的跟骨超聲只能初篩，不能確診。"],
-  ["- 成本：尿常規幾十元，泌尿系超聲一兩百元。醫生認為需要的話，再加一個膀胱鏡，千元上下。", "- 成本：到門診檢查，尿液檢查和超音波多由健保給付，自己付掛號費和部分負擔，合計數百元。醫生認為需要的話，再加一個膀胱鏡，一樣先問健保給付範圍。"],
+  ["- 成本：去醫院做一次雙能 X 線骨密度檢查（簡稱 DXA），查腰椎和髖部，躺著幾分鐘就做完。自費一般一兩百元，各地價格不同。體檢裡踩一腳的跟骨超音波只能初篩，不能確診。", "- 成本：去醫院做一次雙能 X 線骨密度檢查（簡稱 DXA），查腰椎和髖部，躺著幾分鐘就做完。自費約 1,000 到 2,000 元，查腰椎加髖部兩個部位約 1,600 元。符合健保適應症的，由健保給付。體檢裡踩一腳的跟骨超音波只能初篩，不能確診。"],
+  ["- 成本：尿常規幾十元，泌尿系超音波一兩百元。醫生認為需要的話，再加一個膀胱鏡，千元上下。", "- 成本：到門診檢查，尿液檢查和超音波多由健保給付，自己付掛號費和部分負擔，合計數百元。醫生認為需要的話，再加一個膀胱鏡，一樣先問健保給付範圍。"],
   ["- 成本：掛號幾十元。量血壓、抽血查血糖和血脂，一兩百元。跑一趟醫院，等幾天結果。", "- 成本：掛號費加部分負擔約數百元。量血壓、抽血查血糖和血脂，多由健保給付。跑一趟醫院，等幾天結果。"],
   ["- 成本：做一次心電圖幾十元。華法林很便宜，但要定期抽血調劑量。新型抗凝藥不用常抽血，貴一些。難在沒有症狀也要天天吃，拔牙、做手術前要先告訴醫生在吃抗凝藥。", "- 成本：做一次心電圖由健保給付，自己付掛號費和部分負擔。華法林很便宜，但要定期抽血調劑量。新型抗凝藥不用常抽血，貴一些。難在沒有症狀也要天天吃，拔牙、做手術前要先告訴醫生在吃抗凝藥。"],
 ]);
@@ -227,7 +238,7 @@ sub("book/06-反面清單.md", [
 sub("book/13-緊急情況.md", [
   ["- 成本：看急診本身不花什麼錢。急診做一次頭顱 CT 幾百元。", "- 成本：急診做頭顱 CT，符合適應症的由健保給付。自己付急診部分負擔和掛號費，部分負擔醫學中心 750 元、區域醫院 400 元、地區醫院 150 元，合計一千元以內。"],
   ["- 成本：做一次頭顱 CT 兩三百元。", "- 成本：做頭顱 CT，符合適應症的由健保給付，自己付部分負擔和掛號費。走門診幾百元，走急診的部分負擔最高是醫學中心的 750 元。"],
-  ["- 成本：腿部血管做一次超聲（下肢靜脈超聲），一兩百元。", "- 成本：腿部血管做一次超聲（下肢靜脈超聲），符合適應症的由健保給付，自己付部分負擔和掛號費。"],
+  ["- 成本：腿部血管做一次超音波（下肢靜脈超音波），一兩百元。", "- 成本：腿部血管做一次超音波（下肢靜脈超音波），符合適應症的由健保給付，自己付部分負擔和掛號費。"],
   ["- 成本：掛號、抽血幾十到一兩百元。胃鏡幾百元。人還清醒就去急診，別等門診號。頭暈、出冷汗或吐血的，別自己開車。", "- 成本：急診抽血、做胃鏡，符合適應症的處置多由健保給付。自己付急診部分負擔和掛號費，部分負擔醫學中心 750 元、區域醫院 400 元、地區醫院 150 元，合計幾百元到一千元。人還清醒就去急診，別等門診號。頭暈、出冷汗或吐血的，別自己開車。"],
 ]);
 sub("book/02-不要慢慢死.md", [
@@ -585,4 +596,12 @@ sub('docs/換工作、換城市之前.md', [
     fs.writeFileSync(readmePath, after);
     console.log('badge URLs: raw spaces encoded as %20');
   }
+}
+
+// Edition edits that matched nothing: upstream drift or a vocab change
+// can silently disarm an edit (2026-11-07: the 超聲→超音波 rule broke
+// three cost-line edits keyed on the old form). Surface them every run.
+if (UNMATCHED_EDITS.length) {
+  console.warn(`UNMATCHED edition edits: ${UNMATCHED_EDITS.length}`);
+  for (const u of UNMATCHED_EDITS.slice(0, 10)) console.warn('  ' + u);
 }

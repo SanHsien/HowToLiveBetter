@@ -205,6 +205,14 @@ export const GLOBAL_VOCAB = [
   // term. Scoped regexes in REGEX_VOCAB convert only the sign-in senses.
   ['寬帶', '寬頻'], // broadband
   ['網盤', '雲端硬碟'], // cloud storage drive (Will, 2026-11-07)
+  // Will's 2026-11-07 rulings, second round. 網絡: the generic word is
+  // 網路 in Taiwan; every 網絡 compound that is a PRC proper name is
+  // restored at the end of this list （網絡安全法， 信息網絡， 網絡數據…),
+  // so this early generic pair never touches them.
+  ['網絡', '網路'],
+  ['比如', '譬如'], // for example (also closes the 邊界詞 question)
+  ['註冊機', '序號產生器'], // keygen
+  ['破解補丁', '破解修補程式'], // crack patch; bare 補丁 stays (metaphor use in ch.10)
   ['打印', '列印'],
   ['列印遺囑', '打印遺囑'], // PRC Civil Code category name, proper noun
   ['身份', '身分'], // 身分證 / 身分驗證 are the Taiwan standard forms
@@ -231,6 +239,7 @@ export const GLOBAL_VOCAB = [
   ['病毒程序', '病毒程式'],
   ['驅動程序', '驅動程式'],
   ['安裝程序', '安裝程式'], // installer; legal "installation procedure" does not occur
+  ['修補程序', '修補程式'], // software patch (Will's 定版）; no legal-procedure sense occurs
 
   // --- 數字 vs 數位: tw2 turns every 数字 into 數位. This book talks
   // about numbers and statistics, where Taiwan usage is 數字. Digital-tech

@@ -168,6 +168,13 @@ export const POST_VOCAB = [
   // 划; 計劃/規劃/劃重點/劃線價 keep their 劃.
   ['劃不划算', '划不划算'],
   ['劃算', '划算'],
+  // 只讀 vs 唯讀: tw2 re-writes 只讀 to 唯讀 in every context (it even
+  // turns 只讀到大學 into 唯讀到大學）, but 唯讀 is only the storage
+  // property (唯讀記憶體/唯讀模式）. Where 只 means "merely / only up
+  // to" — a cheat that only reads the screen, a degree one only studied
+  // up to — the 定版 is 只讀 (Will, 2026-11-07).
+  ['唯讀螢幕', '只讀螢幕'],
+  ['唯讀本科', '只讀本科'],
   ['對象儲存', '物件儲存'], // object storage, the S3 sense
   ['招財對象', '招財物件'], // lucky-charm objects
   ['這類對象', '這類物件'], // "this kind of object" (crystals, charms)
@@ -197,6 +204,7 @@ export const GLOBAL_VOCAB = [
   // as statutory registration （食品業者登錄） 登錄 is the correct Taiwan
   // term. Scoped regexes in REGEX_VOCAB convert only the sign-in senses.
   ['寬帶', '寬頻'], // broadband
+  ['網盤', '雲端硬碟'], // cloud storage drive (Will, 2026-11-07)
   ['打印', '列印'],
   ['列印遺囑', '打印遺囑'], // PRC Civil Code category name, proper noun
   ['身份', '身分'], // 身分證 / 身分驗證 are the Taiwan standard forms

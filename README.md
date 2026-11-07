@@ -16,7 +16,7 @@
 [![線上檢索](https://img.shields.io/badge/%E7%B7%9A%E4%B8%8A%E6%AA%A2%E7%B4%A2-%E9%BB%9E%E9%80%99%E8%A3%A1%E6%89%93%E9%96%8B-3451b2?style=flat-square)](https://how-to-live-better.gh.miniasp.com/)
 [![條目](https://img.shields.io/badge/%E6%A2%9D%E7%9B%AE-772%20%E6%A2%9D-18794e?style=flat-square)](#目錄)
 [![證據分級](https://img.shields.io/badge/%E8%AD%89%E6%93%9A%E5%88%86%E7%B4%9A-A%20481%20%C2%B7%20B%20237%20%C2%B7%20C%2054-915930?style=flat-square)](#證據分級)
-[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2284%20%E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
+[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2313%20%E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
 [![許可](https://img.shields.io/badge/%E8%A8%B1%E5%8F%AF-CC%20BY%204.0-565a5f?style=flat-square)](#許可)
 [![Claude Code 協助編寫](https://img.shields.io/badge/Claude%20Code-%E5%8D%94%E5%8A%A9%E7%B7%A8%E5%AF%AB-D97757?style=flat-square&logo=claude&logoColor=white)](https://claude.com/claude-code)
 
@@ -191,7 +191,7 @@ node tools/anki/build.mjs                  # Anki 牌組，要 Node ≥ 22.13（
 | B | 有研究支援，但說不出一個確切數字；或者只有小樣本、單獨一項研究撐著 |
 | C | 作者自己的經驗，或者大家公認的做法，沒有直接的研究文獻 |
 
-全書 772 條中 A 級 481 條、B 級 237 條、C 級 54 條，另有 90 條標註了爭議、24 處標註了 TODO 待核實。有爭議的 A/B 級條目會標註「爭議」並列出反方證據。所有來源只引原始文獻（期刊論文附 DOI 或 PubMed 連結，或 WHO/CDC/國家統計局等官方機構報告），不引二手轉述。官方不公開的案件，少數條目引了有記者署名的原創新聞報導，只用來說明「發生過這類事」，來源欄附網頁存檔，備註寫明「只有媒體報導」。不確定的數字標「待核實」。
+全書 772 條中 A 級 481 條、B 級 237 條、C 級 54 條，另有 90 條標註了爭議、27 處標註了 TODO 待核實。有爭議的 A/B 級條目會標註「爭議」並列出反方證據。所有來源只引原始文獻（期刊論文附 DOI 或 PubMed 連結，或 WHO/CDC/國家統計局等官方機構報告），不引二手轉述。官方不公開的案件，少數條目引了有記者署名的原創新聞報導，只用來說明「發生過這類事」，來源欄附網頁存檔，備註寫明「只有媒體報導」。不確定的數字標「待核實」。
 
 A 級只說明「有具體數字、出處可核」，不說明這個數字一定是因果。A 級裡既有隨機分組的試驗，也有只追蹤記錄、不分組的研究，後者分不清是這件事起了作用，還是做這件事的人本來就更健康。哪一種看收益欄：寫著「隨機分成兩組」的是前者，寫著「只記錄、不分組」的是後者。法律和政策類條目的 A 級，指的是引到了法條或官方文件原文。
 

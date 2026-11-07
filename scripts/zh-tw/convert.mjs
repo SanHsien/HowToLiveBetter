@@ -156,6 +156,18 @@ sub('book/26-做一個網站或平台.md', [
   ['從輕或者不追究', '從輕或不追究'],
   ['可以視情從輕', '可視情從輕'],
 ]);
+sub('book/13-緊急情況.md', [
+  [' 120 ', ' 119 '],
+  [' 120，', ' 119，'],
+  [' 120、', ' 119、'],
+  [' 120。', ' 119。'],
+  [' 120）', ' 119）'],
+  ['打120', '打119'],
+  ['叫120', '叫119'],
+  ['呼叫120', '呼叫119'],
+  ['撥打120', '撥打119'],
+  ['「120', '「119'],
+]);
 sub('skills/life-decision-guide/SKILL.md', [['簡體中文', '繁體中文']]);
 // The skill's own instruction prose (not book content): Taiwan terms for
 // a generic "personalised" and for stroke / heart attack. The statutory

@@ -21,6 +21,7 @@ const SKIP_DIRS = new Set([
 const SKIP_FILES = new Set([
   'CLAUDE.md',
   'docs/引用對照.md',
+  'docs/台灣在地化待核.md',
   'tools/check-plain.mjs',
   'tools/check-zh-tw-locale.mjs',
 ]);
@@ -29,6 +30,19 @@ const BAD = [
   /(?:打|叫|撥打|撥)\s*120(?!\d)/,
   /120\s*[/／]\s*119/,
   /12356/,
+];
+
+// 這些是會被讀成台灣現行做法的舊句子。待核清單本身不掃。
+const BANNED = [
+  [/六個月內審完/, '仍把一審寫成六個月內審完'],
+  [/審理期間為六個月/, '仍把審理期間寫成六個月'],
+  [/12308/, '仍把 12308 當成求助電話'],
+  [/門診慢特病跨省/, '仍把門診慢特病跨省結算寫成台灣制度'],
+  [/跨省異地就醫/, '仍把跨省異地就醫寫成做法'],
+  [/領事交易局/, '機關名仍是領事交易局'],
+  [/到工信部的系統裡登記一道手續/, '仍把 ICP 寫成要去工信部登記'],
+  [/職工醫保斷交/, '仍用職工醫保斷繳等待期'],
+  [/公積金中心要在 3 天內/, '仍寫公積金三天提房租'],
 ];
 
 function clauseOk(clause) {
@@ -57,7 +71,9 @@ function selfTest() {
     assert.equal(lineOk(text), ok, `分類不對：${text}`);
   }
   assert.ok(SKIP_DIRS.has('docs/核實記錄'), '核實記錄必須排除');
-  assert.ok(SKIP_FILES.has('CLAUDE.md'), '維護筆記必須排除');
+  assert.ok(SKIP_FILES.has('docs/台灣在地化待核.md'), '待核清單必須排除');
+  assert.equal(BANNED.some(([re]) => re.test('一審普通程序按規定六個月內審完')), true);
+  assert.equal(BANNED.some(([re]) => re.test('台灣民事訴訟法沒有一審六個月、簡易程序三個月的法定審限')), false);
 }
 
 function walk(dir, out) {
@@ -90,6 +106,9 @@ function checkFile(rel) {
   const text = readFileSync(resolve(ROOT, rel), 'utf8');
   text.split(/\r?\n/).forEach((line, i) => {
     if (!lineOk(line)) problems.push(`${rel}:${i + 1} ${line.trim().slice(0, 120)}`);
+    for (const [re, why] of BANNED) {
+      if (re.test(line)) problems.push(`${rel}:${i + 1} ${why}`);
+    }
   });
   return problems;
 }
@@ -99,7 +118,7 @@ function checkReadme(text) {
   if (text.includes('按中國大陸的現行規定寫')) {
     problems.push('README.md 仍把全書制度寫成按中國大陸現行規定');
   }
-  for (const phrase of ['這一版以台灣讀者為主', '尚未逐條核完', '打 119', '打 110', '1925', 'eternity4719', 'CC BY 4.0', 'MIT']) {
+  for (const phrase of ['這一版以台灣讀者為主', '尚未逐條核完', '打 119', '打 110', '1925', 'eternity4719', 'CC BY 4.0', 'MIT', '辦案期限實施要點', '0800-085-095', '台灣沒有這套制度']) {
     if (!text.includes(phrase)) problems.push(`README.md 缺少「${phrase}」`);
   }
   if (!text.includes('LICENSE-CODE') && !text.includes('Copyright (c) 2026 eternity4719')) {
@@ -110,12 +129,10 @@ function checkReadme(text) {
 
 function checkSkill(text) {
   const problems = [];
-  for (const phrase of ['119', '110', '1925', '不要只給 1925', 'nfa.gov.tw', 'npa.gov.tw', 'mohw.gov.tw', '2026-11-07']) {
+  for (const phrase of ['119', '110', '1925', '不要只給 1925', 'nfa.gov.tw', 'npa.gov.tw', 'mohw.gov.tw', '2026-11-07', '內部列管', '第三審律師酬金']) {
     if (!text.includes(phrase)) problems.push(`skills/life-decision-guide/SKILL.md 缺少「${phrase}」`);
   }
-  if (/一審普通程序\s*6\s*個月/.test(text) && !/不要把這組月數說成台灣/.test(text)) {
-    problems.push('SKILL.md 仍把六個月審限當成可以直接告訴讀者的規則');
-  }
+  if (/六個月內審完/.test(text)) problems.push('SKILL.md 仍把六個月內審完寫成可以照辦的規則');
   return problems;
 }
 

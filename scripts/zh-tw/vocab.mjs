@@ -608,6 +608,10 @@ export const GLOBAL_VOCAB = [
  * not followed by 碼 is restored to 編碼.
  */
 export const REGEX_VOCAB = [
+  // After the 乙肝/丙肝 sweep: a Latin letter directly glued to a
+  // preceding Chinese character takes a space, matching the book's
+  // dominant spacing (查 B 型肝炎, not 查B 型肝炎).
+  [/(?<=[一-鿿])([BC] 型肝炎)/g, ' $1'],
   // Repo slug: functional pointers name the fork, but the attribution
   // line in the license section ("附上倉庫連結 <url>") is a provenance
   // citation and keeps the upstream slug (Will, 2026-11-08).

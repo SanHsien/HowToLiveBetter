@@ -217,6 +217,8 @@ export const GLOBAL_VOCAB = [
   ['超聲波', '超音波'], // ultrasound wave form first, so the bare pair below cannot yield 超音波波
   ['超聲', '超音波'], // ultrasound (Will, 2026-11-07: Taiwan medical usage)
   ['雙硫侖', '雙硫崙'], // disulfiram: 崙 is the Taiwan character (Will, 2026-11-08)
+  ['乙肝', 'B 型肝炎'], // hepatitis B: full sweep incl. titles/anchors (Will, 2026-11-08)
+  ['丙肝', 'C 型肝炎'], // hepatitis C: full sweep (Will, 2026-11-08)
   [' B 超', '超音波'], // B-scan ultrasound exam; leading space consumed (same family as 超聲 ruling, 2026-11-08)
   ['B超', '超音波'],
   // 宮頸→子宮頸 lives in REGEX_VOCAB: the target contains the source,

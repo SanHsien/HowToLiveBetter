@@ -85,7 +85,7 @@
 | 主題 | 來源 | 核對結果 |
 | --- | --- | --- |
 | 安全睡眠 | Moon RY, et al. Pediatrics 2022;150(1):e2022057990, PMID 35726558 | 摘要逐字：美國每年約 3500 例睡眠相關嬰兒死亡；「supine positioning; use of a firm, noninclined sleep surface; room sharing without bed sharing; and avoidance of soft bedding and overheating」一致 |
-| 乙肝首針 | WHO Hepatitis B fact sheet | 「All babies should receive the hepatitis B vaccine as soon as possible after birth (within 24 hours).」與「Infection in infancy and early childhood leads to chronic hepatitis in about 95% of cases.」一致 |
+| B 型肝炎首針 | WHO Hepatitis B fact sheet | 「All babies should receive the hepatitis B vaccine as soon as possible after birth (within 24 hours).」與「Infection in infancy and early childhood leads to chronic hepatitis in about 95% of cases.」一致 |
 | 母乳與輔食 | WHO Breastfeeding 專題頁；國衛辦婦幼函〔2024〕452 號 嬰幼兒營養餵養評估服務指南（試行） | 一小時內開奶、6 個月純母乳（含不餵水）、6 個月起加輔食並繼續母乳至 2 歲一致；國內指南的 6-8 月齡 1-2 次、9-12 月齡 2-3 次、含鐵動物性食物、七類中至少四類一致 |
 | 衝奶水溫 | Beary MA, et al. J Food Prot 2025;88(9):100571, PMID 40582619；Sima WG, et al. BMC Microbiol 2025;26:307, PMID 41469539；WHO/FAO (2007) 粉狀嬰兒配方食品安全配製指南 | 「at least 70 °C (158 °F)」與「>5 log CFU/mL C. sakazakii reduction」逐字一致；新生兒病死率「40–80%」逐字一致。WHO/FAO 指南只核對到題錄與出版資訊，未取得正文，故 70 ℃ 的表述以 Beary 文中的轉述為準 |
 | 蜂蜜 | US CDC Preventing Botulism | 「Do not feed honey to a child who is younger than 1 year old.」與「Honey can contain the bacteria that cause botulism.」一致 |
@@ -99,5 +99,5 @@
 （合身、勤換、查國家抽檢通報），並把「查抽檢通報」的方法指回第 5 節。
 
 未取得：國家免疫規劃疫苗兒童免疫程序的完整表（多次檢索中國政府網政策庫未定位到 2021 年版原文，
-只取到 2024 年百白破程序調整為 2、4、6、18 月齡和 6 周歲的通知），故第 20 節只寫了乙肝首針一條，
+只取到 2024 年百白破程序調整為 2、4、6、18 月齡和 6 周歲的通知），故第 20 節只寫了 B 型肝炎首針一條，
 其餘疫苗按接種證時間執行，未在書中逐一列出。

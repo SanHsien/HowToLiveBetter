@@ -22,7 +22,7 @@ const element = id => {
   return elements.get(id);
 };
 const warnings = [];
-const oldAnswers = {'p:age':'30', 'p:sex':'f', 'p:kid':'n', '2:低鈉鹽':'n', '1:乙肝兩對半':'y'};
+const oldAnswers = {'p:age':'30', 'p:sex':'f', 'p:kid':'n', '2:低鈉鹽':'n', '1:B 型肝炎兩對半':'y'};
 const context = vm.createContext({
   window:{__CORPUS__:{readme:read('README.md'), parts}},
   document:{getElementById:element},
@@ -38,8 +38,8 @@ const run = code => vm.runInContext(code, context);
 
 assert.equal(run('profileDone()'), false, '舊版30—44歲不能當成實際30歲');
 assert.equal(run("ans['2:低鈉鹽']"), 'n', '更換年齡欄位應保留其他答案');
-assert.equal(run("ans[qid(GROUPS.flatMap(g => g.qs).find(q => q.key === '乙肝兩對半'))]"), undefined,
-  '語義改變後的乙肝題不能沿用舊的已做到答案');
+assert.equal(run("ans[qid(GROUPS.flatMap(g => g.qs).find(q => q.key === 'B 型肝炎兩對半'))]"), undefined,
+  '語義改變後的 B 型肝炎題不能沿用舊的已做到答案');
 for (const age of ['', 'abc', '-1', '121', '39.5']) {
   run(`ans['p:ageYears'] = ${JSON.stringify(age)}`);
   assert.equal(run('profileDone()'), false, `拒絕無效年齡：${age}`);

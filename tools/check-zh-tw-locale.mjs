@@ -33,9 +33,10 @@ const BAD = [
 ];
 
 // 這些是會被讀成台灣現行做法的舊句子。待核清單本身不掃。
+// 數字同時匹配中文與阿拉伯寫法，中間可有空白（「6 個月」）。
 const BANNED = [
-  [/六個月內審完/, '仍把一審寫成六個月內審完'],
-  [/審理期間為六個月/, '仍把審理期間寫成六個月'],
+  [/(?:六|6)\s*個月內審完/, '仍把一審寫成六個月內審完'],
+  [/審理期間為(?:六|6)\s*個月/, '仍把審理期間寫成六個月'],
   [/12308/, '仍把 12308 當成求助電話'],
   [/門診慢特病跨省/, '仍把門診慢特病跨省結算寫成台灣制度'],
   [/跨省異地就醫/, '仍把跨省異地就醫寫成做法'],
@@ -45,15 +46,44 @@ const BANNED = [
   [/公積金中心要在 3 天內/, '仍寫公積金三天提房租'],
 ];
 
+const EXEMPT = /不要(?:把|說|用|打|叫|撥)|別(?:打|叫|撥)|勿(?:打|叫|撥)|中國大陸|上游|原書|舊寫法|舊的求助|還沒改完|不能直接當成|不是台灣/;
+
 function clauseOk(clause) {
-  const hit = BAD.some(re => re.test(clause));
-  if (!hit) return true;
-  // 明確說這不是台灣現在該打的號碼，或在交代上游還沒改完。
-  return /不要(?:把|說|用|打|叫|撥)|別(?:打|叫|撥)|勿(?:打|叫|撥)|中國大陸|上游|原書|舊寫法|舊的求助|還沒改完|不能直接當成|不是台灣/.test(clause);
+  // 逐一找出錯誤號碼的位置。豁免理由必須是對著這個號碼說的：
+  // 理由要在同一個分句裡，或在緊接著的說明分句（「…，那是還沒改完
+  // 的上游寫法」）。「不要打 1925，先打 120」裡的否定對的是 1925，
+  // 不能因此放行後半句的 120。
+  const hits = [];
+  for (const re of BAD) {
+    for (const m of clause.matchAll(new RegExp(re.source, 'g'))) hits.push(m.index);
+  }
+  if (!hits.length) return true;
+  const segs = clause.split(/，|：/);
+  const starts = [];
+  let pos = 0;
+  for (const s of segs) { starts.push(pos); pos += s.length + 1; }
+  return hits.every(idx => {
+    const si = starts.findLastIndex(st => st <= idx);
+    if (EXEMPT.test(segs[si])) return true;
+    const next = segs[si + 1];
+    return next !== undefined && /^\s*(?:那是|這是|此為|因為)/.test(next) && EXEMPT.test(next);
+  });
+}
+
+// 掃描對象是 Markdown／HTML 原文，讀者看到的是去掉行內標記後的
+// 文字。先換成可見文字，「先打 **120**」這類寫法才攔得下來。
+function visibleText(s) {
+  return s
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/`([^`]+)`/g, '$1');
 }
 
 function lineOk(line) {
-  return line.split(/[。；]/).every(clauseOk);
+  return visibleText(line).split(/[。；]/).every(clauseOk);
 }
 
 function selfTest() {
@@ -66,6 +96,9 @@ function selfTest() {
     ['年齡填 0 到 120 的整數', true],
     ['叫人打 120、12356，那是還沒改完的上游寫法', true],
     ['120 是中國大陸的急救號', true],
+    ['先打 **120**', false],
+    ['不要打 1925，先打 120', false],
+    ['不要打 1925，先打 **120**', false],
   ];
   for (const [text, ok] of samples) {
     assert.equal(lineOk(text), ok, `分類不對：${text}`);
@@ -73,6 +106,8 @@ function selfTest() {
   assert.ok(SKIP_DIRS.has('docs/核實記錄'), '核實記錄必須排除');
   assert.ok(SKIP_FILES.has('docs/台灣在地化待核.md'), '待核清單必須排除');
   assert.equal(BANNED.some(([re]) => re.test('一審普通程序按規定六個月內審完')), true);
+  assert.equal(BANNED.some(([re]) => re.test('一審普通程序按規定 6 個月內審完')), true);
+  assert.equal(BANNED.some(([re]) => re.test('一審普通程序按規定6個月內審完')), true);
   assert.equal(BANNED.some(([re]) => re.test('台灣民事訴訟法沒有一審六個月、簡易程序三個月的法定審限')), false);
 }
 
@@ -107,7 +142,7 @@ function checkFile(rel) {
   text.split(/\r?\n/).forEach((line, i) => {
     if (!lineOk(line)) problems.push(`${rel}:${i + 1} ${line.trim().slice(0, 120)}`);
     for (const [re, why] of BANNED) {
-      if (re.test(line)) problems.push(`${rel}:${i + 1} ${why}`);
+      if (re.test(visibleText(line))) problems.push(`${rel}:${i + 1} ${why}`);
     }
   });
   return problems;
@@ -132,7 +167,7 @@ function checkSkill(text) {
   for (const phrase of ['119', '110', '1925', '不要只給 1925', 'nfa.gov.tw', 'npa.gov.tw', 'mohw.gov.tw', '2026-11-07', '內部列管', '第三審律師酬金']) {
     if (!text.includes(phrase)) problems.push(`skills/life-decision-guide/SKILL.md 缺少「${phrase}」`);
   }
-  if (/六個月內審完/.test(text)) problems.push('SKILL.md 仍把六個月內審完寫成可以照辦的規則');
+  if (/(?:六|6)\s*個月內審完/.test(text)) problems.push('SKILL.md 仍把六個月內審完寫成可以照辦的規則');
   return problems;
 }
 

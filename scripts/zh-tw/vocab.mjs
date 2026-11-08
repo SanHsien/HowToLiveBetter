@@ -216,6 +216,7 @@ export const GLOBAL_VOCAB = [
   ['頭盔', '安全帽'], // helmet (Will, 2026-11-07: Taiwan usage for riding/sports helmets)
   ['超聲波', '超音波'], // ultrasound wave form first, so the bare pair below cannot yield 超音波波
   ['超聲', '超音波'], // ultrasound (Will, 2026-11-07: Taiwan medical usage)
+  ['雙硫侖', '雙硫崙'], // disulfiram: 崙 is the Taiwan character (Will, 2026-11-08)
   [' B 超', '超音波'], // B-scan ultrasound exam; leading space consumed (same family as 超聲 ruling, 2026-11-08)
   ['B超', '超音波'],
   // 宮頸→子宮頸 lives in REGEX_VOCAB: the target contains the source,

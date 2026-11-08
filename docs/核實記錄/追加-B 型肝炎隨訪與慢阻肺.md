@@ -1,12 +1,12 @@
-# 第 16 節追加第 11、12 條：乙肝攜帶者的隨訪與用藥、慢阻肺的吸入劑與肺康復
+# 第 16 節追加第 11、12 條：B 型肝炎攜帶者的隨訪與用藥、慢阻肺的吸入劑與肺康復
 
 2026-10-14。
 
 ## 查重
 
-全書 grep「乙肝」「慢阻肺」「慢性阻塞」「吸入劑」「肺康復」。乙肝相關的已有條目是第 1 節第 14 條（查兩對半、打疫苗）、第 20 節第 2 條（新生兒首針）、第 27 節第 3 條（孕期三病篩檢與母嬰阻斷），都管「還沒感染」或「母嬰傳播」，沒有一條管「已經是攜帶者之後怎麼隨訪、吃不吃藥」。第 1 節第 14 條備註只有一句「已經感染的人打疫苗沒用，要去肝病科定期複查」。慢阻肺全書沒有條目，第 16 節第 5 條只在引文裡提到「慢性阻塞性肺疾病等常見病慢性病門診」。兩條都不算重複。
+全書 grep「B 型肝炎」「慢阻肺」「慢性阻塞」「吸入劑」「肺康復」。B 型肝炎相關的已有條目是第 1 節第 14 條（查兩對半、打疫苗）、第 20 節第 2 條（新生兒首針）、第 27 節第 3 條（孕期三病篩檢與母嬰阻斷），都管「還沒感染」或「母嬰傳播」，沒有一條管「已經是攜帶者之後怎麼隨訪、吃不吃藥」。第 1 節第 14 條備註只有一句「已經感染的人打疫苗沒用，要去肝病科定期複查」。慢阻肺全書沒有條目，第 16 節第 5 條只在引文裡提到「慢性阻塞性肺疾病等常見病慢性病門診」。兩條都不算重複。
 
-## 第 11 條：乙肝表面抗原陽性的隨訪與抗病毒
+## 第 11 條：B 型肝炎表面抗原陽性的隨訪與抗病毒
 
 | 來源 | 取法 | 核到的原文 |
 | --- | --- | --- |
@@ -16,7 +16,7 @@
 | 慢性乙型肝炎防治指南（2022 年版），中華肝臟病雜誌 30(12):1309-1331 | 中文版 PMC12677433 在 Europe PMC 取不到全文，改讀同一指南的英文版 You H 2023, J Clin Transl Hepatol 11(6):1425-1442，PMC10500285 全文 XML | 「patients with chronic HBV infection should be screened for HCC every 6 months through abdominal ultrasonography and AFP detection. Moreover, high-risk patients should be screened for HCC at least once every 3–6 months」；攜帶者：「Routine blood examinations, biochemical tests, monitoring of virological markers, AFP, abdominal ultrasound, and non-invasive fibrosis tests should be performed every 6 to 12 months … Antiviral therapy should be initiated immediately if patients meet the indications for treatment」；Recommendation 11：「Antiviral therapy is recommended for patients with detectable HBV DNA, regardless of ALT levels, if one of the following criteria are fulfilled: Family history of HBV-related cirrhosis or HCC (B1); Age >30 years (B1); …」；Recommendation 13、15：「NAs (ETV, TDF, TAF, or TMF) are recommended (A1)」；「Most patients require long-term NAs treatment, and the rate of virological relapse is high after discontinuation of the drug」 |
 | Wun & Dickinson 2003, Cochrane CD002799（反方） | Europe PMC 摘要（PMID 12804438） | 「The two groups did not differ significantly regarding HCC mortality (OR 0.81; 95% CI 0.54 to 1.22)」；「There are not enough quality trials to support or refute screening」 |
 | Aghoram 2012, Cochrane CD002799.pub2（反方） | Europe PMC 摘要（PMID 22972059） | 「All of them had a high risk of bias」；「There are several published reports on this trial, in which data were presented differently」；「We could not draw any definite conclusions from it」 |
-| 國家醫保局 2025-12-29「中國醫保惠民生 積跬步、至長遠（七）」 | curl 直取 nhsa.gov.cn | 「乙肝治療一線用藥恩替卡韋，過去患者吃一年的費用大約5000元……集採後恩替卡韋年費用降到100多元，當年處方量躍升30%」。這段是該文轉引央視新聞的報導，頁面在國家醫保局官網「醫保動態」欄目。替諾福韋的價格沒找到官方數字，沒寫 |
+| 國家醫保局 2025-12-29「中國醫保惠民生 積跬步、至長遠（七）」 | curl 直取 nhsa.gov.cn | 「B 型肝炎治療一線用藥恩替卡韋，過去患者吃一年的費用大約5000元……集採後恩替卡韋年費用降到100多元，當年處方量躍升30%」。這段是該文轉引央視新聞的報導，頁面在國家醫保局官網「醫保動態」欄目。替諾福韋的價格沒找到官方數字，沒寫 |
 
 沒寫的：B 超和甲胎蛋白每次多少錢，沒找到全國統一的官方價格，成本欄只寫「各地不同」。Lok 2016（Hepatology 薈萃）摘要只給定性結論、沒有效應量，改用 Liaw 2004 的隨機試驗給數字。Papatheodoridis 那篇沒去取。
 

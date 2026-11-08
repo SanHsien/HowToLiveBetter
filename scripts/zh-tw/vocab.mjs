@@ -386,6 +386,7 @@ export const GLOBAL_VOCAB = [
   // 支持 vs 支援: tw2 turns every 支持 into 支援. Evidence and feature
   // support read fine as 支援 in Taiwan usage, so only the court /
   // judgment phrases are restored to 支持.
+  ['心理支援', '心理支持'], // 1925 安心專線的固定搭配（衛福部用語）
   ['法律支援你', '法律支持你'], // the book's own house phrase
   ['法律只支援', '法律只支持'],
   ['法院不支援', '法院不支持'],

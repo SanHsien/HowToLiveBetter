@@ -213,6 +213,15 @@ export const GLOBAL_VOCAB = [
   ['比如', '譬如'], // for example (also closes the 邊界詞 question)
   ['註冊機', '序號產生器'], // keygen
   ['破解補丁', '破解修補程式'], // crack patch; bare 補丁 stays (metaphor use in ch.10)
+  ['頭盔', '安全帽'], // helmet (Will, 2026-11-07: Taiwan usage for riding/sports helmets)
+  ['超聲波', '超音波'], // ultrasound wave form first, so the bare pair below cannot yield 超音波波
+  ['超聲', '超音波'], // ultrasound (Will, 2026-11-07: Taiwan medical usage)
+  [' B 超', '超音波'], // B-scan ultrasound exam; leading space consumed (same family as 超聲 ruling, 2026-11-08)
+  ['B超', '超音波'],
+  // 宮頸→子宮頸 lives in REGEX_VOCAB: the target contains the source,
+  // so a plain pair would re-apply and yield 子子宮頸.
+  ['慢病', '慢性病'], // chronic disease shorthand (Will, 2026-11-08: batch A)
+  ['息肉', '瘜肉'], // polyp, Taiwan medical glyph (Will, 2026-11-08: batch A)
   ['打印', '列印'],
   ['列印遺囑', '打印遺囑'], // PRC Civil Code category name, proper noun
   ['身份', '身分'], // 身分證 / 身分驗證 are the Taiwan standard forms
@@ -548,7 +557,9 @@ export const GLOBAL_VOCAB = [
   // provenance citation above is protected. Branch paths follow the
   // slug: the site's blob/tree links and the skill's raw fetches name
   // files that only exist, under their converted names, on zh-tw.
-  ['eternity4719/HowToLiveBetter', 'doggy8088/HowToLiveBetter'],
+  // The repo slug rewrite lives in REGEX_VOCAB: the license section's
+  // attribution line is a provenance citation and keeps the upstream
+  // slug (Will, 2026-11-08), like the protected citation above.
   ['eternity4719.github.io', 'doggy8088.github.io'],
   ['eternity4719\\.github\\.io', 'doggy8088\\.github\\.io'], // check-links SKIP regex
   ['HowToLiveBetter/blob/main/', 'HowToLiveBetter/blob/zh-tw/'],
@@ -594,6 +605,13 @@ export const GLOBAL_VOCAB = [
  * not followed by 碼 is restored to 編碼.
  */
 export const REGEX_VOCAB = [
+  // Repo slug: functional pointers name the fork, but the attribution
+  // line in the license section ("附上倉庫連結 <url>") is a provenance
+  // citation and keeps the upstream slug (Will, 2026-11-08).
+  [/(?<!附上倉庫連結 https:\/\/github\.com\/)eternity4719\/HowToLiveBetter/g, 'doggy8088/HowToLiveBetter'],
+  // Cervix (Will, 2026-11-08: domain term check, batch A). Negative
+  // lookbehind keeps the already-correct 子宮頸 a fixed point.
+  [/(?<!子)宮頸/g, '子宮頸'],
   [/寫程式(?!碼)/g, '編碼'],
   // Weeks as a duration after a numeral: 幾周 is covered above, digits
   // and 兩 need the regex. The lookahead keeps 周歲 (age, handled by the

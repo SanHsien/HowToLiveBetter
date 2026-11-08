@@ -113,32 +113,145 @@ console.log(`renamed ${renamed} paths`);
 FILES = listTextFiles();
 
 // --- Edition edits (file-scoped, applied after conversion) ---
+const UNMATCHED_EDITS = [];
+let RECORD_UNMATCHED = true;
 const sub = (f, pairs) => {
   // Fail loudly on a missing target: a silent skip here once let the
   // three 說人話 trims below do nothing for months.
   if (!fs.existsSync(path.join(root, f))) throw new Error(`convert.mjs: edition-edit target missing: ${f}`);
   let t = read(f);
   const orig = t;
-  for (const [a, b] of pairs) t = t.split(a).join(b);
+  for (const [a, b] of pairs) {
+    if (RECORD_UNMATCHED && !t.includes(a)) UNMATCHED_EDITS.push(`${f} :: ${a.slice(0, 60)}`);
+    t = t.split(a).join(b);
+  }
   if (t !== orig) write(f, t);
 };
+// All-files sweeps legitimately miss in most files; don't record those.
+const subAllFiles = (pairs, skip) => {
+  RECORD_UNMATCHED = false;
+  for (const f of FILES) {
+    if (skip && f === skip) continue;
+    sub(f, pairs);
+  }
+  RECORD_UNMATCHED = true;
+};
 // Language tags everywhere.
-for (const f of FILES) sub(f, [['zh-CN', 'zh-TW'], ['zh_CN', 'zh_TW'], ['Noto Sans SC', 'Noto Sans TC']]);
+subAllFiles([['zh-CN', 'zh-TW'], ['zh_CN', 'zh_TW'], ['Noto Sans SC', 'Noto Sans TC']]);
 // Cross-reference anchors that name localized chapter-7 entries: the
 // anchor word in parentheses must stay a substring of the entry's
 // current (Taiwan) title or check-refs fails. The generated reference
 // table is excluded; check-refs regenerates it.
-for (const f of FILES) {
-  if (f === 'docs/引用對照.md') continue;
-  sub(f, [
+subAllFiles([
     ['第 7 節第 9 條（居民醫保）', '第 7 節第 9 條（健保不能斷）'],
     ['第 7 節第 18 條（社保斷繳不要慌）', '第 7 節第 18 條（換工作先接續健保）'],
     ['第 7 節第 18 條（社保斷繳）', '第 7 節第 18 條（換工作先接續健保）'],
     ['第 7 節第 8 條（兩項補貼）', '第 7 節第 8 條（先領生活補助）'],
     ['第 7 節第 13 條（職業培訓補貼）', '第 7 節第 13 條（職訓前先問補助）'],
     ['第 7 節第 16 條（住房困難先排公租房）', '第 7 節第 16 條（租金補貼）'],
-  ]);
-}
+  ], 'docs/引用對照.md');
+// Domain term check, batches B and C (Will, 2026-11-08): Taiwan usage for
+// mainland-flavoured terms the classifiers verified line by line. File-scoped
+// pairs only where every hit in that file is in scope; title changes here are
+// mirrored in chapter intros and cross-references by the same pairs.
+sub('book/13-緊急情況.md', [
+  ['胳膊', '手臂'], ['心肌梗死', '心肌梗塞'], ['心梗', '心肌梗塞'],
+  ['血常規', '血液常規檢查'], ['便利店', '便利商店'],
+]);
+sub('book/01-不要早死.md', [
+  ['胳膊', '手臂'], ['心肌梗死', '心肌梗塞'], ['心梗', '心肌梗塞'],
+  ['燃氣軟管到期就換', '瓦斯軟管到期就換'], ['吸煤氣', '吸瓦斯'],
+  ['用燃氣取暖', '用瓦斯取暖'], ['燒煤或用燃氣的', '燒煤或用瓦斯的'],
+  ['體檢套餐', '健檢套餐'],
+]);
+sub('book/06-反面清單.md', [
+  ['胳膊', '手臂'], ['康復科', '復健科'],
+  ['理療師', '物理治療師'], ['只做理療和吃藥', '只做物理治療和吃藥'],
+  ['體檢套餐', '健檢套餐'], ['褪黑素', '褪黑激素'],
+  ['顯著性降到了 10% 的水平', '顯著性降到了 10% 的水準'],
+]);
+sub('book/27-懷孕和生產.md', [
+  ['胳膊', '手臂'], ['愛滋病梅毒乙肝三項', '愛滋病梅毒 B 型肝炎三項'],
+]);
+sub('book/29-遭遇重大打擊之後.md', [
+  ['胳膊', '手臂'], ['心梗', '心肌梗塞'],
+]);
+sub('book/02-不要慢慢死.md', [
+  ['心肌梗死', '心肌梗塞'], ['心梗', '心肌梗塞'],
+  ['乒乓球', '桌球'], ['酸奶', '優酪乳'], ['血常規', '血液常規檢查'],
+  ['有心腦血管病的人', '有心血管或腦血管病的人'],
+]);
+sub('book/16-得了慢性病之後怎麼活.md', [['康復', '復健']]);
+sub('book/33-殘疾之後怎麼活.md', [
+  ['康復', '復健'], ['家屬和護工也要會這三步', '家屬和看護也要會這三步'],
+]);
+sub('book/03-不要浪費精力.md', [
+  ['哮喘', '氣喘'], ['褪黑素', '褪黑激素'], ['本科生', '大學生'],
+  ['沒閤眼的水平', '沒閤眼的水準'], ['不睡的水平', '不睡的水準'],
+]);
+sub('book/23-學什麼技能划算.md', [
+  ['本科', '大學'], ['短週期項目', '短週期課程'],
+  ['按國家發展水平', '按國家發展水準'],
+]);
+sub('book/09-普通人容易踩的法律紅線.md', [['撿到銀行卡不取錢', '撿到金融卡不取錢']]);
+sub('book/17-家裡有老人.md', [['找護士或醫生', '找護理師或醫生']]);
+sub('book/12-創業與做生意.md', [['更可能及時掉頭換別的方案', '更可能及時轉向換別的方案']]);
+sub('book/18-養孩子划不划算.md', [['醫保報銷', '健保給付']]);
+sub('book/14-帳號與資訊安全.md', [
+  ['上次在哪登錄', '上次在哪登入'], ['退出全部登錄', '登出全部裝置'],
+  ['不尋常時間的登錄、登錄嘗試', '不尋常時間的登入、登入嘗試'],
+]);
+sub('docs/生物鐘和夜班.md', [['褪黑素', '褪黑激素']]);
+
+
+// README 說明與授權（Will, 2026-11-08）：開頭的制度口徑改為台灣版現行
+// 規定；「許可」節改名「授權聲明」（徽章同步）；授權聲明的出處連結指回
+// 原作倉庫 eternity4719；讚賞、廣告位、商務合作三節全數移除。網站
+// index.html 的側欄廣告與讚賞彈窗（同為原作者的贊助/廣告內容）一併移除。
+sub('README.md', [
+  ['法律、醫保、社保這些制度上的內容，按中國大陸的現行規定寫。', '法律、健保、勞保這些制度上的內容，本版已按台灣的現行規定改寫。'],
+  ['[![許可](https://img.shields.io/badge/%E8%A8%B1%E5%8F%AF-CC%20BY%204.0-565a5f?style=flat-square)](#許可)', '[![授權聲明](https://img.shields.io/badge/%E6%8E%88%E6%AC%8A%E8%81%B2%E6%98%8E-CC%20BY%204.0-565a5f?style=flat-square)](#授權聲明)'],
+  ['## 許可', '## 授權聲明'],
+  ["\n## 讚賞\n\n覺得有用，可以用微信掃碼請作者喝杯咖啡。給不給都行，不影響任何內容。\n\n<img src=\"ads/wechat-reward.png\" alt=\"微信讚賞碼\" width=\"240\">\n\n## 廣告位\n\n<a href=\"https://4.mcyyy.com\"><img src=\"ads/mcyyy.webp\" alt=\"永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com\" width=\"820\"></a>\n\n## 商務合作\n\n信箱 [admin@mcyyy.com](mailto:admin@mcyyy.com)\n", ''],
+]);
+// 離線版產生器原本會把廣告圖與讚賞碼內嵌成 data URI 並斷言其存在；
+// 本版既已移除，該段改為說明註解，否則電子書 workflow 的離線步驟會失敗。
+sub('tools/offline/build.mjs', [
+  [`// 側欄廣告圖和讚賞碼轉 data URI，否則離線打開是個裂圖
+for (const [img, mime] of [['ads/mcyyy-side.webp', 'image/webp'], ['ads/wechat-reward.png', 'image/png']]) {
+  must(\`src="\${img}"\`, \`圖片 \${img}\`);
+  const data = readFileSync(resolve(ROOT, img)).toString('base64');
+  html = html.replace(\`src="\${img}"\`, \`src="data:\${mime};base64,\${data}"\`);
+}`, '// 繁體中文版已移除側欄廣告與讚賞碼，index.html 不再引用 ads/ 圖片，離線版無圖可內嵌。'],
+]);
+sub('index.html', [
+  ["/* 側欄底部廣告位：圖片換成新廣告主的即可，尺寸按 2:1 出圖，源文件在 tools/ad-*.html */\n.ad{margin-top:26px}\n.ad img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--divider)}\n/* 讚賞：側欄底部一行字，點開才出二維碼，圖用 loading=lazy，不點不下載 */\n.tip-open{margin-top:10px;padding:0;border:0;background:none;font:inherit;font-size:12px;color:var(--t3);cursor:pointer}\n.tip-open:hover{color:var(--brand-1)}\n#tip-mask{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:24px}\n#tip-mask[hidden]{display:none}\n#tip-box{background:var(--bg);border:1px solid var(--divider);border-radius:12px;box-shadow:var(--shadow);width:min(360px,100%);padding:16px;text-align:center}\n#tip-box img{display:block;width:100%;height:auto;border-radius:8px}\n#tip-box p{margin:12px 0;font-size:13px;line-height:1.6;color:var(--t2)}\n#tip-box button{border:1px solid var(--divider);background:var(--bg-soft);color:var(--t2);border-radius:6px;padding:3px 14px;font-size:13px;cursor:pointer;font-family:inherit}\n#tip-box button:hover{color:var(--t1);background:var(--bg-mute)}\n", ''],
+  ["  <div class=\"group ad\">\n    <div class=\"gt\">廣告</div>\n    <a href=\"https://4.mcyyy.com\" target=\"_blank\" rel=\"noopener\"><img src=\"ads/mcyyy-side.webp\" alt=\"永恆世界 Minecraft 伺服器，遊戲地址 1.mcyyy.com\" width=\"624\" height=\"312\" loading=\"lazy\"></a>\n    <button type=\"button\" class=\"tip-open\" id=\"tip-open\">覺得有用？請作者喝杯咖啡</button>\n  </div>\n", ''],
+  ["\n<div id=\"tip-mask\" hidden>\n  <div id=\"tip-box\" role=\"dialog\" aria-modal=\"true\" aria-label=\"微信讚賞碼\">\n    <img src=\"ads/wechat-reward.png\" alt=\"微信讚賞碼\" width=\"1037\" height=\"1037\" loading=\"lazy\">\n    <p>用微信掃一掃，給不給都行，不影響任何內容。<br>在手機上看的話，先截圖，再用微信掃一掃從相簿選圖。</p>\n    <button type=\"button\" id=\"tip-x\">關閉</button>\n  </div>\n</div>", '\n'],
+  ["/* ---------- 讚賞碼彈窗 ---------- */\nconst TIP = document.getElementById('tip-mask');\nfunction tipClose(){\n  if (TIP.hidden) return;\n  TIP.hidden = true;\n  document.getElementById('tip-open').focus();\n}\ndocument.getElementById('tip-open').addEventListener('click', () => {\n  TIP.hidden = false;\n  document.getElementById('tip-x').focus();\n  if (window.gtag) gtag('event', 'tip_open');\n});\ndocument.getElementById('tip-x').addEventListener('click', tipClose);\nTIP.addEventListener('click', ev => { if (ev.target === TIP) tipClose(); });\ndocument.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !TIP.hidden){ ev.stopPropagation(); tipClose(); } }, true);\n", ''],
+]);
+
+// Reader-reported fixes (issue #7, verified 2026-11-08): butter is
+// 奶油 in Taiwan usage, not 黃油 (ch.2 §41 + its intro short name,
+// ch.13 burns note quoting NHS advice); ch.3 §25 gains the ibuprofen
+// allergy contraindication from TFDA's revised label, which the entry
+// previously only implied via the US label. （預包裝→包裝食品 for
+// §2-40 / §5-36 lives in their localize overrides.)
+sub('book/02-不要慢慢死.md', [
+  ['### 41. 做飯用植物油代替豬油和黃油，不必為了健康換著買油，也別指望亞麻籽油護心', '### 41. 做飯用植物油代替豬油和奶油，不必為了健康換著買油，也別指望亞麻籽油護心'],
+  ['少吃豬油黃油這類飽和脂肪', '少吃豬油、奶油這類飽和脂肪'],
+  ['用植物油代替豬油黃油（第 41 條）', '用植物油代替豬油、奶油（第 41 條）'],
+]);
+sub('book/13-緊急情況.md', [
+  ['也不要往燙傷上抹任何藥膏、油或黃油', '也不要往燙傷上抹任何藥膏、油或奶油'],
+]);
+sub('book/03-不要浪費精力.md', [
+  // The source append anchors on the following 備註 line so the edited
+  // text no longer matches the pattern (a re-run cannot double-append).
+  ['Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>\n- 備註：60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。', 'Haleon (2026). Advil (ibuprofen capsule, liquid filled), OTC drug label: Warnings. DailyMed. <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f01c10a-9434-91a4-2ee4-352315a6b610>；衛生福利部食品藥物管理署. 含 ibuprofen 成分藥品仿單禁忌修訂（對 ibuprofen 過敏、服用 aspirin 或其他非類固醇消炎藥後曾發生過敏反應者禁用）. <https://www.fda.gov.tw/tc/includes/GetFile.ashx?mID=19&id=57734>\n- 備註：60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。'],
+  ['- 備註：60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。', '- 備註：對布洛芬、阿斯匹靈或其他消炎止痛藥過敏的人不要吃這類藥，食藥署修訂的仿單把這列為禁忌。60 歲以上、胃出過血、在吃抗凝藥或激素的人，用這類藥前先問醫生。'],
+]);
+
 // The book's own writing rules name the edition's script.
 sub('CLAUDE.md', [['簡體中文，不用繁體', '繁體中文（台灣用詞），不用簡體']]);
 // Three 說人話 run 1–3 characters over the book's own 120-character
@@ -169,6 +282,95 @@ sub('book/13-緊急情況.md', [
   ['「120', '「119'],
   // §24 在地化改題（batch-5d）後，節首引言的短名同步新標題。
   ['火災時貼地爬（第 24 條）', '小火快逃，濃煙關門（第 24 條）'],
+]);
+// Issue #3 A區（數據查核第一批）：緊急號碼 120 殘留。上面那組通用替換
+// 只涵蓋「120 後接標點/空格」的形，標題行尾的「打 120」與「110/120」
+// 斜線並列都漏了，故在此以精確長字串逐處補。各標題的外部錨點都用短名
+// （一條腿突然腫起來、看到有人溺水、柏油樣），不含號碼，不受影響；
+// docs/引用對照.md 是產生檔，重產時自動更新，不在此處理。
+sub('book/13-緊急情況.md', [
+  // §4、§11、§49 標題（行尾的 120）。
+  ['也按卒中打 120', '也按卒中打 119'],
+  ['或者胸痛，立刻打 120', '或者胸痛，立刻打 119'],
+  ['或吐血就打 120', '或吐血就打 119'],
+  // §25 標題、說人話、收益的「110/120」並列：台灣口徑是警察 110、
+  // 救護 119，寫成「打 110 或 119」。
+  ['打 110/120', '打 110 或 119'],
+  // §40 備註：北京分診標準整句換成台灣 TTAS 五級檢傷口徑（與第 24 節
+  // 第 7 條一致：第二級「危急」、十分鐘內處置、大量出血屬第二級）。
+  ['按北京的分診標準，出血多、疼得厲害的能定到 2 級，要進搶救室（見第 24 節第 7 條（急診預檢分診台））。真扎穿了就打 119，北京的方案要求急救醫生把 1、2 級的病人提前通知醫院準備接診。',
+   '按台灣的急診五級檢傷分類，出血多、疼得厲害的穿透傷通常分到第二級「危急」，十分鐘內要處置（見第 24 節第 7 條（急診先去檢傷站分級））。真扎穿了就打 119，由救護人員送醫，他們會先通報醫院準備。'],
+]);
+sub('book/29-遭遇重大打擊之後.md', [
+  ['胸口壓著疼就叫 120', '胸口壓著疼就叫 119'],
+  ['立刻打 120', '立刻打 119'],
+]);
+sub('book/33-殘疾之後怎麼活.md', [
+  ['同時叫 120', '同時叫 119'],
+]);
+sub('book/01-不要早死.md', [
+  ['吃沒吃藥都馬上打 120', '吃沒吃藥都馬上打 119'],
+]);
+sub('book/06-反面清單.md', [
+  ['別先問 AI，直接打 120', '別先問 AI，直接打 119'],
+]);
+// 同屬 A 區：docs/孩子出生前後要辦的事 的破水急救號碼。此文件整份
+// 在地化列在 Issue #3 待辦 1，但急救號碼先隨本批改掉。
+sub('docs/孩子出生前後要辦的事.md', [
+  ['墊高臀部、打 120', '墊高臀部、打 119'],
+]);
+
+// Issue #5: 人民幣口徑成本欄改台灣價格（edition edits 部分；
+// 其餘條目走 localize 覆寫）。價格依據見 Issue #5 查證表。
+// 成本標籤 錢=少→多 的同步修正也在此（CLAUDE.md 標籤定義：多＝上千元）。
+sub("book/01-不要早死.md", [
+  ["- 成本：一針 50 到 150 元。每年秋天打一次。", "- 成本：公費對象免費，不符合公費資格的自費一劑約 1,000 到 2,000 元。每年秋天打一次。"],
+  ["- 成本：鉬靶每次兩三百元。很多地區有免費篩檢項目。每兩年花半天。", "- 成本：40 到 74 歲女性每 2 年一次公費免費，做的是乳房 X 光攝影。每兩年花半天。"],
+  ["- 成本：去醫院做一次雙能 X 線骨密度檢查（簡稱 DXA），查腰椎和髖部，躺著幾分鐘就做完。自費一般一兩百元，各地價格不同。體檢裡踩一腳的跟骨超音波只能初篩，不能確診。", "- 成本：去醫院做一次雙能 X 線骨密度檢查（簡稱 DXA），查腰椎和髖部，躺著幾分鐘就做完。自費約 1,000 到 2,000 元，查腰椎加髖部兩個部位約 1,600 元。符合健保適應症的，由健保給付。體檢裡踩一腳的跟骨超音波只能初篩，不能確診。"],
+  ["- 成本：尿常規幾十元，泌尿系超音波一兩百元。醫生認為需要的話，再加一個膀胱鏡，千元上下。", "- 成本：到門診檢查，尿液檢查和超音波多由健保給付，自己付掛號費和部分負擔，合計數百元。醫生認為需要的話，再加一個膀胱鏡，一樣先問健保給付範圍。"],
+  ["- 成本：掛號幾十元。量血壓、抽血查血糖和血脂，一兩百元。跑一趟醫院，等幾天結果。", "- 成本：掛號費加部分負擔約數百元。量血壓、抽血查血糖和血脂，多由健保給付。跑一趟醫院，等幾天結果。"],
+  ["- 成本：做一次心電圖幾十元。華法林很便宜，但要定期抽血調劑量。新型抗凝藥不用常抽血，貴一些。難在沒有症狀也要天天吃，拔牙、做手術前要先告訴醫生在吃抗凝藥。", "- 成本：做一次心電圖由健保給付，自己付掛號費和部分負擔。華法林很便宜，但要定期抽血調劑量。新型抗凝藥不用常抽血，貴一些。難在沒有症狀也要天天吃，拔牙、做手術前要先告訴醫生在吃抗凝藥。"],
+]);
+sub("book/06-反面清單.md", [
+  ["- 成本：一天約 0.5 到 2 元。對吸菸的人來說，真正的成本是肺癌風險跟著往上走。", "- 成本：一天約 2 到 8 元。對吸菸的人來說，真正的成本是肺癌風險跟著往上走。"],
+  ["全身 PET-CT 一次約 7000 到 10000 元，還要挨一次電離輻射。", "全身 PET-CT 一次約 32000 到 45000 元，還要挨一次電離輻射。"],
+  ["腫瘤標誌物套餐幾百元。真正的成本在後面", "腫瘤標誌物套餐一組約 1500 元。真正的成本在後面"],
+  ["- 成本：設備 200 到 2000 元。另外每天還要分神去看那些資料。", "- 成本：手環約 700 到 2300 元，智慧手錶約 5000 元起。另外每天還要分神去看那些資料。"],
+]);
+sub("book/13-緊急情況.md", [
+  ["- 成本：看急診本身不花什麼錢。急診做一次頭顱 CT 幾百元。", "- 成本：急診做頭顱 CT，符合適應症的由健保給付。自己付急診部分負擔和掛號費，部分負擔醫學中心 750 元、區域醫院 400 元、地區醫院 150 元，合計一千元以內。"],
+  ["- 成本：做一次頭顱 CT 兩三百元。", "- 成本：做頭顱 CT，符合適應症的由健保給付，自己付部分負擔和掛號費。走門診幾百元，走急診的部分負擔最高是醫學中心的 750 元。"],
+  ["- 成本：腿部血管做一次超音波（下肢靜脈超音波），一兩百元。", "- 成本：腿部血管做一次超音波（下肢靜脈超音波），符合適應症的由健保給付，自己付部分負擔和掛號費。"],
+  ["- 成本：掛號、抽血幾十到一兩百元。胃鏡幾百元。人還清醒就去急診，別等門診號。頭暈、出冷汗或吐血的，別自己開車。", "- 成本：急診抽血、做胃鏡，符合適應症的處置多由健保給付。自己付急診部分負擔和掛號費，部分負擔醫學中心 750 元、區域醫院 400 元、地區醫院 150 元，合計幾百元到一千元。人還清醒就去急診，別等門診號。頭暈、出冷汗或吐血的，別自己開車。"],
+]);
+sub("book/02-不要慢慢死.md", [
+  ["一天一包煙約 20–30 元，戒了這筆錢就留下了", "一天一包煙約 110–140 元，一年約 4 萬到 5 萬元，戒了這筆錢就留下了"],
+  ["每天吃 28 克，一年約兩三百元", "每天吃 28 克，一天約 20 到 35 元，一年約 7000 到 12000 元"],
+  ["買一台連安裝要幾百到上千元", "買一台連基本安裝約 8000 到 20000 元"],
+]);
+sub("book/01-不要早死.md", [
+  ["買一頂 100 到 300 元。每次戴上花 5 秒", "買一頂約 800 到 3,800 元，主流款在 1,000 到 3,000 元。每次戴上花 5 秒"],
+  ["煙霧報警器一個 30 到 100 元。一氧化碳報警器一個 50 到 150 元", "煙霧報警器（住警器）一個約 450 到 900 元。一氧化碳報警器一個約 500 到 1,300 元"],
+  ["電子血壓計 100 到 200 元。量一次 1 分鐘。降壓藥多數每月幾元到幾十元", "電子血壓計約 1,500 到 3,000 元。量一次 1 分鐘。降壓藥多數有健保給付"],
+  ["救生衣 50 到 200 元", "救生衣約 400 到 1,500 元"],
+  ["一隻一兩元", "一隻約 20 到 40 元"],
+]);
+sub("book/17-家裡有老人.md", [
+  ["家用電動交替壓力氣墊床，幾百元起", "家用電動交替壓力氣墊床約 10,000 到 17,000 元，符合資格可以申請長照輔具補助"],
+]);
+sub("book/01-不要早死.md", [
+  ["### 2. 騎機車、電動腳踏車戴安全帽並扣好\n<!-- 成本標籤: 錢=少 時間=少 毅力=否 收益=大 口徑=死亡率 -->", "### 2. 騎機車、電動腳踏車戴安全帽並扣好\n<!-- 成本標籤: 錢=多 時間=少 毅力=否 收益=大 口徑=死亡率 -->"],
+  ["### 7. 量血壓，高了就吃藥降到達標\n<!-- 成本標籤: 錢=少 時間=少 毅力=些 收益=大 口徑=死亡率 -->", "### 7. 量血壓，高了就吃藥降到達標\n<!-- 成本標籤: 錢=多 時間=少 毅力=些 收益=大 口徑=死亡率 -->"],
+  ["### 39. 65 歲以上的女性去做一次雙能 X 線骨密度檢查，停經後有骨質疏鬆危險因素的不用等到 65 歲\n<!-- 成本標籤: 錢=少 時間=少 毅力=否 收益=中 口徑=死亡率 人群=女性+35歲,老人 -->", "### 39. 65 歲以上的女性去做一次雙能 X 線骨密度檢查，停經後有骨質疏鬆危險因素的不用等到 65 歲\n<!-- 成本標籤: 錢=多 時間=少 毅力=否 收益=中 口徑=死亡率 人群=女性+35歲,老人 -->"],
+]);
+sub("book/02-不要慢慢死.md", [
+  ["### 22. 每天吃一小把堅果\n<!-- 成本標籤: 錢=少 時間=少 毅力=否 收益=大 口徑=死亡率 -->", "### 22. 每天吃一小把堅果\n<!-- 成本標籤: 錢=多 時間=少 毅力=否 收益=大 口徑=死亡率 -->"],
+]);
+sub("book/17-家裡有老人.md", [
+  ["### 8. 家裡有人長期臥床，把壓瘡當頭號敵人：上電動氣墊床、定時翻身、每天看一遍骨頭突出的地方\n<!-- 成本標籤: 錢=少 時間=多 毅力=是 收益=大 口徑=死亡率 -->", "### 8. 家裡有人長期臥床，把壓瘡當頭號敵人：上電動氣墊床、定時翻身、每天看一遍骨頭突出的地方\n<!-- 成本標籤: 錢=多 時間=多 毅力=是 收益=大 口徑=死亡率 -->"],
+]);
+sub("book/02-不要慢慢死.md", [
+  ["（不買小作坊散裝自榨花生油）", "（不買散裝自榨花生油）"],
 ]);
 sub('skills/life-decision-guide/SKILL.md', [['簡體中文', '繁體中文']]);
 // The skill's own instruction prose (not book content): Taiwan terms for
@@ -227,6 +429,21 @@ sub('selfcheck.html', [
   ["key:'火災時', text:'知道火災時貼地走、先摸門、走樓梯不坐電梯'", "key:'濃煙關門', text:'知道小火快逃、濃煙關門，走樓梯不坐電梯，出去了別回頭'"],
   ['要直接打 120，不自己開車去', '要直接打 119，不自己開車去'],
   ['不緩解要打 120', '不緩解要打 119'],
+]);
+// 第 1 節 §4 標題改瓦斯（領域檢核乙批）後，自查題 key 與題面同步。
+sub('selfcheck.html', [
+  ["key:'燃氣軟管'", "key:'瓦斯軟管'"],
+  ['燃氣軟管和灶具到期換過', '瓦斯軟管和灶具到期換過'],
+  ['一側胳膊沒勁', '一側手臂沒勁'],
+  ['家裡不用燃氣可以跳過', '家裡不用瓦斯可以跳過'],
+]);
+// README 的章節摘要是上游的主題標籤，乙批改詞一併對齊（衍生項目、無收益
+// 項目等 item 義的「項目」不在此列）。
+sub('README.md', [
+  ['心梗', '心肌梗塞'], ['肺康復', '肺復健'], ['康復救助', '復健救助'],
+  ['燃氣與中毒', '瓦斯與中毒'], ['康復機構', '復健機構'], ['銀行卡盜刷', '金融卡盜刷'],
+  ['電話卡和銀行卡', '電話卡和金融卡'], ['別靠褪黑素治', '別靠褪黑激素治'],
+  ['體檢套餐', '健檢套餐'],
 ]);
 // Same repointing for chapter 19's localized titles.
 sub('book/05-不要浪費錢.md', [
@@ -496,4 +713,12 @@ sub('docs/換工作、換城市之前.md', [
     fs.writeFileSync(readmePath, after);
     console.log('badge URLs: raw spaces encoded as %20');
   }
+}
+
+// Edition edits that matched nothing: upstream drift or a vocab change
+// can silently disarm an edit (2026-11-07: the 超聲→超音波 rule broke
+// three cost-line edits keyed on the old form). Surface them every run.
+if (UNMATCHED_EDITS.length) {
+  console.warn(`UNMATCHED edition edits: ${UNMATCHED_EDITS.length}`);
+  for (const u of UNMATCHED_EDITS.slice(0, 10)) console.warn('  ' + u);
 }

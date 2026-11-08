@@ -21,6 +21,13 @@
 //      allowed exactly the three known 說人話 length deviations listed
 //      in KNOWN_PLAIN_FAILURES (Taiwan renderings 使用者 / 程式碼 are
 //      longer than the mainland words the 120-char budget assumed).
+//   7. Standing edition decisions (Will, 2026-11-08) hold in the shipped
+//      README and site: the intro names Taiwan rules, the license
+//      section is 授權聲明 with its attribution link pointing at the
+//      upstream repo, and the upstream author's tip / ad / business
+//      sections (and the site's ad slot and tip dialog) stay removed.
+//      An upstream edit that resurrects any of them fails here instead
+//      of silently shipping.
 //
 // tools/updates.mjs --check is intentionally not a gate: it diffs entry
 // text against git history, which on this branch is the upstream
@@ -179,9 +186,29 @@ for (const [name, args] of [
   }
 }
 
+// 7. Standing edition decisions (Will, 2026-11-08).
+{
+  const readme = readFileSync(join(ROOT, 'README.md'), 'utf8');
+  const site = readFileSync(join(ROOT, 'index.html'), 'utf8');
+  const mustHave = [
+    [readme, '本版已按台灣的現行規定改寫', 'README intro names Taiwan rules'],
+    [readme, '## 授權聲明', 'README license section is 授權聲明'],
+    [readme, '附上倉庫連結 https://github.com/eternity4719/HowToLiveBetter', 'README attribution points at the upstream repo'],
+  ];
+  for (const [text, needle, label] of mustHave)
+    if (!text.includes(needle)) note('edition', `missing: ${label}`);
+  const mustNotHave = [
+    [readme, '## 讚賞'], [readme, '## 廣告位'], [readme, '## 商務合作'],
+    [readme, 'mcyyy'], [readme, '按中國大陸的現行規定寫'],
+    [site, 'mcyyy'], [site, 'tip-mask'], [site, 'tip-open'], [site, '微信讚賞碼'],
+  ];
+  for (const [text, needle] of mustNotHave)
+    if (text.includes(needle)) note('edition', `standing removal regressed: ${needle}`);
+}
+
 if (failures.length) {
   console.error(`zh-tw check FAILED (${failures.length}):`);
   for (const f of failures.slice(0, 60)) console.error('  ' + f);
   process.exit(1);
 }
-console.log(`zh-tw check passed: ${textFiles.length} text files, ${allFiles.length} files total; gates 1-6 all green.`);
+console.log(`zh-tw check passed: ${textFiles.length} text files, ${allFiles.length} files total; gates 1-7 all green.`);

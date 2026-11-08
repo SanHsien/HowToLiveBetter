@@ -1,0 +1,37 @@
+# 只查台灣讀者會看到的急難電話和 README 地域說明。
+# 不建 EPUB、PDF，不發布，不使用憑證。
+name: 台灣在地用語檢查
+
+on:
+  push:
+    branches: [zh-tw]
+    paths:
+      - README.md
+      - index.html
+      - book/**
+      - docs/*.md
+      - skills/**
+      - .claude/skills/**
+      - tools/check-zh-tw-locale.mjs
+      - .github/workflows/zh-tw-locale.yml
+  pull_request:
+    paths:
+      - README.md
+      - index.html
+      - book/**
+      - docs/*.md
+      - skills/**
+      - .claude/skills/**
+      - tools/check-zh-tw-locale.mjs
+      - .github/workflows/zh-tw-locale.yml
+
+jobs:
+  locale:
+    name: 急難電話與地域說明
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node tools/check-zh-tw-locale.mjs

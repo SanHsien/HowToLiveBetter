@@ -222,7 +222,7 @@ const GROUPS = [
   {name:'檢查和疫苗', mod:'身體', qs:[
     {sec:1, key:'量血壓', text:'最近一年量過血壓，高了在吃藥控制'},
     {sec:1, key:'空腹血糖', text:'查過空腹血糖', hint:'這條針對超重的人，不適用可以跳過', when:p => ageAtLeast(p,35)},
-    {sec:1, key:'B 型肝炎兩對半', rev:2, text:'核對過B 型肝炎接種史，需要補種的已按醫生建議接種', hint:'接種後抗體下降，不一定需要重打；拿不准可先查原條目'},
+    {sec:1, key:'B 型肝炎兩對半', rev:2, text:'核對過 B 型肝炎接種史，需要補種的已按醫生建議接種', hint:'接種後抗體下降，不一定需要重打；拿不准可先查原條目'},
     {sec:1, key:'幽門螺桿菌', text:'查過幽門螺桿菌'},
     {sec:1, key:'HPV 疫苗', text:'打過 HPV 疫苗', when:p => p.sex === 'f'},
     {sec:1, key:'子宮頸癌篩檢', text:'做過子宮頸癌篩檢', when:p => p.sex === 'f' && ageAtLeast(p,30)},

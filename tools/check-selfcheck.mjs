@@ -39,7 +39,7 @@ const run = code => vm.runInContext(code, context);
 assert.equal(run('profileDone()'), false, '舊版30—44歲不能當成實際30歲');
 assert.equal(run("ans['2:低鈉鹽']"), 'n', '更換年齡欄位應保留其他答案');
 assert.equal(run("ans[qid(GROUPS.flatMap(g => g.qs).find(q => q.key === 'B 型肝炎兩對半'))]"), undefined,
-  '語義改變後的B 型肝炎題不能沿用舊的已做到答案');
+  '語義改變後的 B 型肝炎題不能沿用舊的已做到答案');
 for (const age of ['', 'abc', '-1', '121', '39.5']) {
   run(`ans['p:ageYears'] = ${JSON.stringify(age)}`);
   assert.equal(run('profileDone()'), false, `拒絕無效年齡：${age}`);

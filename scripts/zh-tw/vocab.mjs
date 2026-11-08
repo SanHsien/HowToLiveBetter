@@ -117,6 +117,11 @@ export const PROTECT = [
   // by the localization overrides (戶政事務所、律師事務所) must survive;
   // genuine 交易所 (證券交易所) does not contain 事務所 and is untouched.
   ['事務所', '\u0001OFFICE\u0001'],
+  // 領事事務局 (外交部領事事務局, Bureau of Consular Affairs): the
+  // name has 事務+局, not 事務所, so the OFFICE protect misses it and
+  // tw2 renders it as 領事交易局. The contributor's checker (PR #10) flags
+  // 交易局 as a wrong agency name; protect the full name instead.
+  ['領事事務局', '\u0001CONSULAR\u0001'],
   // 占有人 is the Civil Code §190 statutory term (動物占有人); tw2 would
   // render it 佔有人. Only the compound is protected, generic 佔有 verbs
   // elsewhere still convert normally.
@@ -154,6 +159,7 @@ export const restore = (t) => {
   t = t.split('\u0001NETCAFE\u0001').join('互聯網上網服務');
   t = t.split('\u0001EBIKE\u0001').join('電動自行車');
   t = t.split('\u0001OFFICE\u0001').join('事務所');
+  t = t.split('\u0001CONSULAR\u0001').join('領事事務局');
   t = t.split('\u0001POSSESSOR\u0001').join('占有人');
   return t;
 };
@@ -244,6 +250,7 @@ export const GLOBAL_VOCAB = [
   ['程序碼', '程式碼'],
   ['電腦程序', '電腦程式'],
   ['寫程序', '寫程式'],
+  ['改程序', '改程式'],
   ['程序語言', '程式語言'],
   ['應用程序', '應用程式'],
   ['小程式', '小程序'], // WeChat Mini Program proper name (in case of drift)
@@ -615,7 +622,7 @@ export const REGEX_VOCAB = [
   // Repo slug: functional pointers name the fork, but the attribution
   // line in the license section ("附上倉庫連結 <url>") is a provenance
   // citation and keeps the upstream slug (Will, 2026-11-08).
-  [/(?<!附上倉庫連結 https:\/\/github\.com\/)eternity4719\/HowToLiveBetter/g, 'doggy8088/HowToLiveBetter'],
+  [/(?<!附上倉庫連結 https:\/\/github\.com\/|上游原文在 \[|上游原文在 \[eternity4719\/HowToLiveBetter\]\(https:\/\/github\.com\/)eternity4719\/HowToLiveBetter/g, 'doggy8088/HowToLiveBetter'],
   // Cervix (Will, 2026-11-08: domain term check, batch A). Negative
   // lookbehind keeps the already-correct 子宮頸 a fixed point.
   [/(?<!子)宮頸/g, '子宮頸'],

@@ -382,9 +382,10 @@ sub('skills/life-decision-guide/SKILL.md', [
 ]);
 // The book workflow builds the edition branch, not the upstream mirror.
 sub('.github/workflows/book.yml', [['branches: [main]', 'branches: [zh-tw]']]);
-// GitHub Pages custom domain for the edition's site. The file is not
-// part of upstream, so it is (re)written on every conversion run.
-fs.writeFileSync(path.join(root, 'CNAME'), 'how-to-live-better.gh.miniasp.com\n');
+// SanHsien fork (2026-11-10): the custom-domain CNAME file was deleted and
+// the site moved to https://sanhsien.github.io/HowToLiveBetter/, so the
+// conversion no longer (re)writes it. vocab.mjs still carries the old
+// doggy8088 domain rules; they are inert for this fork's main branch.
 // The stats job's updates.mjs --check diffs entry text against git
 // history; on this branch that history is the simplified upstream, so
 // it can never pass and would push us to restamp every entry's date.
@@ -888,6 +889,38 @@ sub('README.md', [
   ["資料直接讀本文件。", "資料直接讀本檔案。"],
   ["在本地出一本 EPUB", "在本機出一本 EPUB"],
   ["<tr><td align=\"right\"><b>交流</b></td><td align=\"left\">\n\n[QQ 群 582670354](https://qm.qq.com/q/P1RNw3Rnqg)（點選加群）\n\n</td></tr>\n", ""],
+]);
+
+// 第二輪（2026-11-10 維護者決定）：線上檢索頁改指本 fork 的 GitHub Pages；
+// 薈萃分析→統合分析、佇列→世代研究、卒中→中風、殘疾→失能、離線單文件→
+// 離線單一檔案版，以及大陸才有的說法（長租公寓暴雷、無貨源、境外取現額度等）。
+sub('README.md', [
+  ["https://how-to-live-better.gh.miniasp.com/", "https://sanhsien.github.io/HowToLiveBetter/"],
+  ["來自薈萃分析或大型試驗的", "來自統合分析或大型試驗的"],
+  ["都是得過卒中的人", "都是得過中風的人"],
+  ["卒中低約 14%", "中風低約 14%"],
+  ["合併起來的薈萃分析、追蹤很多人很多年的大型佇列", "合併起來的統合分析、追蹤很多人很多年的大型世代研究"],
+  ["95% CI、薈萃分析、BMI", "95% CI、統合分析、BMI"],
+  ["研究原文裡叫全因死亡率", "研究原文裡叫全死因死亡率"],
+  ["| 薈萃分析 | 把很多項研究", "| 統合分析、薈萃分析 | 把很多項研究"],
+  ["| 佇列 | 佇列研究。挑一大群人", "| 世代研究、佇列 | 世代研究。挑一大群人"],
+  ["心臟驟停、卒中與後循環卒中", "心臟驟停、中風與後循環中風"],
+  ["自己或者家人殘疾了，", "自己或者家人失能了，"],
+  ["[33. 殘疾之後怎麼活]", "[33. 失能之後怎麼活]"],
+  ["33. [殘疾之後怎麼活]", "33. [失能之後怎麼活]"],
+  ["讀者做的網站、App、小程序、瀏覽器外掛", "讀者做的網站、App、小程式（需微信）、瀏覽器外掛"],
+  ["離線單文件版", "離線單一檔案版"],
+  ["離線單文件", "離線單一檔案版"],
+  ["因為單文件已經超過", "因為單一檔案已經超過"],
+  ["房東趕人、長租公寓暴雷怎麼辦", "房東趕人、包租業者倒閉、二房東跑路怎麼辦"],
+  ["怎麼學才省時間，職稱從哪裡報、值不值，要不要", "怎麼學才省時間，要不要"],
+  ["嫖娼的罰則", "買春的罰則"],
+  ["著作權：漢化、搬運", "著作權：中文化、搬運"],
+  ["代營運、開店培訓和「無貨源」這類先收小錢再層層加錢的創業騙局，以及每年上半年要報的年報、湊錢做生意", "代營運、開店培訓這類先收小錢再層層加錢的創業騙局，以及湊錢做生意"],
+  ["境外高薪招聘騙局、境外取現的年度額度、證件丟失", "境外高薪招聘騙局、證件丟失"],
+  ["別在應激期做不可逆的決定", "別在急性壓力期做不可逆的決定"],
+  ["奧美拉唑自己吃最多 7 天", "奧美拉唑自己吃最多 14 天"],
+  ["過期藥和剩藥投有害垃圾、頭孢甲硝唑期間和停藥後 7 天不喝酒", "過期藥和剩藥怎麼丟、吃某些抗生素期間和停藥後別喝酒"],
 ]);
 
 // Refresh the derived statistics (README badges, index.html, og.html)

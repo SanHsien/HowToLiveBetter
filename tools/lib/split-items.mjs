@@ -5,7 +5,7 @@
 // 只改版式，不動正文的字：拆出來的塊按順序拼回去和原文逐字相同（來源欄丟掉的只是分隔用的「；」）。
 // 正文 md 仍然一個欄位一行，index.html 的按行解析、sync-stats 的連結計數都不受影響。
 //
-// 四個出口用同一套規則：EPUB、PDF 在建構時調 splitLongItems；檢索網頁和離線單文件在 index.html 裡
+// 四個出口用同一套規則：EPUB、PDF 在建構時調 splitLongItems；檢索網頁和離線單一檔案版在 index.html 裡
 // 有一份同樣的 splitGain / splitSrc。**改這裡的規則要同步改 index.html 裡那份**，
 // `node tools/check-split.mjs` 會拿全書逐條比對兩邊拆出來的結果。
 

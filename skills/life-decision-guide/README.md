@@ -15,7 +15,7 @@
 想在任何目錄下都能用，複製到個人 skill 目錄：
 
 ```bash
-mkdir -p ~/.claude/skills/life-decision-guide && curl -fsSL -o ~/.claude/skills/life-decision-guide/SKILL.md "https://raw.githubusercontent.com/doggy8088/HowToLiveBetter/zh-tw/skills/life-decision-guide/SKILL.md"
+mkdir -p ~/.claude/skills/life-decision-guide && curl -fsSL -o ~/.claude/skills/life-decision-guide/SKILL.md "https://raw.githubusercontent.com/SanHsien/HowToLiveBetter/main/skills/life-decision-guide/SKILL.md"
 ```
 
 之後直接問「每天通勤兩小時值不值」「朋友讓我替他擔保，籤不籤」就會觸發；也可以明確說「用 life-decision-guide 回答」。
@@ -27,7 +27,7 @@ mkdir -p ~/.claude/skills/life-decision-guide && curl -fsSL -o ~/.claude/skills/
 想在任何目錄下都能用，複製到 Codex 的個人 skill 目錄 `~/.agents/skills`：
 
 ```bash
-mkdir -p ~/.agents/skills/life-decision-guide && curl -fsSL -o ~/.agents/skills/life-decision-guide/SKILL.md "https://raw.githubusercontent.com/doggy8088/HowToLiveBetter/zh-tw/skills/life-decision-guide/SKILL.md"
+mkdir -p ~/.agents/skills/life-decision-guide && curl -fsSL -o ~/.agents/skills/life-decision-guide/SKILL.md "https://raw.githubusercontent.com/SanHsien/HowToLiveBetter/main/skills/life-decision-guide/SKILL.md"
 ```
 
 之後直接問問題就會按描述自動觸發，也可以輸入 `$life-decision-guide` 明確呼叫。注意是 `$` 不是 `/`，新版 Codex 輸入 `/life-decision-guide` 會報 `Unrecognized command`。沒出現就重啟一次 Codex。
@@ -39,7 +39,7 @@ mkdir -p ~/.agents/skills/life-decision-guide && curl -fsSL -o ~/.agents/skills/
 本地有這個倉庫就讀本地的 `book/`；沒有就現取：
 
 ```bash
-git clone --depth 1 https://github.com/doggy8088/HowToLiveBetter.git "${TMPDIR:-/tmp}/hltb"
+git clone --depth 1 https://github.com/SanHsien/HowToLiveBetter.git "${TMPDIR:-/tmp}/hltb"
 ```
 
 整本 1.3 MB，淺複製一次幾秒。取不到網路就如實說取不到，不替代正文。

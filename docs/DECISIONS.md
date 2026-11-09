@@ -84,3 +84,7 @@
 2. README 內「文中的 QQ 群是上游留下的聯絡方式」那句同步刪除，因為群號已不在頁面上。
 3. 修改同時寫進 `scripts/zh-tw/convert.mjs` 的 README 編輯區塊，避免以後重跑轉換流程把殘留寫法帶回來；本 fork 日常不跑該流程，區塊未經實跑驗證。
 4. 正文章節（`book/`、`docs/`）的同類用語本輪不動，另列清單待後續處理。
+5. **線上檢索頁改用本 fork 自己的 GitHub Pages**（維護者決定）：刪除根目錄 `CNAME`（它指向 doggy8088 的網域），README、`index.html`、`selfcheck.html`、`sitemap.xml`、`robots.txt`、`.github/ISSUE_TEMPLATE/config.yml`、`tools/lib/book.mjs`（電子版內嵌的連結）和 `skills/` 的網址，一律改成 `https://sanhsien.github.io/HowToLiveBetter/`；原讀 doggy8088 `zh-tw` 分支的網址（`REPO_BLOB`、頁尾、安裝 skill 的 raw 網址）改讀 `SanHsien/HowToLiveBetter` 的 `main`。Pages 要在推送後由維護者到 Settings 開啟（Deploy from a branch，main，/）。檢索頁執行時直接抓倉庫根目錄的 `README.md`、`book/*.md`、`updates.json`，沒有額外建構步驟。
+6. **README 用語統一為台灣說法**：薈萃分析→統合分析、佇列（研究）→世代研究、全因死亡率→全死因死亡率、卒中→中風、隨訪→追蹤、殘疾→失能（描述功能喪失時；證明與補助仍用身心障礙）、激素→荷爾蒙。術語表的詞欄是 `index.html` 拿去比對正文提示用的，而 `book/` 還沒改，所以這兩列保留舊詞當別名（「統合分析、薈萃分析」「世代研究、佇列」），等正文改完再刪；`tools/check-plain.mjs` 的研究設計行話清單同步加入新詞。
+7. 小程序→小程式，指微信小程式處加註（需微信）；離線版的舊稱統一為「離線單一檔案版」（含 workflow、工具註解與 CLAUDE.md），並在 `tools/check-zh-tw-locale.mjs` 加入禁用詞（舊稱的「文件」二字，台灣說檔案），掃描範圍內不得再出現。
+8. 刪除 README 目錄簡介中大陸才有的說法（職稱從哪裡報、無貨源、每年上半年要報的年報、境外取現的年度額度）；長租公寓暴雷→包租業者倒閉、二房東跑路，嫖娼→買春，漢化→中文化，應激期→急性壓力期，過期藥投有害垃圾→怎麼丟，頭孢甲硝唑→某些抗生素；奧美拉唑自己吃最多 7 天改為 14 天，與正文一致。

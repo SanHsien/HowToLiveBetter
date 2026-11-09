@@ -1,7 +1,7 @@
 # 正文一改就重新生成四樣，掛到固定的 Release「epub-latest」上，下載連結不變：
 #   EPUB        https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub
 #   PDF         https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf
-#   離線單文件  https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html
+#   離線單一檔案版  https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html
 #   Anki 牌組  https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg
 # PR 只生成並校驗，不發布，產物在 Actions 頁面的 artifact 裡。
 name: 電子書
@@ -45,7 +45,7 @@ env:
 
 jobs:
   # 交叉引用檢查。單獨一個 job，不掛在 build 裡：錨點沒補好不該連累 EPUB、PDF 和
-  # 離線單文件的發布，那是兩回事。PR 上照樣紅，main 上該發的還是發出去。
+  # 離線單一檔案版的發布，那是兩回事。PR 上照樣紅，main 上該發的還是發出去。
   # 本地那條鏈路（sync-stats.mjs）要記得跑才會跑，
   # 外部 PR 更是完全跑不到，所以這道檢查得在 CI 裡有一份。零依賴，幾秒鐘。
   refs:
@@ -124,7 +124,7 @@ jobs:
       - name: EPUB
         run: node tools/epub/build.mjs
 
-      - name: 離線單文件 HTML
+      - name: 離線單一檔案版 HTML
         run: node tools/offline/build.mjs
 
       - name: Anki 牌組
@@ -171,7 +171,7 @@ jobs:
         run: |
           git tag -f epub-latest
           git push -f origin epub-latest
-          notes="正文提交 ${GITHUB_SHA::7}，生成於 $(date -u -d '+8 hours' +'%Y-%m-%d %H:%M')（北京時間）。EPUB、PDF、離線單文件 HTML、Anki 牌組四樣，正文每次更新後自動重新生成，下載連結固定不變。"
+          notes="正文提交 ${GITHUB_SHA::7}，生成於 $(date -u -d '+8 hours' +'%Y-%m-%d %H:%M')（北京時間）。EPUB、PDF、離線單一檔案版 HTML、Anki 牌組四樣，正文每次更新後自動重新生成，下載連結固定不變。"
           if gh release view epub-latest >/dev/null 2>&1; then
             gh release edit epub-latest --title "電子書（EPUB / PDF / 離線 HTML / Anki，自動更新）" --notes "$notes"
           else

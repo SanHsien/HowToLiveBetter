@@ -1,6 +1,6 @@
 ---
 name: life-decision-guide
-description: 用《高性價比人生指南》(github.com/doggy8088/HowToLiveBetter) 的正文回答具體的人生決策：該不該做、值不值、怎麼選、出事了先做什麼、能領哪筆錢、這麼幹犯不犯法。先把相關條目查出來再答，按成本（錢/時間/毅力）、收益量級和證據等級 A/B/C 排序，每條都註明出自第幾節第幾條。觸發詞：該不該、值不值、要不要、划不划算、怎麼選、幫我決定、這樣犯法嗎、能領什麼、先做什麼、性價比。
+description: 用《高性價比人生指南》(github.com/SanHsien/HowToLiveBetter) 的正文回答具體的人生決策：該不該做、值不值、怎麼選、出事了先做什麼、能領哪筆錢、這麼幹犯不犯法。先把相關條目查出來再答，按成本（錢/時間/毅力）、收益量級和證據等級 A/B/C 排序，每條都註明出自第幾節第幾條。觸發詞：該不該、值不值、要不要、划不划算、怎麼選、幫我決定、這樣犯法嗎、能領什麼、先做什麼、性價比。
 ---
 
 # 人生決策：按《高性價比人生指南》查了再答
@@ -32,13 +32,13 @@ description: 用《高性價比人生指南》(github.com/doggy8088/HowToLiveBet
 **遠端**：沒有就現取。整本 1.3 MB，淺複製一次最省事，後面所有命令都能照常用：
 
 ```bash
-git clone --depth 1 https://github.com/doggy8088/HowToLiveBetter.git "${TMPDIR:-/tmp}/hltb"
+git clone --depth 1 https://github.com/SanHsien/HowToLiveBetter.git "${TMPDIR:-/tmp}/hltb"
 ```
 
 不能用 git 時按文件取（檔名裡的中文直接寫就行）：
 
 ```bash
-curl -fsSL --compressed "https://raw.githubusercontent.com/doggy8088/HowToLiveBetter/zh-tw/book/02-不要慢慢死.md"
+curl -fsSL --compressed "https://raw.githubusercontent.com/SanHsien/HowToLiveBetter/main/book/02-不要慢慢死.md"
 ```
 
 這兩條都走不通，就說明取不到正文，如實告訴使用者，不要憑印象複述書的內容。

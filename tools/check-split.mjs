@@ -1,5 +1,5 @@
 // 收益、備註、來源的拆分規則有兩份：tools/lib/split-items.mjs（EPUB、PDF）和 index.html 裡
-// <split-rules> 那一段（檢索網頁、離線單文件）。這個指令碼拿全書每一條比對兩邊拆出來的結果，
+// <split-rules> 那一段（檢索網頁、離線單一檔案版）。這個指令碼拿全書每一條比對兩邊拆出來的結果，
 // 順帶查拆完能不能逐字拼回原文、加粗的 ** 有沒有被拆到兩塊裡。
 // 用法：node tools/check-split.mjs     有問題退出碼 1
 import { readdirSync } from 'node:fs';

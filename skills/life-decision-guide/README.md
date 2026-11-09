@@ -18,7 +18,7 @@
 mkdir -p ~/.claude/skills/life-decision-guide && curl -fsSL -o ~/.claude/skills/life-decision-guide/SKILL.md "https://raw.githubusercontent.com/SanHsien/HowToLiveBetter/main/skills/life-decision-guide/SKILL.md"
 ```
 
-之後直接問「每天通勤兩小時值不值」「朋友讓我替他擔保，籤不籤」就會觸發；也可以明確說「用 life-decision-guide 回答」。
+之後直接問「每天通勤兩小時值不值」「朋友讓我替他擔保，簽不簽」就會觸發；也可以明確說「用 life-decision-guide 回答」。
 
 ## 裝到 Codex
 

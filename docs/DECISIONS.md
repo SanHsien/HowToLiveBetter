@@ -89,6 +89,7 @@
 7. 小程序→小程式，指微信小程式處加註（需微信）；離線版的舊稱統一為「離線單一檔案版」（含 workflow、工具註解與 CLAUDE.md），並在 `tools/check-zh-tw-locale.mjs` 加入禁用詞（舊稱的「文件」二字，台灣說檔案），掃描範圍內不得再出現。
 8. 刪除 README 目錄簡介中大陸才有的說法（職稱從哪裡報、無貨源、每年上半年要報的年報、境外取現的年度額度）；長租公寓暴雷→包租業者倒閉、二房東跑路，嫖娼→買春，漢化→中文化，應激期→急性壓力期，過期藥投有害垃圾→怎麼丟，頭孢甲硝唑→吃某些抗生素期間和停藥後 7 天內別喝酒（保留可照做的天數）；奧美拉唑自己吃最多 7 天改為 14 天，與正文一致。
 9. **移除 Google Analytics**（維護者決定）：`index.html` 原帶上游的 GA 追蹤碼（`G-NTPGXCLMP6`），讀者在檢索頁搜尋的詞與開啟的文件會送給第三方。已整段移除追蹤碼以及 `track()`、`reportSearch()`、`doc_open` 事件，頁面功能不受影響；`tools/offline/build.mjs` 不再需要剝離標記，改成只留防呆檢查：`index.html` 出現統計域名或 `gtag(` 就讓建構失敗。
-10. **移除 `.github/FUNDING.yml`**：它把贊助按鈕指向上游的微信讚賞碼圖片，屬於原作者的個人贊助管道。`ads/wechat-reward.png` 與 `ads/` 其他上游廣告素材（`tools/ad-mcyyy*`）目前沒有被 README 與 `index.html` 引用，本輪先保留檔案，待維護者決定是否刪除。
+10. **移除 `.github/FUNDING.yml`**：它把贊助按鈕指向上游的微信讚賞碼圖片，屬於原作者的個人贊助管道。`ads/wechat-reward.png` 與 `ads/` 其他上游廣告素材（`tools/ad-mcyyy*`）目前沒有被 README 與 `index.html` 引用，已於同日另案刪除（見第 13 點）。
 11. **其他殘留網址收尾**：`.claude/skills/life-decision-guide/SKILL.md` 的備援下載網址、`.github/workflows/book.yml` 開頭註解的下載連結改指 SanHsien；`.github/ISSUE_TEMPLATE/config.yml` 裡名為「上游繁體中文在地化專案」的那一項保留指向 doggy8088 的 Issues，名稱與連結一致。其餘 `doggy8088` 字樣都在來源標示、上游追蹤與貢獻說明裡，是刻意保留。
 12. **`robots.txt` 備註**：網站放在 `/HowToLiveBetter/` 子路徑下時，爬蟲只讀網域根目錄的 `robots.txt`，所以本倉庫這份目前不會被讀取，也不影響 `sitemap.xml`（Search Console 可手動提交）；檔案保留，等日後換成自訂網域才會生效。
+13. **刪除上游廣告素材**（維護者規則：沒有理由的東西不留）：`ads/`（`mcyyy.webp`、`mcyyy-side.webp`、`wechat-reward.png`）與 `tools/ad-mcyyy*`（三個檔案）。刪除前全 repo 搜過，README、`index.html`、各 workflow 的建構步驟、`tools/`、`docs/` 都沒有引用；僅有的引用是 `.github/workflows/book.yml` 的 `ads/**` 觸發路徑（已移除）與已停用的舊轉換流程 `scripts/zh-tw/regen-images.mjs`（已改成只重產 `og.png`）。

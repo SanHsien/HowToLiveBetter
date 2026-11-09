@@ -14,7 +14,6 @@ on:
       - index.html
       - selfcheck.html
       - og.png
-      - ads/**
       - book/**
       - docs/*.md
       - tools/**
@@ -25,7 +24,6 @@ on:
       - index.html
       - selfcheck.html
       - og.png
-      - ads/**
       - book/**
       - docs/*.md
       - tools/**

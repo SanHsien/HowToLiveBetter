@@ -1,0 +1,70 @@
+name: Upstream check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/check_upstream_updates.py
+      - tools/upstream_baseline.json
+      - tools/upstream_root_baseline.json
+      - .github/workflows/upstream-check.yml
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: upstream-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Dual-Upstream check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Check direct upstream (doggy8088/HowToLiveBetter)
+        id: upstream_direct
+        continue-on-error: true
+        run: python tools/check_upstream_updates.py --baseline tools/upstream_baseline.json --strict
+
+      - name: Check root upstream (eternity4719/HowToLiveBetter)
+        id: upstream_root
+        continue-on-error: true
+        run: python tools/check_upstream_updates.py --baseline tools/upstream_root_baseline.json --output upstream-root-review-report.md --strict
+
+      - name: Publish direct upstream report
+        if: always()
+        run: |
+          echo "## 直接上游（doggy8088 / zh-tw）檢查結果" >> "$GITHUB_STEP_SUMMARY"
+          cat upstream-review-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish root upstream report
+        if: always()
+        run: |
+          echo "## 根原作上游（eternity4719 / main）檢查結果" >> "$GITHUB_STEP_SUMMARY"
+          cat upstream-root-review-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Require review when upstream changed
+        if: steps.upstream_direct.outcome == 'failure' || steps.upstream_root.outcome == 'failure'
+        run: |
+          echo "::error::Upstream changed or the check failed. Review the workflow summary."
+          exit 1

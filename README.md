@@ -4,12 +4,15 @@
 
 # 高性價比人生指南
 
+[English](README.en.md) · [Fork 維護說明](FORK.md) · [維護指引](AGENTS.md) · [路線圖](ROADMAP.md)
+
+
 講怎麼活得久、怎麼少生病，出了意外怎麼救。講怎麼少花冤枉錢，哪些事會讓人被騙、攤上官司。講沒工作沒錢時能去領什麼，開店、開公司、做網站要辦什麼手續。也講戀愛結婚生孩子、出國和學手藝。法律、健保、勞保這些制度上的內容，本版已按台灣的現行規定改寫。<br>
 772 條建議，每條寫明花掉什麼、換回什麼、證據有多硬，來源只引期刊論文和官方文件，少數官方不公開的案件引署名的原創新聞報導並附網頁存檔。
 
 不用全做：這是一份備選單，不是任務清單——挑走一兩條就算數，作者自己也沒做到其中大部分。
 
-書裡的內容可能過時，也可能有錯。不少政策各地執行不一樣。真去辦事、看病、打官司時，以當地部門、醫生和律師的說法為準。發現寫錯了，歡迎[提 issue](https://github.com/doggy8088/HowToLiveBetter/issues)。
+書裡的內容可能過時，也可能有錯。不少政策各地執行不一樣。真去辦事、看病、打官司時，以當地部門、醫生和律師的說法為準。發現寫錯了，歡迎[提 issue](https://github.com/SanHsien/HowToLiveBetter/issues)。
 
 這一版以台灣讀者為主，但全書尚未逐條核完。抽過的幾條，不能當成其餘條目都合格。還沒改完的位置和優先順序見 [台灣在地化待核](docs/台灣在地化待核.md)。上游原文在 [eternity4719/HowToLiveBetter](https://github.com/eternity4719/HowToLiveBetter)。正文若還看到大陸機構、大陸審限，或叫人打 120、12356，那是還沒改完的上游寫法，不能直接當成台灣的作法。文中的 QQ 群是上游留下的聯絡方式，不是台灣的求助專線。
 
@@ -20,7 +23,7 @@
 [![線上檢索](https://img.shields.io/badge/%E7%B7%9A%E4%B8%8A%E6%AA%A2%E7%B4%A2-%E9%BB%9E%E9%80%99%E8%A3%A1%E6%89%93%E9%96%8B-3451b2?style=flat-square)](https://how-to-live-better.gh.miniasp.com/)
 [![條目](https://img.shields.io/badge/%E6%A2%9D%E7%9B%AE-772%20%E6%A2%9D-18794e?style=flat-square)](#目錄)
 [![證據分級](https://img.shields.io/badge/%E8%AD%89%E6%93%9A%E5%88%86%E7%B4%9A-A%20478%20%C2%B7%20B%20240%20%C2%B7%20C%2054-915930?style=flat-square)](#證據分級)
-[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2287%20%E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
+[![原始文獻](https://img.shields.io/badge/%E5%8E%9F%E5%A7%8B%E6%96%87%E7%8D%BB-2284%20%E6%A2%9D%E9%80%A3%E7%B5%90-565a5f?style=flat-square)](docs/核實記錄/)
 [![授權聲明](https://img.shields.io/badge/%E6%8E%88%E6%AC%8A%E8%81%B2%E6%98%8E-CC%20BY%204.0-565a5f?style=flat-square)](#授權聲明)
 [![Claude Code 協助編寫](https://img.shields.io/badge/Claude%20Code-%E5%8D%94%E5%8A%A9%E7%B7%A8%E5%AF%AB-D97757?style=flat-square&logo=claude&logoColor=white)](https://claude.com/claude-code)
 
@@ -31,7 +34,7 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 <table>
 <tr><td align="right"><b>下載</b></td><td align="left">
 
-[PDF](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf) · [EPUB](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub) · [離線單文件（HTML）](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html) · [Anki 牌組](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)
+[PDF](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf) · [EPUB](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub) · [離線單文件（HTML）](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html) · [Anki 牌組](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)
 
 </td></tr>
 <tr><td align="right"><b>查閱</b></td><td align="left">
@@ -54,13 +57,6 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 [QQ 群 582670354](https://qm.qq.com/q/P1RNw3Rnqg)（點選加群）
 
 </td></tr>
-<tr><td align="right"><b>其他語言</b></td><td align="left">
-
-[English](其他語言.md) · [Русский](其他語言.md) · [Español](其他語言.md) · [Português](其他語言.md) · [العربية](其他語言.md) · [Bahasa Indonesia](其他語言.md) · [Tiếng Việt](其他語言.md)
-
-讀者翻譯的版本，各版本的網站和維護者見[其他語言](其他語言.md)
-
-</td></tr>
 <tr><td align="right"><b>衍生工具</b></td><td align="left">
 
 讀者做的網站、App、小程序、瀏覽器外掛和資料集，見[衍生項目](衍生項目.md)
@@ -68,7 +64,7 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 </td></tr>
 </table>
 
-<sub>其他語言和衍生工具由他人維護，內容可能落後，以本倉庫中文原文為準。</sub>
+<sub>衍生工具由他人維護，內容可能落後，以本倉庫中文原文為準。</sub>
 
 </div>
 
@@ -120,10 +116,10 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 - **想按條件挑**：打開[線上檢索頁](https://how-to-live-better.gh.miniasp.com/)，可以按關鍵詞、章節、證據等級來篩，也可以按「花不花錢、花多少時間、要不要毅力」這三樣篩，幾個條件能疊著用。頁面上的內容直接取自 book/ 目錄裡的正文，正文一改，頁面跟著改。
 - **條目之間會互相指路**（「見第 8 節第 17 條」這種）：在檢索頁裡，這種指路帶一條虛線。點一下，就地顯示被指的那條的標題和「說人話」。想真的翻過去，再按「跳過去」。那一條正好被篩選條件藏起來了，頁面會自動把篩選清掉。在 GitHub 上直接讀正文點不動，但每處指路後面都寫著指向什麼（「見第 18 條（借錢寫清借條）」）。不翻過去也知道說的是哪條。
 - **想按順序讀**：每節內的先後順序不代表性價比高低。條目多的節開頭有一段分組導覽，按主題挑著看就行。
-- **想離線看、想發給別人**：下載 [離線單文件 HTML](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，整本書連同檢索和篩選都在這一個文件裡，雙擊就開，不用伺服器也不用聯網，微信裡也能直接傳。
-- **想列印或在手機上翻**：下載 [PDF](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf)，A4 排版、兩百多頁，帶目錄頁碼和書籤，每節另起一頁。
-- **想在 Kindle 或其他閱讀器上讀**：下載 [EPUB 電子書](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub)，Kindle 用 Send to Kindle 發過去即可。
-- **想記住、隔幾天複習一遍**：下載 [Anki 牌組](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)，用 Anki 打開就匯入。一條一張卡，按節分成子牌組。正面是建議，背面是說人話、成本和證據等級。可以只學其中幾節，也可以按「性價比極高」這類標籤篩。以後重新下載再匯入一次，卡片內容會更新，複習記錄不丟。
+- **想離線看、想發給別人**：下載 [離線單文件 HTML](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，整本書連同檢索和篩選都在這一個文件裡，雙擊就開，不用伺服器也不用聯網，微信裡也能直接傳。
+- **想列印或在手機上翻**：下載 [PDF](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf)，A4 排版、兩百多頁，帶目錄頁碼和書籤，每節另起一頁。
+- **想在 Kindle 或其他閱讀器上讀**：下載 [EPUB 電子書](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub)，Kindle 用 Send to Kindle 發過去即可。
+- **想記住、隔幾天複習一遍**：下載 [Anki 牌組](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg)，用 Anki 打開就匯入。一條一張卡，按節分成子牌組。正面是建議，背面是說人話、成本和證據等級。可以只學其中幾節，也可以按「性價比極高」這類標籤篩。以後重新下載再匯入一次，卡片內容會更新，複習記錄不丟。
 - **這四樣都是正文每次更新後自動重新生成的**，下載連結固定不變；轉發出去的那一份不會跟著更新，以線上版為準。
 - **看不懂那串數字**：每條都有一行「說人話」。它把「收益」欄裡那些研究裡的寫法，翻成「同期死亡的機率低約兩成」「拘留幾日、罰多少錢」這樣的日常說法。它只用「收益」欄已經寫到的內容，不添新數字。只看這一行就夠拿主意。「收益」欄裡原樣留著全部數字，想自己核對就看那一欄。
 - **只想看結論最硬的**：在檢索頁裡勾選證據等級 A，只留下有具體數字、來自薈萃分析或大型試驗的 478 條。
@@ -144,12 +140,12 @@ AI 助手 skill 支援 Claude Code 和 Codex。裝上後直接問「替朋友擔
 
 ## 自己跑一份
 
-多數人用不著部署：[線上檢索頁](https://how-to-live-better.gh.miniasp.com/)是現成的，要離線就下[離線單文件 HTML](https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，雙擊就開。
+多數人用不著部署：[線上檢索頁](https://how-to-live-better.gh.miniasp.com/)是現成的，要離線就下[離線單文件 HTML](https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html)，雙擊就開。
 
 真要在自己電腦或伺服器上跑：
 
 ```bash
-git clone https://github.com/doggy8088/HowToLiveBetter.git
+git clone https://github.com/SanHsien/HowToLiveBetter.git
 cd HowToLiveBetter
 python -m http.server 8000
 ```
@@ -328,6 +324,3 @@ A 級只說明「有具體數字、出處可核」，不說明這個數字一定
 
 程式碼用 [MIT](LICENSE-CODE)，範圍是 tools/、skills/、index.html 和 .github/。著作權標示是 Copyright (c) 2026 eternity4719。改程式時保留這段宣告。CC BY 4.0 不管這一部分，MIT 也不把正文變成可以不署名就轉載。
 
-## Star 走勢
-
-[![Star History Chart](https://api.star-history.com/svg?repos=doggy8088/HowToLiveBetter&type=Date)](https://star-history.com/#doggy8088/HowToLiveBetter&Date)

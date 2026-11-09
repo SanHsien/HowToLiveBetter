@@ -4,7 +4,7 @@ name: 台灣在地用語檢查
 
 on:
   push:
-    branches: [zh-tw]
+    branches: [main]
     paths:
       - README.md
       - index.html

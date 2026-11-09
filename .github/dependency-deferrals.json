@@ -1,0 +1,21 @@
+{
+  "_comment": "Reviewed-but-not-now decisions for tools/check_dependency_freshness.py. A deferral is for a floor that would genuinely break something if raised right now, with the reason recorded here.",
+  "deferrals": {
+    "actions/checkout": {
+      "deferredLatest": "7.0.1",
+      "reason": "上游原有 book.yml, links.yml, zh-tw-locale.yml 宣告 actions/checkout@v4，保持上游電子書產製流程相容"
+    },
+    "actions/setup-node": {
+      "deferredLatest": "7.1.0",
+      "reason": "上游原有 book.yml, links.yml, zh-tw-locale.yml 宣告 actions/setup-node@v4，保持 Node 22 建置相容"
+    },
+    "actions/setup-java": {
+      "deferredLatest": "6.2.0",
+      "reason": "上游原有 book.yml 宣告 actions/setup-java@v4，保持 epubcheck Java 21 相容"
+    },
+    "actions/upload-artifact": {
+      "deferredLatest": "7.0.2",
+      "reason": "上游原有 book.yml 宣告 actions/upload-artifact@v4，保持電子書產物上傳相容"
+    }
+  }
+}

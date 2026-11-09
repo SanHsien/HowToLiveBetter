@@ -8,7 +8,7 @@ name: 電子書
 
 on:
   push:
-    branches: [zh-tw]
+    branches: [main]
     paths:
       - README.md
       - index.html

@@ -3,3 +3,12 @@ contact_links:
   - name: 先搜一下書裡有沒有
     url: https://how-to-live-better.gh.miniasp.com/
     about: 線上檢索頁能按關鍵詞、章節、證據等級篩。想問的事多半已經有條目了。
+  - name: 本 fork 維護與貢獻指引
+    url: https://github.com/SanHsien/HowToLiveBetter/blob/main/CONTRIBUTING.md
+    about: Windows gate、維護工具與本 fork 治理問題看這裡。
+  - name: 安全漏洞私下回報
+    url: https://github.com/SanHsien/HowToLiveBetter/security/advisories/new
+    about: 漏洞、憑證或敏感資料問題請勿建立公開 Issue。
+  - name: 上游繁體中文在地化專案
+    url: https://github.com/doggy8088/HowToLiveBetter/issues
+    about: 書籍通用繁中翻譯或在地化糾錯，亦可至上游專案回報。

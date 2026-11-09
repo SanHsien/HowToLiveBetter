@@ -1,4 +1,17 @@
+# Upstream ignores
 .idea/
 .junie/
 node_modules/
 dist/
+
+# Fork maintenance tooling and caches
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.pyc
+
+# Ephemeral maintenance reports
+dependency-freshness-report.md
+upstream-review-report.md
+upstream-root-review-report.md

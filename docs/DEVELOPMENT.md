@@ -38,12 +38,12 @@ pwsh -NoProfile -File tools\dev_check.ps1
 4. **自查邏輯檢驗** (`node tools/check-selfcheck.mjs`)：檢查自查測驗題目與選項關聯。
 5. **Python 代碼品質** (`ruff check .` 與 `ruff format --check .`)：確保維護工具代碼合規。
 6. **維護工具測試** (`pytest -q`)：驗證水位檢查、連結檢查與新鮮度比對合約。
-7. **文件相對連結檢查** (`python tools/check_links.py`)：確保維護文檔、指引與規格文件間的相對鏈接完好無損。
+7. **文件相對連結檢查** (`python tools/check_links.py`)：確保維護文檔、指引與規格文件間的相對連結完好無損。
 8. **上游狀態檢查** (`python tools/check_upstream_updates.py`)：確認與上游的水位保持同步。
 
 ## 3. 推送與發布
 
-通過 `tools\dev_check.ps1` 綠燈後，直接提交並推送到 `origin/zh-tw`：
+通過 `tools\dev_check.ps1` 綠燈後，直接提交並推送到 `origin/main`：
 
 ```powershell
 git add .

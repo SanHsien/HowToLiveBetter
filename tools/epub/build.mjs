@@ -40,7 +40,7 @@ function aboutMd() {
 
 這本電子書由倉庫裡的 Markdown 正文自動生成，正文一改就重新生成一本。手裡這本的版本：
 
-- 生成時間：${buildStamp()}（北京時間）
+- 生成時間：${buildStamp()}（台灣時間）
 ${commitLine}
 - 最新版下載：${RELEASE}
 - 線上檢索頁（按關鍵詞、章節、證據等級和成本篩選）：${SITE}

@@ -171,7 +171,7 @@ jobs:
         run: |
           git tag -f epub-latest
           git push -f origin epub-latest
-          notes="正文提交 ${GITHUB_SHA::7}，生成於 $(date -u -d '+8 hours' +'%Y-%m-%d %H:%M')（北京時間）。EPUB、PDF、離線單一檔案版 HTML、Anki 牌組四樣，正文每次更新後自動重新生成，下載連結固定不變。"
+          notes="正文提交 ${GITHUB_SHA::7}，生成於 $(date -u -d '+8 hours' +'%Y-%m-%d %H:%M')（台灣時間）。EPUB、PDF、離線單一檔案版 HTML、Anki 牌組四樣，正文每次更新後自動重新生成，下載連結固定不變。"
           if gh release view epub-latest >/dev/null 2>&1; then
             gh release edit epub-latest --title "電子書（EPUB / PDF / 離線 HTML / Anki，自動更新）" --notes "$notes"
           else

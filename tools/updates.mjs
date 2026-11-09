@@ -10,7 +10,7 @@
 // 只有讀者看得見的正文變了才算「改過」：標題、成本、說人話、收益、證據等級、備註。
 // 來源欄、成本標籤、條號順延、「第 N 條（錨點）」裡的條號和錨點詞變了都不算，不然天天滿屏「改過」。
 // 只走 main 的第一父提交：本地 merge --no-ff 合進來的 PR 算在合併那天。
-// 起算日之前的條目一律當老條目，不標新增。日期按北京時間。
+// 起算日之前的條目一律當老條目，不標新增。日期按台灣時間。
 // --check 只比對「哪些條目、新增還是改過、改了哪幾欄」，不比日期：PR 在 CI 上是臨時合併提交，
 // 日期必然和本地生成時差一點。
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
@@ -23,7 +23,7 @@ const SINCE = '2026-10-01';
 const OUT = 'updates.json';
 const FIELDS = ['標題', '成本', '說人話', '收益', '證據等級', '備註'];
 
-const day = sec => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai' }).format(new Date(sec * 1000));
+const day = sec => new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Taipei' }).format(new Date(sec * 1000));
 const git = (args, input) => {
   const r = spawnSync('git', ['-c', 'core.quotepath=false', ...args], { cwd: ROOT, input, maxBuffer: 1 << 30 });
   if (r.status !== 0) throw new Error(`git ${args.join(' ')} 失敗：${r.stderr}`);

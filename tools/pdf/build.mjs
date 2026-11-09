@@ -13,7 +13,7 @@ const OUT = resolve(ROOT, process.argv[2] ?? 'dist/HowToLiveBetter.pdf');
 const WORK = resolve(ROOT, 'dist/pdf-build.md');
 const PANDOC = process.env.PANDOC ?? 'pandoc';
 const TYPST = process.env.TYPST ?? 'typst';
-const STAMP = buildStamp();          // 「（北京時間）」寫在樣板和版本說明裡，傳給 pandoc 的值保持純 ASCII
+const STAMP = buildStamp();          // 「（台灣時間）」寫在樣板和版本說明裡，傳給 pandoc 的值保持純 ASCII
 const COMMIT = gitCommit();
 
 const { description, frontMd, contentsMd, bookFiles, docFiles } = readBook();
@@ -36,7 +36,7 @@ function aboutMd() {
 
 這本 PDF 由倉庫裡的 Markdown 正文自動排版，正文一改就重新排一本。手裡這本的版本：
 
-- 生成時間：${STAMP}（北京時間）
+- 生成時間：${STAMP}（台灣時間）
 ${commitLine}- 最新版下載、線上檢索、提意見：${REPO}
 - 線上檢索頁（按關鍵詞、章節、證據等級和成本篩選，也能存成單一檔案離線看）：${SITE}
 

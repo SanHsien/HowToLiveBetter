@@ -307,7 +307,7 @@ A 級只說明「有具體數字、出處可核」，不說明這個數字一定
 
 ## 正文
 
-正文按節拆成 34 個文件放在 [book/](book/)，點上面目錄裡的節名進入。拆開是因為單一檔案已經超過 GitHub 渲染 Markdown 的 512 KB 上限，後面的節顯示不出來；[線上檢索頁](https://sanhsien.github.io/HowToLiveBetter/)會把這些文件合起來讀，用法不變。
+正文按節拆成 34 個檔案放在 [book/](book/)，點上面目錄裡的節名進入。拆開是因為單一檔案已經超過 GitHub 渲染 Markdown 的 512 KB 上限，後面的節顯示不出來；[線上檢索頁](https://sanhsien.github.io/HowToLiveBetter/)會把這些文件合起來讀，用法不變。
 
 ## 授權聲明
 

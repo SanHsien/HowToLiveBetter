@@ -130,7 +130,7 @@ const deck = (id, name, desc = '') => ({
   newToday: [0, 0], revToday: [0, 0], lrnToday: [0, 0], timeToday: [0, 0], extendNew: 0, extendRev: 0,
 });
 const commit = gitCommit();
-const rootDesc = `《${TITLE}》全書條目，一條一張卡，按節分子牌組。生成於 ${buildStamp()}（北京時間）`
+const rootDesc = `《${TITLE}》全書條目，一條一張卡，按節分子牌組。生成於 ${buildStamp()}（台灣時間）`
   + `${commit ? `，正文提交 ${commit.slice(0, 7)}` : ''}。正文會繼續更新，以 <a href="${SITE}">線上版</a> 為準；`
   + '重新下載匯入會更新卡片內容，複習記錄保留。';
 const decks = {

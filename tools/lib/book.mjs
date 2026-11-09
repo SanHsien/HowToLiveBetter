@@ -26,9 +26,9 @@ export function gitCommit() {
 }
 
 // 正文一天可能改好幾輪，只給日期分不出是哪一版，所以精確到分鐘。
-// CI 跑在 UTC 上，統一按北京時間顯示，免得下載的人按自己那邊的日期對不上。
+// CI 跑在 UTC 上，統一按台灣時間顯示，免得下載的人按自己那邊的日期對不上。
 export function buildStamp() {
-  return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai', dateStyle: 'short', timeStyle: 'short' }).format(new Date());
+  return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Taipei', dateStyle: 'short', timeStyle: 'short' }).format(new Date());
 }
 
 export function stripBackLink(md) {

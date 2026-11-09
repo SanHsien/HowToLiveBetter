@@ -57,7 +57,7 @@ html = html
 const foot = '<div class="foot">';
 must(foot, '頁尾');
 const commitNote = COMMIT ? `，正文提交 ${COMMIT.slice(0, 7)}` : '';
-html = html.replace(foot, `${foot}離線副本，生成於 ${STAMP}（北京時間）${commitNote}；正文會繼續更新，以 <a href="${SITE}">線上版</a> 為準。<br>`);
+html = html.replace(foot, `${foot}離線副本，生成於 ${STAMP}（台灣時間）${commitNote}；正文會繼續更新，以 <a href="${SITE}">線上版</a> 為準。<br>`);
 
 // 正文要在主指令碼之前就位
 const mainScript = '\n<script>\n/* ---------- 除錯面板';

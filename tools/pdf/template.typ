@@ -56,7 +56,7 @@ $--
   #block(width: 80%)[#text(11.5pt, fill: luma(60))[$subtitle$]]
   #v(2cm)
   #text(10pt, fill: luma(90))[
-    生成於 $builddate$（北京時間）　·　正文提交 $commit$ \
+    生成於 $builddate$（台灣時間）　·　正文提交 $commit$ \
     正文每天都在改，以線上版為準：$site$ \
     線上檢索、EPUB 與本 PDF 的最新版都在 $repo$
   ]

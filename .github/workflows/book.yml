@@ -1,8 +1,8 @@
 # 正文一改就重新生成四樣，掛到固定的 Release「epub-latest」上，下載連結不變：
-#   EPUB        https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub
-#   PDF         https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf
-#   離線單一檔案版  https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html
-#   Anki 牌組  https://github.com/doggy8088/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg
+#   EPUB        https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.epub
+#   PDF         https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.pdf
+#   離線單一檔案版  https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.html
+#   Anki 牌組  https://github.com/SanHsien/HowToLiveBetter/releases/download/epub-latest/HowToLiveBetter.apkg
 # PR 只生成並校驗，不發布，產物在 Actions 頁面的 artifact 裡。
 name: 電子書
 

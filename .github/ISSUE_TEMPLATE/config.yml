@@ -10,5 +10,5 @@ contact_links:
     url: https://github.com/SanHsien/HowToLiveBetter/security/advisories/new
     about: 漏洞、憑證或敏感資料問題請勿建立公開 Issue。
   - name: 上游繁體中文在地化專案
-    url: https://github.com/SanHsien/HowToLiveBetter/issues
+    url: https://github.com/doggy8088/HowToLiveBetter/issues
     about: 書籍通用繁中翻譯或在地化糾錯，亦可至上游專案回報。

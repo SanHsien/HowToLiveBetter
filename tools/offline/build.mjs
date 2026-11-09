@@ -33,13 +33,9 @@ const must = (needle, label) => {
   if (!html.includes(needle)) throw new Error(`index.html 裡找不到${label}，離線版指令碼要跟著改：${needle}`);
 };
 
-// 統計指令碼不能跟著離線版走：別人雙擊打開的副本不該往外發請求，斷網時還要等超時
-const GA_START = '<!-- ga:start', GA_END = '<!-- ga:end -->';
-must(GA_START, ' GA 片段的起始標記');
-must(GA_END, ' GA 片段的結束標記');
-html = html.slice(0, html.indexOf(GA_START)) + html.slice(html.indexOf(GA_END) + GA_END.length);
-// 只查外連域名：主指令碼裡的 track() 帶 typeof 守衛，沒有 gtag 也能跑，不算殘留
-if (/googletagmanager|google-analytics/.test(html)) throw new Error('剝掉標記之間的內容後仍有統計域名殘留，離線版會往外發請求');
+// 本 fork 的 index.html 不帶任何第三方統計指令碼（2026-11-10 移除上游的 Google Analytics）。
+// 這裡只做防呆：以後若有人把統計片段加回來，離線版會往外發請求，直接讓建構失敗。
+if (/googletagmanager|google-analytics|gtag\(/.test(html)) throw new Error('index.html 裡出現統計指令碼或域名，離線版與線上版都不該往外發統計請求');
 
 // 相對連結在本地打開時是死的，改成線上地址
 must('href="README.md"', ' README.md 連結');

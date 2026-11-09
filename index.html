@@ -316,16 +316,6 @@ abbr.term:hover{border-bottom-color:var(--brand-1);color:var(--brand-1)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 
-<!-- ga:start 這兩行註釋是離線建構的剝離標記（tools/offline/build.mjs），別刪 -->
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NTPGXCLMP6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-NTPGXCLMP6');
-</script>
-<!-- ga:end -->
 </head>
 <body>
 
@@ -1250,16 +1240,6 @@ function apply(){
 }
 
 /* ---------- 事件 ---------- */
-// 離線單一檔案版會把 GA 片段整段剝掉，這裡沒有 gtag 也要能跑
-const track = (name, params) => { if (typeof gtag === 'function') gtag('event', name, params); };
-// 搜尋詞上報：搜了沒命中的詞就是該補的條目。results 要在 GA 後台註冊成自訂指標才看得到。
-let SENT_Q = '';
-function reportSearch(){
-  const q = state.q;
-  if (q.length < 2 || q === SENT_Q) return;
-  SENT_Q = q;
-  track('search', { search_term: q, results: Number(document.getElementById('cnt').textContent) || 0 });
-}
 function wire(){
   const sb = document.getElementById('sidebar'), bd = document.getElementById('backdrop'), mb = document.getElementById('menu');
   const setMenu = (on) => { sb.classList.toggle('open', on); bd.classList.toggle('on', on); mb.setAttribute('aria-expanded', String(on)); };
@@ -1299,10 +1279,8 @@ function wire(){
   });
   document.getElementById('f-dispute').addEventListener('change', e => { state.dispute = e.target.checked; apply(); toTop(); });
   document.getElementById('f-todo').addEventListener('change', e => { state.todo = e.target.checked; apply(); toTop(); });
-  // 上報比篩選晚得多：按 120ms 那一拍發，「高血壓」會被當成「高」「高血」「高血壓」三次搜尋
-  let tm, qtm; document.getElementById('q').addEventListener('input', e => {
+  let tm; document.getElementById('q').addEventListener('input', e => {
     clearTimeout(tm); tm = setTimeout(() => { state.q = e.target.value.trim(); apply(); }, 120);
-    clearTimeout(qtm); qtm = setTimeout(reportSearch, 2000);
   });
   const reset = () => { state.q=''; for (const d of DIMS) state[d].clear(); state.dispute=false; state.todo=false; apply(); toTop(); };
   // 頁首「最近 N 天更新」：點了就只看這一類，別的篩選清掉，免得讀者以為沒幾條
@@ -1532,7 +1510,6 @@ async function dmOpen(path, from){
     DM.toc.appendChild(a);
   }
   dmSpy();
-  if (window.gtag) gtag('event', 'doc_open', { doc: path });
 }
 document.addEventListener('click', ev => {
   const a = ev.target.closest?.('a[href]');

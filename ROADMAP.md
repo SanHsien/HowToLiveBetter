@@ -5,16 +5,16 @@
 
 ## 現況
 `doggy8088/HowToLiveBetter`（繁中在地化）與 `eternity4719/HowToLiveBetter`（原作主線）之雙軸追蹤維護 fork。
-- 直接上游審到：commit `c0485f1`、PR #10、Issue #7（見 `tools/upstream_baseline.json`）。
-- 根原作上游審到：commit `21ad906`、PR #173、Issue #171（見 `tools/upstream_root_baseline.json`）。
+- 直接上游審到：commit `4353179`、PR #14、Issue #11（見 `tools/upstream_baseline.json`）。
+- 根原作上游審到：commit `dff814d`、PR #174、Issue #171（見 `tools/upstream_root_baseline.json`）。
 - 授權比照上游：內容 CC BY 4.0，程式碼 MIT License。
 - 維護門禁已建立 Windows-first 雙軸驗收管線（`tools/dev_check.ps1`），一切以台灣正確資料、台灣繁體中文用語與現行法規為最高準則。
+- 已完成首發正式發布 `v1.0.0` 與自動同步發布 `epub-latest`（含 EPUB、PDF、離線 HTML、Anki 產物）。
 
 ## 近期：可以直接動手
 | 項目 | 為什麼 | 驗收方式 | 建議執行者 | 證據 |
 | --- | --- | --- | --- | --- |
-| 追蹤上游 PR #10 後續討論與 issue #7 進展 | doggy8088 上游正在針對「預包裝」等在地詞彙進行討論 | 執行 `python tools/check_upstream_updates.py`；審核後更新 baseline | 維護者 | `doggy8088/HowToLiveBetter#7` |
-| 補完 docs/台灣在地化待核.md 的條目審定 | 書籍部分章節仍有待核條目標籤 | 逐章審定並通過 `node tools/check-zh-tw-locale.mjs` | 維護者 | `docs/台灣在地化待核.md` |
+| 評估向直接上游 (doggy8088) 回貢在地化成果 | 本庫已修復 34§9 乙醯胺酚詞彙回退，並完成孩子出生長文之台灣法規改寫 | 開立 Issue 或送出聚焦之 PR | 維護者 | `docs/孩子出生前後要辦的事.md` |
 
 ## 中期：等條件成立再做
 | 項目 | 觸發條件 | 驗收方式 | 建議執行者 | 證據 |

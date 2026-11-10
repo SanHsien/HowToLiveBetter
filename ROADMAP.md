@@ -9,11 +9,12 @@
 - 根原作上游審到：commit `dff814d`、PR #174、Issue #171（見 `tools/upstream_root_baseline.json`）。
 - 授權比照上游：內容 CC BY 4.0，程式碼 MIT License。
 - 維護門禁已建立 Windows-first 雙軸驗收管線（`tools/dev_check.ps1`），一切以台灣正確資料、台灣繁體中文用語與現行法規為最高準則。
-- 已完成首發正式發布 `v1.0.0` 與自動同步發布 `epub-latest`（含 EPUB、PDF、離線 HTML、Anki 產物）。
+- 發布只保留自動同步的 `epub-latest`（含 EPUB、PDF、離線 HTML、Anki 產物）；`v1.0.0` 已於 2026-11-10 依維護者指示刪除。
 
 ## 近期：可以直接動手
 | 項目 | 為什麼 | 驗收方式 | 建議執行者 | 證據 |
 | --- | --- | --- | --- | --- |
+| 書本正文用語統一為台灣用語（如「薈萃」「激素」「殘疾」等，估計數百處） | 2026-11-10 README 已審修，正文仍有同類大陸用語 | 逐章替換並保留專有名詞；`tools/dev_check.ps1` 全綠；抽查 EPUB 產物 | Claude Sonnet | README 審修 `ee54ef6`、`8edb6c2` |
 | 評估向直接上游 (doggy8088) 回貢在地化成果 | 本庫已修復 34§9 乙醯胺酚詞彙回退，並完成孩子出生長文之台灣法規改寫 | 開立 Issue 或送出聚焦之 PR | 維護者 | `docs/孩子出生前後要辦的事.md` |
 
 ## 中期：等條件成立再做

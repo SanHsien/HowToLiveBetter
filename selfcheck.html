@@ -214,7 +214,7 @@ const GROUPS = [
     {sec:1, key:'限位器', text:'窗戶和陽台裝了限位器或護欄', when:p => p.kid === 'y'},
   ]},
   {name:'吃藥', mod:'身體', qs:[
-    {sec:34, key:'對乙酰氨基酚', text:'同時吃兩種感冒藥或止痛藥之前，會先看成分表'},
+    {sec:34, key:'乙醯胺酚', text:'同時吃兩種感冒藥或止痛藥之前，會先看成分表'},
     {sec:34, key:'普通感冒別找醫生要抗生素', text:'普通感冒不找醫生要抗生素'},
     {sec:34, key:'頭孢、甲硝唑', text:'吃頭孢、甲硝唑期間和停藥後一週不喝酒'},
     {sec:2, key:'有高血壓、高血脂', text:'有高血壓、高血脂的，在按醫囑規律吃藥', hint:'沒有這些病可以跳過'},
@@ -227,7 +227,7 @@ const GROUPS = [
     {sec:1, key:'HPV 疫苗', text:'打過 HPV 疫苗', when:p => p.sex === 'f'},
     {sec:1, key:'子宮頸癌篩檢', text:'做過子宮頸癌篩檢', when:p => p.sex === 'f' && ageAtLeast(p,30)},
     {sec:1, key:'乳腺癌篩檢', text:'近兩年做過乳腺鉬靶', when:p => p.sex === 'f' && ageAtLeast(p,40)},
-    {sec:1, key:'結直腸癌篩檢', text:'做過結直腸癌篩檢（大便潛血或腸鏡）', when:p => ageAtLeast(p,45)},
+    {sec:1, key:'大腸直腸癌篩檢', text:'做過大腸直腸癌篩檢（大便潛血或腸鏡）', when:p => ageAtLeast(p,45)},
     {sec:1, key:'流感疫苗', text:'每年打流感疫苗', when:p => ageAtLeast(p,60)},
     {sec:1, key:'帶狀皰疹疫苗', text:'打過帶狀皰疹疫苗', when:p => ageAtLeast(p,50)},
     {sec:1, key:'肺炎球菌疫苗', text:'打過肺炎球菌疫苗', when:p => ageAtLeast(p,65)},
@@ -318,6 +318,12 @@ const find = (sec, key) => {
 const STORE = 'selfcheck-v1';
 let ans = {};
 try { ans = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
+// 標題改用台灣說法時，題目 key 跟著改；舊 key 下已填的答案搬到新 key，不讓使用者重填。
+const RENAMED_KEYS = {'34:對乙酰氨基酚':'34:乙醯胺酚', '1:結直腸癌篩檢':'1:大腸直腸癌篩檢'};
+for (const [from, to] of Object.entries(RENAMED_KEYS)) {
+  if (ans[from] !== undefined && ans[to] === undefined) ans[to] = ans[from];
+  delete ans[from];
+}
 const save = () => { try { localStorage.setItem(STORE, JSON.stringify(ans)); } catch (e) {} };
 const profile = () => Object.fromEntries(PROFILE.map(p => [p.id, ans['p:'+p.id]]));
 // 使用新欄位 ageYears，舊版年齡段答案不會被當成實際年齡；其他答案保留。

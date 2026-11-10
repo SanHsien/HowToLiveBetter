@@ -22,7 +22,8 @@ const element = id => {
   return elements.get(id);
 };
 const warnings = [];
-const oldAnswers = {'p:age':'30', 'p:sex':'f', 'p:kid':'n', '2:低鈉鹽':'n', '1:B 型肝炎兩對半':'y'};
+const oldAnswers = {'p:age':'30', 'p:sex':'f', 'p:kid':'n', '2:低鈉鹽':'n', '1:B 型肝炎兩對半':'y',
+  '1:結直腸癌篩檢':'y', '34:對乙酰氨基酚':'n'};
 const context = vm.createContext({
   window:{__CORPUS__:{readme:read('README.md'), parts}},
   document:{getElementById:element},
@@ -38,6 +39,10 @@ const run = code => vm.runInContext(code, context);
 
 assert.equal(run('profileDone()'), false, '舊版30—44歲不能當成實際30歲');
 assert.equal(run("ans['2:低鈉鹽']"), 'n', '更換年齡欄位應保留其他答案');
+assert.equal(run("ans['1:大腸直腸癌篩檢']"), 'y', '題目 key 改用台灣說法後，舊 key 的答案要搬過去');
+assert.equal(run("ans['34:乙醯胺酚']"), 'n', '題目 key 改用台灣說法後，舊 key 的答案要搬過去');
+assert.equal(run("ans['1:結直腸癌篩檢'] === undefined && ans['34:對乙酰氨基酚'] === undefined"), true,
+  '搬過去之後不留舊 key');
 assert.equal(run("ans[qid(GROUPS.flatMap(g => g.qs).find(q => q.key === 'B 型肝炎兩對半'))]"), undefined,
   '語義改變後的 B 型肝炎題不能沿用舊的已做到答案');
 for (const age of ['', 'abc', '-1', '121', '39.5']) {
@@ -45,7 +50,7 @@ for (const age of ['', 'abc', '-1', '121', '39.5']) {
   assert.equal(run('profileDone()'), false, `拒絕無效年齡：${age}`);
 }
 const expected = [
-  ['空腹血糖',35], ['乳腺癌篩檢',40], ['結直腸癌篩檢',45],
+  ['空腹血糖',35], ['乳腺癌篩檢',40], ['大腸直腸癌篩檢',45],
   ['帶狀皰疹疫苗',50], ['流感疫苗',60], ['肺炎球菌疫苗',65], ['骨密度',65],
 ];
 for (const [key, min] of expected) {

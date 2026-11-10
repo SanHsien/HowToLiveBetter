@@ -14,7 +14,7 @@
 ## 近期：可以直接動手
 | 項目 | 為什麼 | 驗收方式 | 建議執行者 | 證據 |
 | --- | --- | --- | --- | --- |
-| 書本正文用語統一為台灣用語（如「薈萃」「激素」「殘疾」等，估計數百處） | 2026-11-10 README 已審修，正文仍有同類大陸用語 | 逐章替換並保留專有名詞；`tools/dev_check.ps1` 全綠；抽查 EPUB 產物 | Claude Sonnet | README 審修 `ee54ef6`、`8edb6c2` |
+| README 術語表收尾：正文已統一為台灣用語，刪掉詞欄的舊詞別名（「統合分析、薈萃分析」「世代研究、佇列」），並改 `index.html` 的「薈萃/RCT」「殘疾之後怎麼活」說明文字、`skills/life-decision-guide/SKILL.md` 的「腦卒中」 | 2026-11-10 正文改完；README 與檢索頁、skill 不在該輪範圍，還留著舊詞 | `node tools/check-zh-tw-locale.mjs` 加掃這三處仍全綠；`tools/sync-stats.mjs --check` 無過時數字 | Claude Sonnet | `docs/DECISIONS.md` 2026-11-10 正文用語統一 |
 | 評估向直接上游 (doggy8088) 回貢在地化成果 | 本庫已修復 34§9 乙醯胺酚詞彙回退，並完成孩子出生長文之台灣法規改寫 | 開立 Issue 或送出聚焦之 PR | 維護者 | `docs/孩子出生前後要辦的事.md` |
 
 ## 中期：等條件成立再做

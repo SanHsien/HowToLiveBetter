@@ -23,7 +23,12 @@ const element = id => {
 };
 const warnings = [];
 const oldAnswers = {'p:age':'30', 'p:sex':'f', 'p:kid':'n', '2:低鈉鹽':'n', '1:B 型肝炎兩對半':'y',
-  '1:結直腸癌篩檢':'y', '34:對乙酰氨基酚':'n'};
+  '1:結直腸癌篩檢':'y', '34:對乙酰氨基酚':'n',
+  '1:燃氣軟管':'y', '8:不把銀行卡':'n', '8:徵信報告':'y',
+  // 題面實質改寫的三題：舊 key 的答案不得沿用到新題
+  '13:火災時':'y', '5:個稅彙算':'y', '5:家庭共濟':'y',
+  // 新 key 已有答案時，舊 key 不得蓋掉它
+  '8:聯徵信用報告':'n'};
 const context = vm.createContext({
   window:{__CORPUS__:{readme:read('README.md'), parts}},
   document:{getElementById:element},
@@ -43,6 +48,17 @@ assert.equal(run("ans['1:大腸直腸癌篩檢']"), 'y', '題目 key 改用台�
 assert.equal(run("ans['34:乙醯胺酚']"), 'n', '題目 key 改用台灣說法後，舊 key 的答案要搬過去');
 assert.equal(run("ans['1:結直腸癌篩檢'] === undefined && ans['34:對乙酰氨基酚'] === undefined"), true,
   '搬過去之後不留舊 key');
+assert.equal(run("ans['1:瓦斯軟管']"), 'y', '同義改名（燃氣→瓦斯）沿用舊答案');
+assert.equal(run("ans['8:不把銀行帳戶']"), 'n', '同義改名（銀行卡→銀行帳戶）沿用舊答案');
+assert.equal(run("ans['8:聯徵信用報告']"), 'n', '新 key 已有答案時保留新答案，不被舊 key 蓋掉');
+assert.equal(run("['1:燃氣軟管', '8:不把銀行卡', '8:徵信報告', '8:聯徵信用報告'].filter(k => k in ans).length"), 1,
+  '舊 key 搬完即刪（只剩已有答案的新 key）');
+assert.equal(run("['13:濃煙關門', '5:綜合所得稅結算申報', '5:眷屬依附加保'].some(k => ans[k] !== undefined)"), false,
+  '題面實質改寫的題不能沿用舊 key 的答案');
+assert.equal(run("Object.values(RENAMED_KEYS).every(k => GROUPS.flatMap(g => g.qs).some(q => qid(q) === k))"), true,
+  '每個改名目標都要對得到一道真實存在的題');
+// 後面的結果頁斷言要從只有原本那幾題答案的狀態開始
+run("for (const k of ['1:瓦斯軟管', '8:不把銀行帳戶', '8:聯徵信用報告']) delete ans[k]");
 assert.equal(run("ans[qid(GROUPS.flatMap(g => g.qs).find(q => q.key === 'B 型肝炎兩對半'))]"), undefined,
   '語義改變後的 B 型肝炎題不能沿用舊的已做到答案');
 for (const age of ['', 'abc', '-1', '121', '39.5']) {

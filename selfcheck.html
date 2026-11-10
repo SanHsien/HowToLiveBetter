@@ -318,13 +318,23 @@ const find = (sec, key) => {
 const STORE = 'selfcheck-v1';
 let ans = {};
 try { ans = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
-// 標題改用台灣說法時，題目 key 跟著改；舊 key 下已填的答案搬到新 key，不讓使用者重填。
-const RENAMED_KEYS = {'34:對乙酰氨基酚':'34:乙醯胺酚', '1:結直腸癌篩檢':'1:大腸直腸癌篩檢'};
-for (const [from, to] of Object.entries(RENAMED_KEYS)) {
-  if (ans[from] !== undefined && ans[to] === undefined) ans[to] = ans[from];
-  delete ans[from];
-}
 const save = () => { try { localStorage.setItem(STORE, JSON.stringify(ans)); } catch (e) {} };
+// 標題改用台灣說法時，題目 key 跟著改；舊 key 下已填的答案搬到新 key，不讓使用者重填。
+// 只放「同義改名」：題目要做的動作沒變，只是換成台灣說法。題面實質改寫的題
+// （濃煙關門、綜合所得稅結算申報、眷屬依附加保）刻意不放：舊答案 y 不能證明新動作
+// 已做到，留給讀者重答（上游 PR #19、#23 同此判準）。新 key 已有答案時保留新答案。
+const RENAMED_KEYS = {
+  '34:對乙酰氨基酚':'34:乙醯胺酚', '1:結直腸癌篩檢':'1:大腸直腸癌篩檢',
+  '1:燃氣軟管':'1:瓦斯軟管', '8:不把銀行卡':'8:不把銀行帳戶', '8:徵信報告':'8:聯徵信用報告',
+};
+let migrated = false;
+for (const [from, to] of Object.entries(RENAMED_KEYS)) {
+  if (ans[from] === undefined) continue;
+  if (ans[to] === undefined) ans[to] = ans[from];
+  delete ans[from];
+  migrated = true;
+}
+if (migrated) save();
 const profile = () => Object.fromEntries(PROFILE.map(p => [p.id, ans['p:'+p.id]]));
 // 使用新欄位 ageYears，舊版年齡段答案不會被當成實際年齡；其他答案保留。
 const profileDone = () => PROFILE.every(p => p.type === 'number'

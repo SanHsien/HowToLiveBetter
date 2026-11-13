@@ -17,6 +17,7 @@ const SKIP_DIRS = new Set([
   'scripts',
   'node_modules',
   '.git',
+  '.pytest_cache',
 ]);
 const SKIP_FILES = new Set([
   'CLAUDE.md',
@@ -34,6 +35,7 @@ const BAD = [
 
 // 這些是會被讀成台灣現行做法的舊句子。待核清單本身不掃。
 // 數字同時匹配中文與阿拉伯寫法，中間可有空白（「6 個月」）。
+/** @type {[RegExp, string][]} */
 const BANNED = [
   [/(?:六|6)\s*個月內審完/, '仍把一審寫成六個月內審完'],
   [/審理期間為(?:六|6)\s*個月/, '仍把審理期間寫成六個月'],
@@ -47,13 +49,18 @@ const BANNED = [
   [/單文件/, '用語：單文件 → 單一檔案（台灣說檔案）'],
 ];
 
-// 正文（book/）與深入文件（docs/ 根下）的大陸慣用詞。台灣讀者讀到的是
+// 正文、深入文件、README、檢索頁與生活決策 skill 的大陸慣用詞。台灣讀者讀到的是
 // 統合分析、世代研究、中風、荷爾蒙、失能／身心障礙；「褪黑激素」「雌激素」
 // 是台灣通行的藥名，所以 激素 只在前面不是 黑／雌 時才算。
 // 掃描不含：來源欄（文獻題錄照原樣留著才能核對）、維護文件（它們在記錄
 // 「舊詞→新詞」）、核實記錄（歷史）。第三欄為 true 的詞，同一行明說「大陸」
 // 「上游」「原書」的對照句放行，例如「台灣的藥品標示叫乙醯胺酚，大陸叫對乙酰氨基酚」。
+/** @type {[RegExp, string, boolean?][]} */
 const BODY_BANNED = [
+  [/聯網/, '用語：聯網 → 連網'],
+  [/會話/, '用語：會話 → 對話'],
+  [/壓縮包/, '用語：壓縮包 → 壓縮檔'],
+  [/MIT 許可/, '用語：MIT 許可 → MIT 授權'],
   [/薈萃/, '用語：薈萃分析 → 統合分析'],
   [/佇列/, '用語：佇列（研究）→ 世代研究'],
   [/卒中/, '用語：卒中 → 中風（卒中單元 → 中風單位）'],
@@ -82,16 +89,24 @@ const BODY_SKIP_FILES = new Set(['docs/DECISIONS.md', 'docs/DEVELOPMENT.md', 'do
 
 function inBodyScope(rel) {
   if (BODY_SKIP_FILES.has(rel)) return false;
-  return rel.startsWith('book/') || (rel.startsWith('docs/') && !rel.slice(5).includes('/'));
+  return rel === 'README.md' || rel === 'index.html'
+    || rel === 'skills/life-decision-guide/SKILL.md'
+    || rel === 'skills/life-decision-guide/README.md'
+    || rel === 'tools/skill/build.mjs'
+    || rel.startsWith('book/') || (rel.startsWith('docs/') && !rel.slice(5).includes('/'));
 }
 
 // 回傳這一行踩到的 BODY_BANNED 說明。來源欄（含接在後面的續行）不查。
 // inSource 由呼叫端逐行傳進來，回傳 [problems, 下一行是否仍在來源欄內]。
+/** @returns {[string[], boolean]} */
 function bodyLineProblems(line, inSource) {
   const isSource = /^- 來源：/.test(line)
     || (inSource && line.trim() !== '' && !/^(?:- |#|<!--)/.test(line));
   if (isSource) return [[], true];
-  const text = visibleText(line);
+  // 外部連結的題名保留原文；本地連結的顯示文字仍須檢查。
+  const text = visibleText(line
+    .replace(/\[[^\]]*\]\(https?:\/\/[^)]*\)/g, '')
+    .replace(/<a\b[^>]*href=["']https?:\/\/[^"']*["'][^>]*>.*?<\/a>/gi, ''));
   const contrast = BODY_CONTRAST.test(text);
   const hits = BODY_BANNED
     .filter(([re, , contrastOk]) => re.test(text) && !(contrastOk && contrast))
@@ -157,6 +172,17 @@ function selfTest() {
     assert.equal(lineOk(text), ok, `分類不對：${text}`);
   }
   const bodyBad = (line, inSource = false) => bodyLineProblems(line, inSource)[0].length > 0;
+  for (const [old, localized] of [['聯網', '連網'], ['會話', '對話'], ['壓縮包', '壓縮檔'], ['MIT 許可', 'MIT 授權']]) {
+    assert.equal(bodyBad(old), true, `讀者可見的「${old}」必須被攔`);
+    assert.equal(bodyBad(localized), false, `台灣用語「${localized}」不能誤攔`);
+    assert.equal(bodyBad(`- 來源：${old}`), false, '引用原文不能誤攔');
+    assert.equal(bodyBad(`[${old}](https://example.org/source)`), false, '外部題名不能誤攔');
+  }
+  for (const rel of ['skills/life-decision-guide/README.md', 'tools/skill/build.mjs']) {
+    assert.equal(inBodyScope(rel), true, `${rel} 的安裝說明必須檢查用語`);
+  }
+  assert.equal(inBodyScope('scripts/zh-tw/convert.mjs'), false, '轉換規則的原文不能誤攔');
+  assert.ok(SKIP_DIRS.has('.pytest_cache'), '用語檢查不得讀取測試快取');
   assert.equal(bodyBad('一篇薈萃分析把 13 項研究合在一起算'), true, '薈萃分析必須被攔');
   assert.equal(bodyBad('一篇統合分析把 13 項研究合在一起算'), false, '統合分析是台灣說法，不能誤攔');
   assert.equal(bodyBad('停經前後潮熱去評估激素治療'), true, '激素治療必須被攔');
@@ -176,9 +202,16 @@ function selfTest() {
   assert.equal(bodyBad('社宅要抽籤，標籤不是錯字'), false, '抽籤、標籤是正確用字，不能誤攔');
   assert.equal(bodyBad('- 來源：中國女性乳腺癌篩查指南，薈萃分析，隨訪 5 年'), false, '來源欄的題錄照原樣留著');
   assert.equal(bodyBad('Tokyo guideline continued line 薈萃', true), false, '來源欄的續行也不查');
+  assert.equal(bodyBad('[薈萃分析原文](https://example.org/paper)'), false, '外部連結題名保留原文');
+  assert.equal(bodyBad('<a href="https://example.org/paper">薈萃分析原文</a>'), false, 'HTML 外部連結題名保留原文');
+  assert.equal(bodyBad('[殘疾之後怎麼活](book/33-殘疾之後怎麼活.md)'), true, '本地連結顯示的舊詞必須被攔');
+  assert.equal(bodyBad('[失能之後怎麼活](book/33-殘疾之後怎麼活.md)'), false, '本地連結路徑保留原名');
   assert.equal(bodyBad('台灣的藥品標示叫乙醯胺酚，大陸叫對乙酰氨基酚'), false, '明說「大陸叫」的對照句放行');
   assert.equal(bodyBad('對乙酰氨基酚一天最多吃多少'), true, '沒有對照語境的對乙酰氨基酚必須被攔');
   assert.equal(inBodyScope('book/01-不要早死.md'), true);
+  for (const rel of ['README.md', 'index.html', 'skills/life-decision-guide/SKILL.md']) {
+    assert.equal(inBodyScope(rel), true, `${rel} 必須攔下讀者會看到的舊詞`);
+  }
   assert.equal(inBodyScope('docs/生物鐘和夜班.md'), true);
   assert.equal(inBodyScope('docs/核實記錄/01-不要早死.md'), false, '核實記錄是歷史，不掃');
   assert.equal(inBodyScope('docs/DECISIONS.md'), false, '維護文件在記錄舊詞→新詞，不掃');
@@ -201,14 +234,15 @@ function walk(dir, out) {
       walk(abs, out);
       continue;
     }
-    if (!/\.(md|html)$/.test(name)) continue;
-    // 只掃讀者會當建議看的位置，不掃工具腳本和廣告圖。
+    if (!/\.(md|html)$/.test(name) && rel !== 'tools/skill/build.mjs') continue;
+    // 掃讀者建議與 skill 封裝說明；其餘工具腳本和廣告圖不掃。
     const inScope = rel === 'README.md'
       || rel === 'index.html'
       || rel.startsWith('book/')
       || rel.startsWith('docs/')
       || rel.startsWith('skills/')
-      || rel.startsWith('.claude/skills/');
+      || rel.startsWith('.claude/skills/')
+      || rel === 'tools/skill/build.mjs';
     if (!inScope) continue;
     out.push(rel);
   }

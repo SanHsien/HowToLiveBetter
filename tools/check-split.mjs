@@ -4,6 +4,7 @@
 // 用法：node tools/check-split.mjs     有問題退出碼 1
 import { readdirSync } from 'node:fs';
 import vm from 'node:vm';
+import assert from 'node:assert/strict';
 import { read, readBook } from './lib/book.mjs';
 import { splitGain, splitSrc } from './lib/split-items.mjs';
 
@@ -12,6 +13,13 @@ const m = html.match(/\/\/ <split-rules>[\s\S]*?\/\/ <\/split-rules>/);
 if (!m) { console.error('index.html 裡找不到 // <split-rules> … // </split-rules> 這一段'); process.exit(1); }
 const ctx = {};
 vm.runInNewContext(`${m[0]}\nthis.splitGain = splitGain; this.splitSrc = splitSrc;`, ctx);
+
+const previousEvidence = '這項試驗記錄兩組參與者的結果，並保留原研究的適用條件。'.repeat(12);
+const cohortEvidence = '台灣世代追蹤五年，記錄參與者的健康變化，沒有隨機分組。';
+for (const split of [splitGain, ctx.splitGain]) {
+  assert.deepEqual(Array.from(split(previousEvidence + cohortEvidence)), [previousEvidence, cohortEvidence],
+    '台灣世代研究的新依據必須另起一段');
+}
 
 const { docFiles } = readBook();
 const files = [...readdirSync(new URL('../book/', import.meta.url)).filter(f => f.endsWith('.md')).map(f => `book/${f}`), ...docFiles];

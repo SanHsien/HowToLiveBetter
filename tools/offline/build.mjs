@@ -1,4 +1,4 @@
-// 把 index.html + README + book/*.md 打成一個自包含的 HTML：雙擊就能看，不用伺服器、不用聯網。
+// 把 index.html + README + book/*.md 打成一個自包含的 HTML：雙擊就能看，不用伺服器、不用連網。
 // 用法：node tools/offline/build.mjs [輸出路徑]   預設輸出 dist/HowToLiveBetter.html
 // 正文內聯進 window.__CORPUS__，index.html 的 init() 認這個變數就不再發請求；
 // 站內相對連結改成線上地址，側欄圖片轉成 data URI，其餘一個字不動。

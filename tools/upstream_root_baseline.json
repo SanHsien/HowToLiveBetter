@@ -1,10 +1,10 @@
 {
   "repo": "https://github.com/eternity4719/HowToLiveBetter.git",
   "branch": "main",
-  "reviewed_through": "dff814dcbb0a2e968acc0af48e418814655ba1df",
-  "reviewed_date": "2026-11-10",
+  "reviewed_through": "36c78569a8d21f26c7c650d2993c7103832ca4b5",
+  "reviewed_date": "2026-11-13",
   "reviewed_pr_through": 174,
-  "reviewed_issue_through": 175,
+  "reviewed_issue_through": 176,
   "track": "commit",
   "decision_log": "docs/UPSTREAM.md",
   "notes": "上游的上游（原作 eternity4719 主線）。追蹤新條目與文獻更新；一切仍以台灣正確資料、台灣繁體中文用語為準，不引入大陸體制與簡中用語。"

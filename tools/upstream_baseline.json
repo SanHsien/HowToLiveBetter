@@ -1,9 +1,9 @@
 {
   "repo": "https://github.com/doggy8088/HowToLiveBetter.git",
   "branch": "zh-tw",
-  "reviewed_through": "81e167a16d09d8aa2903b2c86231ee2f4299bdf9",
-  "reviewed_date": "2026-11-10",
-  "reviewed_pr_through": 23,
+  "reviewed_through": "1a3752d1cb867f6d4082d0ab612a5cb406b5498c",
+  "reviewed_date": "2026-11-13",
+  "reviewed_pr_through": 24,
   "reviewed_issue_through": 20,
   "track": "commit",
   "decision_log": "docs/DECISIONS.md"

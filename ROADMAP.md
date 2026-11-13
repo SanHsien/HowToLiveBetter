@@ -1,20 +1,20 @@
 # 路線圖
 
 > 本 repo 後續工作的單一真相源。做完一項，就在同一個 commit 刪掉那一列；新工作只加在這裡。
-> 現況段的數字是 2026-11-08 依 `main` 查的快照，開工前先重查 GitHub。
+> commit 審核水位更新至 2026-11-13；PR、Issue 水位分開記錄，開工前先重查 GitHub。
 
 ## 現況
 `doggy8088/HowToLiveBetter`（繁中在地化）與 `eternity4719/HowToLiveBetter`（原作主線）之雙軸追蹤維護 fork。
-- 直接上游審到：commit `4353179`、PR #14、Issue #11（見 `tools/upstream_baseline.json`）。
-- 根原作上游審到：commit `dff814d`、PR #174、Issue #171（見 `tools/upstream_root_baseline.json`）。
+- 直接上游審到：commit `1a3752d`、PR #24、Issue #20（見 `tools/upstream_baseline.json`）。
+- 根原作上游審到：commit `36c7856`、PR #174、Issue #176（見 `tools/upstream_root_baseline.json`）。
 - 授權比照上游：內容 CC BY 4.0，程式碼 MIT License。
 - 維護門禁已建立 Windows-first 雙軸驗收管線（`tools/dev_check.ps1`），一切以台灣正確資料、台灣繁體中文用語與現行法規為最高準則。
 - 發布只保留自動同步的 `epub-latest`（含 EPUB、PDF、離線 HTML、Anki 產物）；`v1.0.0` 已於 2026-11-10 依維護者指示刪除。
 
 ## 近期：可以直接動手
+
 | 項目 | 為什麼 | 驗收方式 | 建議執行者 | 證據 |
 | --- | --- | --- | --- | --- |
-| README 術語表收尾：正文已統一為台灣用語，刪掉詞欄的舊詞別名（「統合分析、薈萃分析」「世代研究、佇列」），並改 `index.html` 的「薈萃/RCT」「殘疾之後怎麼活」說明文字、`skills/life-decision-guide/SKILL.md` 的「腦卒中」 | 2026-11-10 正文改完；README 與檢索頁、skill 不在該輪範圍，還留著舊詞 | `node tools/check-zh-tw-locale.mjs` 加掃這三處仍全綠；`tools/sync-stats.mjs --check` 無過時數字 | Claude Sonnet | `docs/DECISIONS.md` 2026-11-10 正文用語統一 |
 | 評估向直接上游 (doggy8088) 回貢在地化成果 | 本庫已修復 34§9 乙醯胺酚詞彙回退，並完成孩子出生長文之台灣法規改寫 | 開立 Issue 或送出聚焦之 PR | 維護者 | `docs/孩子出生前後要辦的事.md` |
 
 ## 中期：等條件成立再做

@@ -57,6 +57,15 @@ assert.equal(run("['13:濃煙關門', '5:綜合所得稅結算申報', '5:眷屬
   '題面實質改寫的題不能沿用舊 key 的答案');
 assert.equal(run("Object.values(RENAMED_KEYS).every(k => GROUPS.flatMap(g => g.qs).some(q => qid(q) === k))"), true,
   '每個改名目標都要對得到一道真實存在的題');
+// 曾被舊版遷移並存回的新 key，也不能當成改題後的答案。
+for (const key of ['濃煙關門', '綜合所得稅結算申報', '眷屬依附加保']) {
+  const question = run(`GROUPS.flatMap(g => g.qs).find(q => q.key === ${JSON.stringify(key)})`);
+  run(`ans[${JSON.stringify(`${question.sec}:${key}`)}] = 'y'`);
+  assert.equal(question.rev, 2, `${key}必須升版，擋住已遷移並存回的舊答案`);
+  assert.equal(run(`ans[qid(GROUPS.flatMap(g => g.qs).find(q => q.key === ${JSON.stringify(key)}))]`),
+    undefined, `${key}改題後必須重新回答`);
+  run(`delete ans[${JSON.stringify(`${question.sec}:${key}`)}]`);
+}
 // 後面的結果頁斷言要從只有原本那幾題答案的狀態開始
 run("for (const k of ['1:瓦斯軟管', '8:不把銀行帳戶', '8:聯徵信用報告']) delete ans[k]");
 assert.equal(run("ans[qid(GROUPS.flatMap(g => g.qs).find(q => q.key === 'B 型肝炎兩對半'))]"), undefined,
@@ -65,6 +74,7 @@ for (const age of ['', 'abc', '-1', '121', '39.5']) {
   run(`ans['p:ageYears'] = ${JSON.stringify(age)}`);
   assert.equal(run('profileDone()'), false, `拒絕無效年齡：${age}`);
 }
+/** @type {Array<[string, number]>} */
 const expected = [
   ['空腹血糖',35], ['乳腺癌篩檢',40], ['大腸直腸癌篩檢',45],
   ['帶狀皰疹疫苗',50], ['流感疫苗',60], ['肺炎球菌疫苗',65], ['骨密度',65],

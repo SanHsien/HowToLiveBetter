@@ -1,12 +1,12 @@
 # 路線圖
 
 > 本 repo 後續工作的單一真相源。做完一項，就在同一個 commit 刪掉那一列；新工作只加在這裡。
-> commit 審核水位更新至 2026-11-13；PR、Issue 水位分開記錄，開工前先重查 GitHub。
+> commit 審核水位更新至 2026-11-22；PR、Issue 水位分開記錄，開工前先重查 GitHub。
 
 ## 現況
 `doggy8088/HowToLiveBetter`（繁中在地化）與 `eternity4719/HowToLiveBetter`（原作主線）之雙軸追蹤維護 fork。
-- 直接上游審到：commit `1a3752d`、PR #24、Issue #20（見 `tools/upstream_baseline.json`）。
-- 根原作上游審到：commit `36c7856`、PR #174、Issue #176（見 `tools/upstream_root_baseline.json`）。
+- 直接上游審到：commit `5f93016`、PR #24、Issue #20（見 `tools/upstream_baseline.json`）。
+- 根原作上游審到：commit `49fceab`、PR #180、Issue #177（見 `tools/upstream_root_baseline.json`）。
 - 授權比照上游：內容 CC BY 4.0，程式碼 MIT License。
 - 維護門禁已建立 Windows-first 雙軸驗收管線（`tools/dev_check.ps1`），一切以台灣正確資料、台灣繁體中文用語與現行法規為最高準則。
 - 發布只保留自動同步的 `epub-latest`（含 EPUB、PDF、離線 HTML、Anki 產物）；`v1.0.0` 已於 2026-11-10 依維護者指示刪除。

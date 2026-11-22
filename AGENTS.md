@@ -22,7 +22,7 @@ SSOT 自 2026-10-23 起啟用；早於此日、要求暫停 SSOT 的舊記憶已
 
 這個倉庫是《高性價比人生指南》（繁體中文維護版）的正文與維護工具集。
 
-- **改這本書**（增刪條目、改正文、動工具指令碼）：規則全在 [CLAUDE.md](CLAUDE.md) 裡，全部適用，先讀完再動手。檔名叫 CLAUDE.md 只是歷史原因，內容與工具無關。
+- **改這本書**（增刪條目、改正文、動工具指令碼）：規則在 [CLAUDE.md](CLAUDE.md) 裡，先讀完再動手。檔名叫 CLAUDE.md 只是歷史原因，內容與工具無關。CLAUDE.md 沿用上游，凡寫到大陸法規、審限、機構或電話的規則（例如「寫『法律支持你』的條目時必須寫過程成本」一節的審限與《訴訟費用交納辦法》寫法），以上方台灣在地化準則與 [docs/DECISIONS.md](docs/DECISIONS.md) 為準。
 - **用這本書回答問題**（有人問該不該做、值不值、怎麼選、出事了先做什麼、能領哪筆錢、犯不犯法）：按 [skills/life-decision-guide/SKILL.md](skills/life-decision-guide/SKILL.md) 執行，先查條目再答，答覆裡註明出自第幾節第幾條。裝到別的目錄去用的辦法見 [skills/life-decision-guide/README.md](skills/life-decision-guide/README.md)。
 
 ## 動手前與完成前
